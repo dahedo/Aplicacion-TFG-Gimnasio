@@ -1,6 +1,6 @@
 package com.mygym.model;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +16,11 @@ public class Dieta {
 	@Column
 	private String nombre;
 
-	@OneToMany(mappedBy = "id")
-	private List<Comida> comidas;
+	@OneToMany(mappedBy = "dieta")
+	private Set<DietaCliente> dietasClientes;
+
+	@OneToMany(mappedBy = "dieta_id")
+	private Set<ComidaDieta> comidasDietas;
 
 	//////////////////////////
 	//////////////////////////
@@ -49,20 +52,6 @@ public class Dieta {
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	/**
-	 * @return the comidas
-	 */
-	public List<Comida> getComidas() {
-		return comidas;
-	}
-
-	/**
-	 * @param comidas the comidas to set
-	 */
-	public void setComidas(List<Comida> comidas) {
-		this.comidas = comidas;
 	}
 
 }

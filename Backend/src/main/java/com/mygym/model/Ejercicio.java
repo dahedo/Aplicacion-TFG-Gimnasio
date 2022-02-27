@@ -1,9 +1,12 @@
 package com.mygym.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Ejercicio {
@@ -24,6 +27,9 @@ public class Ejercicio {
 	@Column
 	private String otraInfo;
 
+	@OneToMany(mappedBy = "ejercicio")
+	private Set<EjercicioEntrenamiento> ejerciciosEntrenamientos;
+
 	//////////////////////////
 	//////////////////////////
 //////////////////////////
@@ -33,6 +39,20 @@ public class Ejercicio {
 	 */
 	public Integer getId() {
 		return id;
+	}
+
+	/**
+	 * @return the ejerciciosEntrenamientos
+	 */
+	public Set<EjercicioEntrenamiento> getEjerciciosEntrenamientos() {
+		return ejerciciosEntrenamientos;
+	}
+
+	/**
+	 * @param ejerciciosEntrenamientos the ejerciciosEntrenamientos to set
+	 */
+	public void setEjerciciosEntrenamientos(Set<EjercicioEntrenamiento> ejerciciosEntrenamientos) {
+		this.ejerciciosEntrenamientos = ejerciciosEntrenamientos;
 	}
 
 	/**
