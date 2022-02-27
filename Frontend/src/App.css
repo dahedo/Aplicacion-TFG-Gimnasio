@@ -1,0 +1,28 @@
+ .App {
+  background-color: #e9ecef;
+  height: 100vh;
+}
+   
+.navbar{
+  height:8%;
+  background-color: #adb5bd !important;
+}
+
+.main-menu-grid{ 
+  height:90% ;
+}
+
+.main-menu-grid-item{  
+  display:flex;
+  justify-content:center;
+   
+}
+.main-menu-grid-button{
+  display:flex;
+  align-self: center;
+  align-content: center;
+  flex-direction: column;
+  height:85%;  
+  width:85%; 
+  background-color: #ced4da !important;
+}
