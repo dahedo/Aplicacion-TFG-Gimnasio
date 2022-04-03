@@ -1,4 +1,4 @@
-package com.mygym.rest;
+package com.mygym.controller;
 
 import java.util.List;
 

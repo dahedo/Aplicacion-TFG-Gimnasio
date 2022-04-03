@@ -1,4 +1,4 @@
-package com.mygym.model;
+package com.mygym.model.Usuarios;
 
 import java.util.Set;
 
@@ -7,11 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.mygym.model.DietaCliente;
+import com.mygym.model.EntrenamientoCliente;
+
 @Entity
 public class Cliente {
 
 	@Id
-	private Integer id;
+	private long id;
 
 	@Column
 	private String nombre;
@@ -25,24 +28,11 @@ public class Cliente {
 	@Column
 	private String fechaNacimiento;
 
-	@Column
-	private String nombreUsuario;
-
-	@Column
-	private String contraseña;
-
 	@OneToMany(mappedBy = "entrenamiento")
 	private Set<EntrenamientoCliente> entrenamientosClientes;
 
 	@OneToMany(mappedBy = "dieta")
 	private Set<DietaCliente> dietasClientes;
-
-	/**
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
-	}
 
 	/**
 	 * @return the dietasClientes
@@ -56,13 +46,6 @@ public class Cliente {
 	 */
 	public void setDietasClientes(Set<DietaCliente> dietasClientes) {
 		this.dietasClientes = dietasClientes;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	/**
@@ -119,34 +102,6 @@ public class Cliente {
 	 */
 	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
-	}
-
-	/**
-	 * @return the nombreUsuario
-	 */
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-
-	/**
-	 * @param nombreUsuario the nombreUsuario to set
-	 */
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-
-	/**
-	 * @return the contraseña
-	 */
-	public String getContraseña() {
-		return contraseña;
-	}
-
-	/**
-	 * @param contraseña the contraseña to set
-	 */
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
 	}
 
 	/**
