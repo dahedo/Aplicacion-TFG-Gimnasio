@@ -2,12 +2,11 @@ package com.mygym.model.Usuarios;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-public class Nutricionista {
-	@Id
-	private long id;
+@PrimaryKeyJoinColumn(name = "user_id")
+public class Nutricionista extends Usuario {
 
 	@Column
 	private String nombre;

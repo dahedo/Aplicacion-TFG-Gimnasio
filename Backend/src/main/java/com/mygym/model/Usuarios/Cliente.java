@@ -4,18 +4,15 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import com.mygym.model.DietaCliente;
 import com.mygym.model.EntrenamientoCliente;
 
 @Entity
-public class Cliente {
-
-	@Id
-	private long id;
-
+@PrimaryKeyJoinColumn(name = "user_id")
+public class Cliente extends Usuario {
 	@Column
 	private String nombre;
 
