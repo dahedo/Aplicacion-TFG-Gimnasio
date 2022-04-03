@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -24,6 +26,14 @@ public class Cliente extends Usuario {
 
 	@Column
 	private String fechaNacimiento;
+
+	@ManyToOne
+	@JoinColumn(name = "entrenador_id", nullable = true)
+	private Entrenador entrenador;
+
+	@ManyToOne
+	@JoinColumn(name = "nutricionista_id", nullable = false)
+	private Nutricionista nutricionista;
 
 	@OneToMany(mappedBy = "entrenamiento")
 	private Set<EntrenamientoCliente> entrenamientosClientes;
