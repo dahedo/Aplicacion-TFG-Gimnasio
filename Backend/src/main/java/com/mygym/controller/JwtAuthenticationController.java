@@ -6,7 +6,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mygym.config.JwtTokenUtil;
+import com.mygym.config.UserDetailsImpl;
 import com.mygym.model.JwtRequest;
 import com.mygym.model.JwtResponse;
 import com.mygym.model.UserDTO;
@@ -37,7 +37,10 @@ public class JwtAuthenticationController {
 
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+		final UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService
+				.loadUserByUsername(authenticationRequest.getUsername());
+
+		System.out.println(userDetails.getRol());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 

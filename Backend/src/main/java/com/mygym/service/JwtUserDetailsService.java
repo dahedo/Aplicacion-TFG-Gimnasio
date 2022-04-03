@@ -1,7 +1,5 @@
 package com.mygym.service;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.mygym.config.UserDetailsImpl;
 import com.mygym.dao.UsuarioDAO;
 import com.mygym.model.UserDTO;
 import com.mygym.model.Usuarios.Usuario;
@@ -28,8 +27,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-				new ArrayList<>());
+		return UserDetailsImpl.build(user);
 	}
 
 	public Usuario save(UserDTO user) {

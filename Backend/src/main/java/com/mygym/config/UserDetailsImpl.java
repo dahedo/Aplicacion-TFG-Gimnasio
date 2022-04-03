@@ -1,9 +1,9 @@
 package com.mygym.config;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,24 +16,25 @@ public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String username;
-	private String email;
 	@JsonIgnore
 	private String password;
+	private String rol;
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsImpl(Long id, String username, String email, String password,
+	public UserDetailsImpl(Long id, String username, String password, String rol,
 			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
-		this.email = email;
 		this.password = password;
+		this.rol = rol;
 		this.authorities = authorities;
 	}
 
 	public static UserDetailsImpl build(Usuario user) {
-		List<GrantedAuthority> authorities = user.getRoles().stream()
-				.map(role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
-		return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), authorities);
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority(user.getRol().toString()));
+		return new UserDetailsImpl(user.getUser_id(), user.getUsername(), user.getPassword(), user.getRol().toString(),
+				authorities);
 	}
 
 	@Override
@@ -45,13 +46,23 @@ public class UserDetailsImpl implements UserDetails {
 		return id;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
 	@Override
 	public String getPassword() {
 		return password;
+	}
+
+	/**
+	 * @return the rol
+	 */
+	public String getRol() {
+		return rol;
+	}
+
+	/**
+	 * @param rol the rol to set
+	 */
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
 	@Override
