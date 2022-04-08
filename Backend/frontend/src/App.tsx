@@ -8,14 +8,14 @@ import MainMenu from './MainMenu';
 import Ejercicios from './Ejercicios';
 import Alimentacion from './Alimentacion';
 import Entrenamientos from './Entrenamientos';
-import Login from './Login';
+import Login from './Login/Login';
 import LandingPage from './LandingPage';
 
 function App() {
   const [name, setName] = useState('');
 
   return (
-    <BrowserRouter>
+    <BrowserRouter >
     <Routes>
     <Route path="/" element={<LandingPage/>}> </Route>
       <Route path="/main-menu" element={<MainMenu/>}> </Route>
