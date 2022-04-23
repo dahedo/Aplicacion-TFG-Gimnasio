@@ -14,23 +14,19 @@ import MuenuEntrenador from './Menus/MenuEntrenador';
 import MuenuNutricionista from './Menus/MenuNutricionista';
 
 function App() {
-  const [name, setName] = useState('');
-  const [userType, setUserType] = useState('');
-  const [user, setUser] = useState(null);
-
-  return (
+    return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
 
-        <Route path="/menuCliente" element={<MuenuCliente  userType={userType} />}> </Route>
-        <Route path="/menuEntrenador" element={<MuenuEntrenador userType={userType} />}> </Route>
-        <Route path="/menuNutricionista" element={<MuenuNutricionista  userType={userType} />}> </Route>
+        <Route path="/menuCliente" element={<MuenuCliente/>}> </Route>
+        <Route path="/menuEntrenador" element={<MuenuEntrenador/>}> </Route>
+        <Route path="/menuNutricionista" element={<MuenuNutricionista/>}> </Route>
 
         <Route path="/ejercicios" element={<Ejercicios />}> </Route>
         <Route path="/entrenamientos" element={<Entrenamientos />}> </Route>
         <Route path="/alimentacion" element={<Alimentacion />}> </Route>
-        <Route path="/login" element={<Login setName={setName} setUserType={setUserType}/>}> </Route>
+        <Route path="/login" element={<Login/>}> </Route>
       </Routes>
     </BrowserRouter>
   );
