@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 import { Paper,Typography,TextField } from '@mui/material';
 import ResponsiveAppBar from '../navbar';
@@ -25,6 +25,26 @@ const Login = (props) => {
 
  
 
+    
+  useEffect(() => {
+    var loggedUser = window.localStorage.getItem('loggedUser');
+
+    if (loggedUser == null) {
+      navigate('/login');
+    } else {
+      loggedUser = JSON.parse(loggedUser)
+      if(loggedUser.Rol === 'CLIENTE'){
+        navigate('/menuCliente');
+      }      if (loggedUser.Rol === 'ENTRENADOR') {
+        navigate('/menuEntrenador');
+      } if (loggedUser.Rol === 'NUTRICIONISTA') {
+        navigate('/menuNutricionista');
+      }
+    }
+  }, [])
+
+
+
     const submit = async (e) => {
         e.preventDefault();
 
@@ -47,7 +67,6 @@ const Login = (props) => {
             console.log(decoded.Rol)
 
             window.localStorage.setItem('loggedUser', JSON.stringify(decoded));
-            props.setUserType(decoded.Rol)
 
             switch(decoded.Rol){
                 case 'CLIENTE':
