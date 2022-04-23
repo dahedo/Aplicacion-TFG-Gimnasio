@@ -58,7 +58,6 @@ const baseURL = "http://localhost:8080/ejercicios/find-all";
 
   return (
     <div className="App">
-      <ResponsiveAppBar/>
    <h1 style={{color: 'white'}}>Ejercicios</h1> 
    <TableContainer component={Paper}  >
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">

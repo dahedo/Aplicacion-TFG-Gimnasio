@@ -18,7 +18,6 @@ function Entrenamientos() {
 
   return (
     <div className="App">
-      <ResponsiveAppBar/>
    <h1 style={{color: 'white'}}>Entrenamientos</h1> 
     </div>
   );

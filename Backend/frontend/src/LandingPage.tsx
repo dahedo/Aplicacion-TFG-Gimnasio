@@ -7,7 +7,7 @@ const LandingPage = () => {
 
     return (
         <div style={{ height: '100%' }}>
-            <ResponsiveAppBar />
+            <ResponsiveAppBar loginVisivility={true}/>
             <div style={{ height: 'calc(100% - 60px)', display: 'flex', flexDirection: 'row' }}>
                 <div style={{ width: '50%' }}>
                     <h1> ¡Bienvenido a tu web de entrenamiento personal!</h1>

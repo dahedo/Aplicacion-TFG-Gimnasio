@@ -10,7 +10,6 @@ function Alimentacion() {
    
   return (
     <div className="App">
-      <ResponsiveAppBar/>
    <h1 style={{color: 'white'}}>Alimentacion</h1> 
     
     </div>

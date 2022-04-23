@@ -1,89 +1,98 @@
-import React, { SyntheticEvent, useState } from 'react';
-import { Navigate } from "react-router-dom";
-import { Paper } from '@mui/material';
+import React, { useState } from 'react';
+
+import { Paper,Typography,TextField } from '@mui/material';
 import ResponsiveAppBar from '../navbar';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
-import FilledInput from '@mui/material/FilledInput';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import jwt from "jwt-decode";
+import { useNavigate } from 'react-router-dom';
 
 
-
-const Login = (props: { setName: (name: string) => void }) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [redirect, setRedirect] = useState(false);
-    const [salida, setSalida] = useState('');
-
-
-    interface State {
-        password: string;
-        showPassword: boolean;
-      }
-
-    const [values, setValues] = React.useState<State>({
+const Login = (props) => { 
+    const navigate  = useNavigate();
+    const [values, setValues] = useState({
+        username:'',
         password: '',
         showPassword: false,
-      });
+    });
 
+ 
 
-    const submit = async (e: SyntheticEvent) => {
+    const submit = async (e) => {
         e.preventDefault();
 
-        console.log("login")
+        const username=values.username 
+        const password=values.password
+
+        
         const response = await fetch('http://localhost:8080/authenticate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 username,
                 password
-            })
+                        })
         });
-
         const content = await response.json();
-        setSalida(content.token)
+        
+        if(content.token !== undefined){
+            const decoded = jwt(content.token);
+            console.log(decoded.Rol)
+
+            window.localStorage.setItem('loggedUser', JSON.stringify(decoded));
+            props.setUserType(decoded.Rol)
+
+            switch(decoded.Rol){
+                case 'CLIENTE':
+                    navigate('/menucliente'); 
+                    break;
+                case 'ENTRENADOR':
+                    navigate('/menuEntrenador'); 
+                    break;
+                case 'NUTRICIONISTA':
+                    navigate('/menuNutricionista'); 
+                    break;
+            }
+
+        }
+
+        
 
 
+        
 
-        // setRedirect(true); 
-        props.setName(content.name);
+         
+        
     }
 
-    const handleChange =
-    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value });
-    };
+    const handleChange = (prop) => (event) => {
+
+            console.log()
+            setValues({ ...values, [prop]: event.target.value });
+        };
 
     const handleClickShowPassword = () => {
         setValues({
-          ...values,
-          showPassword: !values.showPassword,
+            ...values,
+            showPassword: !values.showPassword,
         });
-      };
-
-
-    if (redirect) {
-        return <Navigate to="/" />;
-    }
+    };
 
     return (
-        <div style={{ height: '100vh' }}>
-            <ResponsiveAppBar />
+        <div className="App">
+        <ResponsiveAppBar loginVisivility={false} />
             <div style={{ height: 'calc(100% - 60px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Paper elevation={3} style={{ width: '350px', height: '450px' }}>
                     <Stack spacing={2} direction="column" style={{ marginTop: '40px', marginLeft: '25px', marginRight: '25px' }}>
                         <Typography variant="h3" component="div" >¡Bienvenido de nuevo! </Typography>
-                        <TextField label="Usuario" variant="outlined" />
+                        <TextField label="Usuario" variant="outlined" onChange={ handleChange('username')} />
 
                         <FormControl variant="outlined">
                             <InputLabel htmlFor="outlined-adornment-password">Contraseña</InputLabel>
@@ -106,7 +115,7 @@ const Login = (props: { setName: (name: string) => void }) => {
                                 label="Password"
                             />
                         </FormControl>
-                        <Button variant="contained">Login</Button>
+                        <Button variant="contained" onClick={submit}>Login</Button>
                     </Stack>
                 </Paper>
             </div>
