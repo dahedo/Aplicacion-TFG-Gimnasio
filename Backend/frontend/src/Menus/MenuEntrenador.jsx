@@ -28,7 +28,7 @@ function MuenuEntrenador(props) {
 
     return (
         <div className="App">
-        <ResponsiveAppBar loginVisivility={false} />
+        <ResponsiveAppBar loginVisivility={false} logoutVisivility={true}/>
         <div style={{ display: 'flex', flexDirection: 'row', height: 'calc(100% - 60px)', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{ height: '95%', width: '90%'}}>
             <Grid container spacing={2}  style={{ height: '100%'}}>

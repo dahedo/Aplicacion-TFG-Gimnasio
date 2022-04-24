@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { Navigate } from 'react-router-dom';
 
 
-const ResponsiveAppBar = (props: { loginVisivility: Boolean }) => {
+const ResponsiveAppBar = (props: { loginVisivility: Boolean ,logoutVisivility:Boolean}) => {
   const [redirect, setRedirect] = React.useState(false);
 
   const redirectToLogin = (event: React.MouseEvent<HTMLElement>) => {
@@ -35,10 +35,20 @@ const ResponsiveAppBar = (props: { loginVisivility: Boolean }) => {
         >
           LOGO
         </Typography>
+
         {props.loginVisivility ?
           <Button variant="outlined" style={{ backgroundColor: 'green' }} onClick={redirectToLogin} >Login</Button>
           :
-          <Button variant="outlined" style={{ backgroundColor: 'red' }} onClick={logoutButton} >Logout</Button>}
+          null
+          }
+          {props.logoutVisivility ?
+           <Button variant="outlined" style={{ backgroundColor: 'red' }} onClick={logoutButton} >Logout</Button>
+          :
+         null
+          }
+
+
+
       </div>
     </AppBar>
   );

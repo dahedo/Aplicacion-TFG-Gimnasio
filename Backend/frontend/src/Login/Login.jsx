@@ -106,7 +106,7 @@ const Login = (props) => {
 
     return (
         <div className="App">
-        <ResponsiveAppBar loginVisivility={false}/>
+        <ResponsiveAppBar loginVisivility={false} logoutVisivility={false}/>
             <div style={{ height: 'calc(100% - 60px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Paper elevation={3} style={{ width: '350px', height: '450px' }}>
                     <Stack spacing={2} direction="column" style={{ marginTop: '40px', marginLeft: '25px', marginRight: '25px' }}>
