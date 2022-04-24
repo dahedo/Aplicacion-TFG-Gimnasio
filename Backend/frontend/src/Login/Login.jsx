@@ -33,11 +33,11 @@ const Login = (props) => {
       navigate('/login');
     } else {
       loggedUser = JSON.parse(loggedUser)
-      if(loggedUser.Rol === 'CLIENTE'){
+      if(loggedUser.rol === 'CLIENTE'){
         navigate('/menuCliente');
-      }      if (loggedUser.Rol === 'ENTRENADOR') {
+      }      if (loggedUser.rol === 'ENTRENADOR') {
         navigate('/menuEntrenador');
-      } if (loggedUser.Rol === 'NUTRICIONISTA') {
+      } if (loggedUser.rol === 'NUTRICIONISTA') {
         navigate('/menuNutricionista');
       }
     }
@@ -64,11 +64,11 @@ const Login = (props) => {
         
         if(content.token !== undefined){
             const decoded = jwt(content.token);
-            console.log(decoded.Rol)
+            console.log(decoded.rol)
 
             window.localStorage.setItem('loggedUser', JSON.stringify(decoded));
 
-            switch(decoded.Rol){
+            switch(decoded.rol){
                 case 'CLIENTE':
                     navigate('/menucliente'); 
                     break;
@@ -106,7 +106,7 @@ const Login = (props) => {
 
     return (
         <div className="App">
-        <ResponsiveAppBar loginVisivility={false} />
+        <ResponsiveAppBar loginVisivility={false}/>
             <div style={{ height: 'calc(100% - 60px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Paper elevation={3} style={{ width: '350px', height: '450px' }}>
                     <Stack spacing={2} direction="column" style={{ marginTop: '40px', marginLeft: '25px', marginRight: '25px' }}>

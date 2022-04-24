@@ -20,13 +20,15 @@ function MuenuCliente(props) {
     } else {
       loggedUser = JSON.parse(loggedUser)
 
-      if (loggedUser.Rol === 'ENTRENADOR') {
+      if (loggedUser.rol === 'ENTRENADOR') {
         navigate('/menuEntrenador');
-      } if (loggedUser.Rol === 'NUTRICIONISTA') {
+      } if (loggedUser.rol === 'NUTRICIONISTA') {
         navigate('/menuNutricionista');
       }
     }
 
+
+    
   }, [])
 
 
@@ -37,10 +39,20 @@ function MuenuCliente(props) {
         <div style={{ height: '95%', width: '90%'}}>
           <Grid container spacing={2}  style={{ height: '100%'}}>
             <Grid item  xs={12} md={2} style={{ height: '100%' }} >
-              <Paper elevation={3} style={{ height: '100%' }}>xs=4</Paper>
+              <Paper elevation={3} style={{ height: '100%' }}>
+
+
+
+              </Paper>
             </Grid>
+
             <Grid item xs={12} md={10}>
-              <Paper elevation={3} style={{ height: '100%' }}>xs=8</Paper>
+              <Paper elevation={3} style={{ height: '100%' }}>
+
+
+
+
+              </Paper>
             </Grid>
           </Grid>
         </div>

@@ -5,17 +5,23 @@ import Button from '@mui/material/Button';
 import { Navigate } from 'react-router-dom';
 
 
-const ResponsiveAppBar = (props: {loginVisivility: Boolean}) => {
+const ResponsiveAppBar = (props: { loginVisivility: Boolean }) => {
   const [redirect, setRedirect] = React.useState(false);
 
   const redirectToLogin = (event: React.MouseEvent<HTMLElement>) => {
-     setRedirect(true)
+    setRedirect(true)
   };
+
+  const logoutButton = (event: React.MouseEvent<HTMLElement>) => {
+    window.localStorage.removeItem('loggedUser');
+    setRedirect(true)
+  };
+
 
 
   if (redirect) {
     return <Navigate to="/login" />;
-}
+  }
   return (
     <AppBar position="static" className="navbar">
 
@@ -29,10 +35,10 @@ const ResponsiveAppBar = (props: {loginVisivility: Boolean}) => {
         >
           LOGO
         </Typography>
- {props.loginVisivility ? 
-        <Button variant="outlined" style={{backgroundColor:'red'}} onClick={redirectToLogin} >Login</Button>
-:
-null}
+        {props.loginVisivility ?
+          <Button variant="outlined" style={{ backgroundColor: 'green' }} onClick={redirectToLogin} >Login</Button>
+          :
+          <Button variant="outlined" style={{ backgroundColor: 'red' }} onClick={logoutButton} >Logout</Button>}
       </div>
     </AppBar>
   );
