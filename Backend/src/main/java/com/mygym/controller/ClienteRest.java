@@ -23,10 +23,7 @@ public class ClienteRest {
 
 	// Get (all)
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-	public Optional<Cliente> getById(@PathVariable int userId) {
-		
-		Long l= new Long(userId)
-				
-		return clienteDAO.findById(l);
+	public Optional<Cliente> getById(@PathVariable long userId) {
+		return Optional.ofNullable(clienteDAO.findById(userId));
 	}
 }
