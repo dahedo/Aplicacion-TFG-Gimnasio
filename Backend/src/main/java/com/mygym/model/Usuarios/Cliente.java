@@ -32,7 +32,7 @@ public class Cliente extends Usuario {
 	private Entrenador entrenador;
 
 	@ManyToOne
-	@JoinColumn(name = "nutricionista_id", nullable = false)
+	@JoinColumn(name = "nutricionista_id", nullable = true)
 	private Nutricionista nutricionista;
 
 	@OneToMany(mappedBy = "entrenamiento")
