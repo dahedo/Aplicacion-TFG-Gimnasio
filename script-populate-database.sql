@@ -9,3 +9,8 @@ INSERT INTO gym.usuario(user_id,password, rol, username)VALUES(6,'$2a$12$RfSwJOR
 
 INSERT INTO gym.cliente (apellidos,email,fecha_nacimiento,nombre,user_id,entrenador_id,nutricionista_id)VALUES("Ahedo García","danielAhedo@miemail.com","28-12-1998","Daniel",1,null,null);
 INSERT INTO gym.cliente (apellidos,email,fecha_nacimiento,nombre,user_id,entrenador_id,nutricionista_id)VALUES("Gomez Perez","pepeperez@yahoo.es","14-02-1995","Pepe",2,NULL,NULL);
+
+INSERT INTO gym.nutricionista (apellidos,nombre,user_id)VALUES ("Ortiz","Estefanía",3);
+
+INSERT INTO gym.entrenador  (apellidos,nombre,user_id)VALUES ("San Felix","Borja",5);
+
