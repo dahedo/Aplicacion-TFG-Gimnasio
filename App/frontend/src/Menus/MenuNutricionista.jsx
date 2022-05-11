@@ -1,7 +1,8 @@
 import { Grid, Paper } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ResponsiveAppBar from '../navbar';
+import ResponsiveAppBar from '../navbar';import jwt from "jwt-decode";
+
 
 function MuenuNutricionista(props) {
 
@@ -13,8 +14,7 @@ function MuenuNutricionista(props) {
         if(loggedUser == null){
           navigate('/login');
         }else{
-            loggedUser= JSON.parse(loggedUser)
- 
+          loggedUser=jwt(loggedUser) 
           if(loggedUser.rol === 'CLIENTE'){
             navigate('/menuCliente');
           }if(loggedUser.rol === 'ENTRENADOR'){

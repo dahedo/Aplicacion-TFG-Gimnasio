@@ -60,13 +60,13 @@ const Login = (props) => {
                 password
                         })
         });
+        console.log(response)
         const content = await response.json();
         
         if(content.token !== undefined){
-            const decoded = jwt(content.token);
-            console.log(decoded.rol)
+            const decoded = jwt(content.token); 
 
-            window.localStorage.setItem('loggedUser', JSON.stringify(decoded));
+            window.localStorage.setItem('loggedUser', JSON.stringify(content.token));
 
             switch(decoded.rol){
                 case 'CLIENTE':
