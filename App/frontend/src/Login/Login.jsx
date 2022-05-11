@@ -59,8 +59,7 @@ const Login = (props) => {
                 username,
                 password
                         })
-        });
-        console.log(response)
+        }); 
         const content = await response.json();
         
         if(content.token !== undefined){
