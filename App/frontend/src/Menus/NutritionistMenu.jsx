@@ -5,11 +5,14 @@ import { Button,Avatar,Grid, Paper,Table, TableBody ,TableCell ,TableContainer,T
 import axios from 'axios';
 import jwt from "jwt-decode";
 
-function MuenuNutricionista(props) {
+function NutritionistMenu(props) {
 
     const navigate = useNavigate();
 
     const [showClientsPanel, setShowClientsPanel] = useState(false);
+    const [showProfilePanel, setShowProfilePanel] = useState(false);
+     const [showDietsPanel, setShowDietsPanel] = useState(false);
+     const [createDietsPanel, setCreateDietsPanel] = useState(false);
 
     const [nutritionistProfile, setNutritionistProfile] = useState({
       nombre:'',
@@ -57,9 +60,37 @@ function MuenuNutricionista(props) {
         e.preventDefault();
       }
 
+      const showDiets = async (e) => {
+        e.preventDefault(); 
+        setShowProfilePanel(false)
+        setShowClientsPanel(false)
+        setShowDietsPanel(true)
+        setCreateDietsPanel(false)
+      }
+
+      const createDiets = async (e) => {
+        e.preventDefault(); 
+        setShowProfilePanel(false)
+        setShowClientsPanel(false)
+        setShowDietsPanel(false)
+        setCreateDietsPanel(true)
+      }
+
+
+      const showProfile = async (e) => {
+        e.preventDefault();
+        setShowProfilePanel(true)
+        setShowClientsPanel(false)
+        setShowDietsPanel(false)
+        setCreateDietsPanel(false)
+      }
+
       const showClients = async (e) => {
         e.preventDefault();
+        setShowProfilePanel(false)
         setShowClientsPanel(true)
+        setShowDietsPanel(false)
+        setCreateDietsPanel(false)
       }
 
     return (
@@ -77,33 +108,34 @@ function MuenuNutricionista(props) {
                   style={{marginTop:'30px'}}
                 />
                 <p>Bienvenido {nutritionistProfile.nombre}</p>
-                <Button variant="contained" onClick={submit} style={{width:'90%', marginTop:'30px'}}>Perfil</Button>
-                <Button variant="contained" onClick={submit} style={{width:'90%', marginTop:'100px'}}>Ver dietas</Button>
-                <Button variant="contained" onClick={submit} style={{width:'90%', marginTop:'30px'}}>Crear dietas</Button>
+                <Button variant="contained" onClick={showProfile} style={{width:'90%', marginTop:'30px'}}>Perfil</Button>
+                <Button variant="contained" onClick={showDiets} style={{width:'90%', marginTop:'100px'}}>Ver dietas</Button>
+                <Button variant="contained" onClick={createDiets} style={{width:'90%', marginTop:'30px'}}>Crear dietas</Button>
                 <Button variant="contained" onClick={showClients} style={{width:'90%', marginTop:'30px'}}>Mis clientes</Button>
-
-
               </Paper>
             </Grid>
 
             <Grid item xs={12} md={10}>
               <Paper elevation={3} style={{ height: '100%' }}>
+              {showProfilePanel ?'Perfil':null}
+              {showDietsPanel ?'Ver dietas':null}
+              {createDietsPanel ?'Crear dietas':null}
                 {showClientsPanel ? 
                  <TableContainer component={Paper}>
                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
                    <TableHead>
                      <TableRow>
                        <TableCell>Nombre</TableCell>
-                       <TableCell align="right">Apellidos</TableCell>
-                       <TableCell align="right">Email</TableCell> 
+                       <TableCell>Apellidos</TableCell>
+                       <TableCell>Email</TableCell> 
                      </TableRow>
                    </TableHead>
                    <TableBody>
                      {nutritionistProfile.clientes.map((row) => (
                        <TableRow key={row.nombre} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                          <TableCell component="th" scope="row">{row.nombre}</TableCell>
-                         <TableCell align="right">{row.apellidos}</TableCell>
-                         <TableCell align="right">{row.email}</TableCell> 
+                         <TableCell>{row.apellidos}</TableCell>
+                         <TableCell >{row.email}</TableCell> 
                        </TableRow>
                      ))}
                    </TableBody>
@@ -112,6 +144,8 @@ function MuenuNutricionista(props) {
                 :
                 null
                 }
+
+
               </Paper>
             </Grid>
             </Grid>
@@ -120,4 +154,4 @@ function MuenuNutricionista(props) {
       </div>
     )
 }
-export default MuenuNutricionista;
+export default NutritionistMenu;

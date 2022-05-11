@@ -11,7 +11,7 @@ import Entrenamientos from './Entrenamientos';
 import Login from './Login/Login';
 import LandingPage from './LandingPage';
 import MuenuEntrenador from './Menus/MenuEntrenador';
-import MuenuNutricionista from './Menus/MenuNutricionista';
+import NutritionistMenu from './Menus/NutritionistMenu';
 
 function App() {
     return (
@@ -21,7 +21,7 @@ function App() {
 
         <Route path="/menuCliente" element={<MuenuCliente/>}> </Route>
         <Route path="/menuEntrenador" element={<MuenuEntrenador/>}> </Route>
-        <Route path="/menuNutricionista" element={<MuenuNutricionista/>}> </Route>
+        <Route path="/menuNutricionista" element={<NutritionistMenu/>}> </Route>
 
         <Route path="/ejercicios" element={<Ejercicios />}> </Route>
         <Route path="/entrenamientos" element={<Entrenamientos />}> </Route>
