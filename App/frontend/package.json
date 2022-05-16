@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.3.1",
     "@mui/material": "^5.2.7",
+    "@react-pdf/renderer": "^2.1.1",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "file-loader": "^6.2.0"
+    "file-loader": "^6.2.0",
+    "prettier": "2.6.2"
   }
 }
