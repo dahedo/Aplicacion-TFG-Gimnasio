@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Button, TextField } from "@mui/material";
 import Table from "@mui/material/Table";
@@ -8,6 +8,18 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 
 function ClientProfile(props) {
+  const [clientProfile, setClientProfile] = useState(props.clientProfile);
+
+  const submit = async (e) => {
+    e.preventDefault();
+    console.log(e.target);
+    console.log(clientProfile[e.target.id]);
+    setClientProfile({
+      ...clientProfile,
+      [e.target.id]: !clientProfile[e.target.id],
+    });
+  };
+
   return (
     <React.Fragment>
       <Paper elevation={3}>
@@ -78,15 +90,19 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  id="parq1"
+                  onClick={submit}
                   style={{ padding: "5px" }}
-                  variant={props.clientProfile.parq1 ? "contained" : null}
+                  variant={clientProfile.parq1 ? "contained" : null}
                 >
                   Si
                 </Button>
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq1 ? null : "contained"}
+                  id="parq1"
+                  onClick={submit}
+                  variant={clientProfile.parq1 ? null : "contained"}
                 >
                   No
                 </Button>
@@ -99,14 +115,18 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq2 ? "contained" : null}
+                  id="parq2"
+                  onClick={submit}
+                  variant={clientProfile.parq2 ? "contained" : null}
                 >
                   Si
                 </Button>
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq2 ? null : "contained"}
+                  id="parq2"
+                  onClick={submit}
+                  variant={clientProfile.parq2 ? null : "contained"}
                 >
                   No
                 </Button>
@@ -119,14 +139,18 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq3 ? "contained" : null}
+                  id="parq3"
+                  onClick={submit}
+                  variant={clientProfile.parq3 ? "contained" : null}
                 >
                   Si
                 </Button>
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq3 ? null : "contained"}
+                  id="parq3"
+                  onClick={submit}
+                  variant={clientProfile.parq3 ? null : "contained"}
                 >
                   No
                 </Button>
@@ -140,14 +164,18 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq4 ? "contained" : null}
+                  id="parq4"
+                  onClick={submit}
+                  variant={clientProfile.parq4 ? "contained" : null}
                 >
                   Si
                 </Button>
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq4 ? null : "contained"}
+                  id="parq4"
+                  onClick={submit}
+                  variant={clientProfile.parq4 ? null : "contained"}
                 >
                   No
                 </Button>
@@ -161,14 +189,18 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq5 ? "contained" : null}
+                  id="parq5"
+                  onClick={submit}
+                  variant={clientProfile.parq5 ? "contained" : null}
                 >
                   Si
                 </Button>
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq5 ? null : "contained"}
+                  id="parq5"
+                  onClick={submit}
+                  variant={clientProfile.parq5 ? null : "contained"}
                 >
                   No
                 </Button>
@@ -182,14 +214,18 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq6 ? "contained" : null}
+                  id="parq6"
+                  onClick={submit}
+                  variant={clientProfile.parq6 ? "contained" : null}
                 >
                   Si
                 </Button>
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq6 ? null : "contained"}
+                  id="parq6"
+                  onClick={submit}
+                  variant={clientProfile.parq6 ? null : "contained"}
                 >
                   No
                 </Button>
@@ -203,14 +239,18 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq7 ? "contained" : null}
+                  id="parq7"
+                  onClick={submit}
+                  variant={clientProfile.parq7 ? "contained" : null}
                 >
                   Si
                 </Button>
               </TableCell>
               <TableCell>
                 <Button
-                  variant={props.clientProfile.parq7 ? null : "contained"}
+                  id="parq7"
+                  onClick={submit}
+                  variant={clientProfile.parq7 ? null : "contained"}
                 >
                   No
                 </Button>
