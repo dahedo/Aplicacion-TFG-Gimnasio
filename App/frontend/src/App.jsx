@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MuenuCliente from "./Menus/MuenuCliente";
+import MuenuCliente from "./Menus/ClientMenu";
 import Login from "./Login/Login";
 import LandingPage from "./LandingPage";
 import MuenuEntrenador from "./Menus/MenuEntrenador";

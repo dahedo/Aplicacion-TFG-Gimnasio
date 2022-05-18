@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ResponsiveAppBar from "../navbar";
+import NutritionistCreateDiet from "./NutritionistCreateDiet";
 import {
   Button,
   Avatar,
@@ -173,7 +174,7 @@ function NutritionistMenu(props) {
               <Paper elevation={3} style={{ height: "100%" }}>
                 {showProfilePanel ? "Perfil" : null}
                 {showDietsPanel ? "Ver dietas" : null}
-                {createDietsPanel ? "Crear dietas" : null}
+                {createDietsPanel ? <NutritionistCreateDiet /> : null}
                 {showClientsPanel ? (
                   <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
