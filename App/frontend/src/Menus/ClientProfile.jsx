@@ -12,16 +12,19 @@ function ClientProfile(props) {
 
   const submit = async (e) => {
     e.preventDefault();
-    console.log(e.target);
-    console.log(clientProfile[e.target.id]);
     setClientProfile({
       ...clientProfile,
       [e.target.id]: !clientProfile[e.target.id],
     });
   };
 
+  const cancel = async (e) => {
+    e.preventDefault();
+    setClientProfile(props.clientProfile);
+  };
+
   return (
-    <React.Fragment>
+    <Paper elevation={3} style={{ height: "100%" }}>
       <Paper elevation={3}>
         <TextField
           size="small"
@@ -272,7 +275,15 @@ function ClientProfile(props) {
           {" "}
         </TextField>
       </Paper>
-    </React.Fragment>
+      <Paper size="small" style={{ marginTop: "15px" }} elevation={3}>
+        {props.clientProfile !== clientProfile ? (
+          <React.Fragment>
+            <Button>Save</Button>
+            <Button onClick={cancel}>Cancel</Button>
+          </React.Fragment>
+        ) : null}
+      </Paper>
+    </Paper>
   );
 }
 export default ClientProfile;
