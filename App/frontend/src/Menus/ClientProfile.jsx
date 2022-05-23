@@ -9,6 +9,7 @@ import TableRow from "@mui/material/TableRow";
 
 function ClientProfile(props) {
   const [clientProfile, setClientProfile] = useState(props.clientProfile);
+  const [readOnly, setReadOnly] = useState(true);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -21,12 +22,19 @@ function ClientProfile(props) {
   const cancel = async (e) => {
     e.preventDefault();
     setClientProfile(props.clientProfile);
+    setReadOnly(true);
+  };
+
+  const edit = async (e) => {
+    e.preventDefault();
+    setReadOnly(!readOnly);
   };
 
   return (
     <Paper elevation={3} style={{ height: "100%" }}>
       <Paper elevation={3}>
         <TextField
+          InputProps={{ readOnly: readOnly }}
           size="small"
           style={{ margin: "15px 15px 15px 15px" }}
           id="outlined-basic"
@@ -37,16 +45,18 @@ function ClientProfile(props) {
           {" "}
         </TextField>
         <TextField
+          InputProps={{ readOnly: readOnly }}
           size="small"
           style={{ margin: "15px 15px 15px 15px" }}
           id="outlined-basic"
           label="Apellidos"
           variant="outlined"
-          defaultValue={props.clientProfile.apellidos}
+          value={props.clientProfile.apellidos}
         >
           {" "}
         </TextField>
         <TextField
+          InputProps={{ readOnly: readOnly }}
           size="small"
           style={{ margin: "15px 15px 15px 15px" }}
           id="outlined-basic"
@@ -54,9 +64,8 @@ function ClientProfile(props) {
           variant="outlined"
           defaultValue={props.clientProfile.email}
         ></TextField>
-      </Paper>
-      <Paper size="small" style={{ marginTop: "15px" }} elevation={3}>
         <TextField
+          InputProps={{ readOnly: readOnly }}
           size="small"
           style={{ margin: "15px 15px 15px 15px" }}
           id="outlined-basic"
@@ -66,8 +75,9 @@ function ClientProfile(props) {
           {" "}
         </TextField>
         <TextField
+          InputProps={{ readOnly: readOnly }}
           size="small"
-          style={{ margin: "15px 15px 15px 15px" }}
+          style={{ margin: "0px 15px 15px 15px" }}
           id="outlined-basic"
           label="Peso"
           variant="outlined"
@@ -75,8 +85,9 @@ function ClientProfile(props) {
           {" "}
         </TextField>
         <TextField
+          InputProps={{ readOnly: readOnly }}
           size="small"
-          style={{ margin: "15px 15px 15px 15px" }}
+          style={{ margin: "0px 15px 15px 15px" }}
           id="outlined-basic"
           label="Altura"
           variant="outlined"
@@ -93,6 +104,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq1"
                   onClick={submit}
                   style={{ padding: "5px" }}
@@ -103,6 +115,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq1"
                   onClick={submit}
                   variant={clientProfile.parq1 ? null : "contained"}
@@ -118,6 +131,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq2"
                   onClick={submit}
                   variant={clientProfile.parq2 ? "contained" : null}
@@ -127,6 +141,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq2"
                   onClick={submit}
                   variant={clientProfile.parq2 ? null : "contained"}
@@ -142,6 +157,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq3"
                   onClick={submit}
                   variant={clientProfile.parq3 ? "contained" : null}
@@ -151,6 +167,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq3"
                   onClick={submit}
                   variant={clientProfile.parq3 ? null : "contained"}
@@ -167,6 +184,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq4"
                   onClick={submit}
                   variant={clientProfile.parq4 ? "contained" : null}
@@ -176,6 +194,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq4"
                   onClick={submit}
                   variant={clientProfile.parq4 ? null : "contained"}
@@ -192,6 +211,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq5"
                   onClick={submit}
                   variant={clientProfile.parq5 ? "contained" : null}
@@ -201,6 +221,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq5"
                   onClick={submit}
                   variant={clientProfile.parq5 ? null : "contained"}
@@ -217,6 +238,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq6"
                   onClick={submit}
                   variant={clientProfile.parq6 ? "contained" : null}
@@ -226,6 +248,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq6"
                   onClick={submit}
                   variant={clientProfile.parq6 ? null : "contained"}
@@ -242,6 +265,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq7"
                   onClick={submit}
                   variant={clientProfile.parq7 ? "contained" : null}
@@ -251,6 +275,7 @@ function ClientProfile(props) {
               </TableCell>
               <TableCell>
                 <Button
+                  disabled={readOnly}
                   id="parq7"
                   onClick={submit}
                   variant={clientProfile.parq7 ? null : "contained"}
@@ -266,6 +291,7 @@ function ClientProfile(props) {
         En caso de tener alguna alergia o intolerancia alimenticia indiquese a
         continuación
         <TextField
+          InputProps={{ readOnly: readOnly }}
           size="small"
           style={{ width: "500px", margin: "15px 15px 15px 15px" }}
           id="outlined-basic"
@@ -276,12 +302,14 @@ function ClientProfile(props) {
         </TextField>
       </Paper>
       <Paper size="small" style={{ marginTop: "15px" }} elevation={3}>
-        {props.clientProfile !== clientProfile ? (
+        {readOnly ? (
+          <Button onClick={edit}>Edit</Button>
+        ) : (
           <React.Fragment>
             <Button>Save</Button>
             <Button onClick={cancel}>Cancel</Button>
           </React.Fragment>
-        ) : null}
+        )}
       </Paper>
     </Paper>
   );
