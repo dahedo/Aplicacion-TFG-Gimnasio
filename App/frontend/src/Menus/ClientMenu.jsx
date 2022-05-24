@@ -9,6 +9,7 @@ import axios from "axios";
 import jwt from "jwt-decode";
 import "./NutritionistStyles.css";
 import ClientProfile from "./ClientProfile";
+import ClientDiets from "./ClientDiets";
 
 function ClientMenu(props) {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ function ClientMenu(props) {
     parq5: false,
     parq6: false,
     parq7: false,
+    dieta: "",
   });
 
   useEffect(() => {
@@ -76,6 +78,7 @@ function ClientMenu(props) {
             parq5: response.data.parq5 ? response.data.parq5 : false,
             parq6: response.data.parq6 ? response.data.parq6 : false,
             parq7: response.data.parq7 ? response.data.parq7 : false,
+            dieta: response.data.dieta,
           });
         },
         (error) => {
@@ -182,7 +185,7 @@ function ClientMenu(props) {
               {showProfilePanel ? (
                 <ClientProfile clientProfile={clientProfile} />
               ) : null}
-              {showDietsPanel ? "showDietsPanel" : null}
+              <ClientDiets clientDiet={clientProfile.dieta}></ClientDiets>
               {showTrainningsPanel ? "showTrainningsPanel" : null}
               {showExercisesPanel ? "showExercisesPanel" : null}
             </Grid>
