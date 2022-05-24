@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.mygym.model.Usuarios.Cliente;
+
 @Entity
 public class Dieta {
 
@@ -17,20 +19,34 @@ public class Dieta {
 	private String nombre;
 
 	@OneToMany(mappedBy = "dieta")
-	private Set<DietaCliente> dietasClientes;
+	private Set<Cliente> clientes;
 
-	@OneToMany(mappedBy = "dieta_id")
-	private Set<ComidaDieta> comidasDietas;
+	@OneToMany(mappedBy = "dieta")
+	private Set<AlimentacionDiariaDieta> alimentacionDiariaDietas;
 
 	//////////////////////////
 	//////////////////////////
-//////////////////////////
+	//////////////////////////
 
 	/**
 	 * @return the id
 	 */
 	public Integer getId() {
 		return id;
+	}
+
+	/**
+	 * @return the alimentacionDiariaDietas
+	 */
+	public Set<AlimentacionDiariaDieta> getAlimentacionDiariaDietas() {
+		return alimentacionDiariaDietas;
+	}
+
+	/**
+	 * @param alimentacionDiariaDietas the alimentacionDiariaDietas to set
+	 */
+	public void setAlimentacionDiariaDietas(Set<AlimentacionDiariaDieta> alimentacionDiariaDietas) {
+		this.alimentacionDiariaDietas = alimentacionDiariaDietas;
 	}
 
 	/**

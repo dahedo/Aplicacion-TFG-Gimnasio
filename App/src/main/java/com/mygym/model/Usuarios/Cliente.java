@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-import com.mygym.model.DietaCliente;
+import com.mygym.model.Dieta;
 import com.mygym.model.EntrenamientoCliente;
 
 @Entity
@@ -53,22 +53,9 @@ public class Cliente extends Usuario {
 	@OneToMany(mappedBy = "entrenamiento")
 	private Set<EntrenamientoCliente> entrenamientosClientes;
 
-	@OneToMany(mappedBy = "dieta")
-	private Set<DietaCliente> dietasClientes;
-
-	/**
-	 * @return the dietasClientes
-	 */
-	public Set<DietaCliente> getDietasClientes() {
-		return dietasClientes;
-	}
-
-	/**
-	 * @param dietasClientes the dietasClientes to set
-	 */
-	public void setDietasClientes(Set<DietaCliente> dietasClientes) {
-		this.dietasClientes = dietasClientes;
-	}
+	@ManyToOne
+	@JoinColumn(name = "dieta_id", nullable = true)
+	private Dieta dieta;
 
 	/**
 	 * @return the nombre
@@ -236,6 +223,24 @@ public class Cliente extends Usuario {
 	 */
 	public void setParq7(Boolean parq7) {
 		this.parq7 = parq7;
+	}
+
+	/**
+	 * @return the dieta
+	 */
+	public Dieta getDieta() {
+		return dieta;
+	}
+
+	/**
+	 * @param dieta the dieta to set
+	 */
+	public void setDieta(Dieta dieta) {
+		this.dieta = dieta;
+	}
+
+	public Cliente() {
+		super();
 	}
 
 }
