@@ -31,12 +31,25 @@ INSERT INTO gym.cliente (apellidos,email,fecha_nacimiento,nombre,user_id,entrena
 		,("Gomez de la Riva",	"raul_gomez@yahoo.es",		"14-02-1995",	"Raul",		8,NULL	,NULL);
 		
 		
+
 		
-INSERT INTO gym.dieta (id,nombre) 
-VALUES (1, "2500kcal"),
-		(2, "2000kcal"),
-		(3, "1800kcal"),
-		(4, "1600kcal");
+--  Auto-generated SQL script #202205232344
+INSERT INTO gym.alimentacion_diaria (id,cena,comida,desayuno,media_mañana,merienda,otros,post_entreno,pre_entreno)
+	VALUES (1,"pescado","pollo","colacao",NULL,NULL,NULL,NULL,NULL),
+			(2,"patata","brocoli","cafe","Manzana","platano",NULL,NULL,NULL);
+	
+INSERT INTO gym.dieta (id,nombre)
+	VALUES (1,"Mi dieta");
+	
+	INSERT INTO gym.alimentacion_diaria_dieta (dieta_id,alim_diaria_id)
+	VALUES (1,1), (1,2);
+	
+	--  Auto-generated SQL script #202205241926
+INSERT INTO gym.alimentacion_diaria_dieta (id,dia_semana,alimentacion_diaria_id,dieta_id)
+	VALUES (1,1,1,1),
+			(2,2,2,1);
+
+
 
 
 
