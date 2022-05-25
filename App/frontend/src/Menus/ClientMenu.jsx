@@ -185,7 +185,10 @@ function ClientMenu(props) {
               {showProfilePanel ? (
                 <ClientProfile clientProfile={clientProfile} />
               ) : null}
-              <ClientDiets clientDiet={clientProfile.dieta}></ClientDiets>
+              {showDietsPanel ? (
+                <ClientDiets clientDiet={clientProfile.dieta} />
+              ) : null}
+
               {showTrainningsPanel ? "showTrainningsPanel" : null}
               {showExercisesPanel ? "showExercisesPanel" : null}
             </Grid>

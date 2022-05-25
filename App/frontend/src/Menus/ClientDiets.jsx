@@ -55,44 +55,49 @@ function ClientDiets(props) {
         height: "100%",
       }}
     >
-      <Paper elevation={3} style={{ height: "49%" }}>
-        <h1>Dietas genéricas:</h1>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Nombre</TableCell>
-                <TableCell>Calorias</TableCell>
-                <TableCell>Descripción</TableCell>
-                <TableCell>Lupa</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>Dieta generica 1</TableCell>
-                <TableCell>b</TableCell>
-                <TableCell>c</TableCell>
-                <TableCell>d</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Dieta generica 2</TableCell>
-                <TableCell>b</TableCell>
-                <TableCell>c</TableCell>
-                <TableCell>d</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Dieta generica 3</TableCell>
-                <TableCell>b</TableCell>
-                <TableCell>c</TableCell>
-                <TableCell>d</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+      <Paper elevation={3} style={{ height: "29%" }}>
+        <div style={{ margin: "20px" }}>
+          <h2>Dieta asignada a mi:</h2>
+          <Button onClick={openDialog}>Abrir dieta</Button>
+        </div>
       </Paper>
-      <Paper elevation={3} style={{ height: "49%" }}>
-        <h1>Dieta asignada a mi:</h1>
-        <Button onClick={openDialog}>Abrir dieta</Button>
+
+      <Paper elevation={3} style={{ height: "69%" }}>
+        <div style={{ margin: "10px" }}>
+          <h2>Dietas genéricas:</h2>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Nombre</TableCell>
+                  <TableCell>Calorias</TableCell>
+                  <TableCell>Descripción</TableCell>
+                  <TableCell>Lupa</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Dieta generica 1</TableCell>
+                  <TableCell>b</TableCell>
+                  <TableCell>c</TableCell>
+                  <TableCell>d</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Dieta generica 2</TableCell>
+                  <TableCell>b</TableCell>
+                  <TableCell>c</TableCell>
+                  <TableCell>d</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Dieta generica 3</TableCell>
+                  <TableCell>b</TableCell>
+                  <TableCell>c</TableCell>
+                  <TableCell>d</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
       </Paper>
 
       <Dialog
