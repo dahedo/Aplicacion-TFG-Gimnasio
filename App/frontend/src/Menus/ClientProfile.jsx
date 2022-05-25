@@ -31,8 +31,15 @@ function ClientProfile(props) {
   };
 
   return (
-    <Paper elevation={3} style={{ height: "100%" }}>
-      <Paper elevation={3}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "100%",
+      }}
+    >
+      <Paper elevation={3} style={{ height: "19%" }}>
         <TextField
           InputProps={{ readOnly: readOnly }}
           size="small"
@@ -93,201 +100,203 @@ function ClientProfile(props) {
           variant="outlined"
         ></TextField>
       </Paper>
-      <Paper elevation={3} style={{ marginTop: "15px" }}>
-        <Table>
-          <TableBody>
-            <TableRow>
-              <TableCell>
-                ¿Alguna vez le ha diagnosticado su médico un problema en el
-                corazón, recomendándole que solo haga deporte bajo supervisión
-                médica?
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq1"
-                  onClick={submit}
-                  style={{ padding: "5px" }}
-                  variant={clientProfile.parq1 ? "contained" : null}
-                >
-                  Si
-                </Button>
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq1"
-                  onClick={submit}
-                  variant={clientProfile.parq1 ? null : "contained"}
-                >
-                  No
-                </Button>
-              </TableCell>
-            </TableRow>
+      <Paper elevation={3} style={{ height: "59%" }}>
+        <div style={{ margin: "10px" }}>
+          <Table>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  ¿Alguna vez le ha diagnosticado su médico un problema en el
+                  corazón, recomendándole que solo haga deporte bajo supervisión
+                  médica?
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq1"
+                    onClick={submit}
+                    style={{ padding: "5px" }}
+                    variant={clientProfile.parq1 ? "contained" : null}
+                  >
+                    Si
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq1"
+                    onClick={submit}
+                    variant={clientProfile.parq1 ? null : "contained"}
+                  >
+                    No
+                  </Button>
+                </TableCell>
+              </TableRow>
 
-            <TableRow>
-              <TableCell>
-                ¿Siente dolor en el pecho al hacer ejercicio?
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq2"
-                  onClick={submit}
-                  variant={clientProfile.parq2 ? "contained" : null}
-                >
-                  Si
-                </Button>
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq2"
-                  onClick={submit}
-                  variant={clientProfile.parq2 ? null : "contained"}
-                >
-                  No
-                </Button>
-              </TableCell>
-            </TableRow>
+              <TableRow>
+                <TableCell>
+                  ¿Siente dolor en el pecho al hacer ejercicio?
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq2"
+                    onClick={submit}
+                    variant={clientProfile.parq2 ? "contained" : null}
+                  >
+                    Si
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq2"
+                    onClick={submit}
+                    variant={clientProfile.parq2 ? null : "contained"}
+                  >
+                    No
+                  </Button>
+                </TableCell>
+              </TableRow>
 
-            <TableRow>
-              <TableCell>
-                ¿Ha tenido dolor en el pecho durante el último mes?
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq3"
-                  onClick={submit}
-                  variant={clientProfile.parq3 ? "contained" : null}
-                >
-                  Si
-                </Button>
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq3"
-                  onClick={submit}
-                  variant={clientProfile.parq3 ? null : "contained"}
-                >
-                  No
-                </Button>
-              </TableCell>
-            </TableRow>
+              <TableRow>
+                <TableCell>
+                  ¿Ha tenido dolor en el pecho durante el último mes?
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq3"
+                    onClick={submit}
+                    variant={clientProfile.parq3 ? "contained" : null}
+                  >
+                    Si
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq3"
+                    onClick={submit}
+                    variant={clientProfile.parq3 ? null : "contained"}
+                  >
+                    No
+                  </Button>
+                </TableCell>
+              </TableRow>
 
-            <TableRow>
-              <TableCell>
-                ¿Se marea frecuentemente o ha perdido el conocimiento demasiadas
-                veces?
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq4"
-                  onClick={submit}
-                  variant={clientProfile.parq4 ? "contained" : null}
-                >
-                  Si
-                </Button>
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq4"
-                  onClick={submit}
-                  variant={clientProfile.parq4 ? null : "contained"}
-                >
-                  No
-                </Button>
-              </TableCell>
-            </TableRow>
+              <TableRow>
+                <TableCell>
+                  ¿Se marea frecuentemente o ha perdido el conocimiento
+                  demasiadas veces?
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq4"
+                    onClick={submit}
+                    variant={clientProfile.parq4 ? "contained" : null}
+                  >
+                    Si
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq4"
+                    onClick={submit}
+                    variant={clientProfile.parq4 ? null : "contained"}
+                  >
+                    No
+                  </Button>
+                </TableCell>
+              </TableRow>
 
-            <TableRow>
-              <TableCell>
-                ¿Toma medicación para la presión arterial u otro problema
-                circulatorio?
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq5"
-                  onClick={submit}
-                  variant={clientProfile.parq5 ? "contained" : null}
-                >
-                  Si
-                </Button>
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq5"
-                  onClick={submit}
-                  variant={clientProfile.parq5 ? null : "contained"}
-                >
-                  No
-                </Button>
-              </TableCell>
-            </TableRow>
+              <TableRow>
+                <TableCell>
+                  ¿Toma medicación para la presión arterial u otro problema
+                  circulatorio?
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq5"
+                    onClick={submit}
+                    variant={clientProfile.parq5 ? "contained" : null}
+                  >
+                    Si
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq5"
+                    onClick={submit}
+                    variant={clientProfile.parq5 ? null : "contained"}
+                  >
+                    No
+                  </Button>
+                </TableCell>
+              </TableRow>
 
-            <TableRow>
-              <TableCell>
-                ¿Tiene problemas en las articulaciones o algún dolor que se
-                agrava haciendo ejercicio?
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq6"
-                  onClick={submit}
-                  variant={clientProfile.parq6 ? "contained" : null}
-                >
-                  Si
-                </Button>
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq6"
-                  onClick={submit}
-                  variant={clientProfile.parq6 ? null : "contained"}
-                >
-                  No
-                </Button>
-              </TableCell>
-            </TableRow>
+              <TableRow>
+                <TableCell>
+                  ¿Tiene problemas en las articulaciones o algún dolor que se
+                  agrava haciendo ejercicio?
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq6"
+                    onClick={submit}
+                    variant={clientProfile.parq6 ? "contained" : null}
+                  >
+                    Si
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq6"
+                    onClick={submit}
+                    variant={clientProfile.parq6 ? null : "contained"}
+                  >
+                    No
+                  </Button>
+                </TableCell>
+              </TableRow>
 
-            <TableRow>
-              <TableCell>
-                ¿Cuenta con alguna otra recomendación médica que le recomiende
-                no hacer deporte con mucha intensidad?
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq7"
-                  onClick={submit}
-                  variant={clientProfile.parq7 ? "contained" : null}
-                >
-                  Si
-                </Button>
-              </TableCell>
-              <TableCell>
-                <Button
-                  disabled={readOnly}
-                  id="parq7"
-                  onClick={submit}
-                  variant={clientProfile.parq7 ? null : "contained"}
-                >
-                  No
-                </Button>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+              <TableRow>
+                <TableCell>
+                  ¿Cuenta con alguna otra recomendación médica que le recomiende
+                  no hacer deporte con mucha intensidad?
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq7"
+                    onClick={submit}
+                    variant={clientProfile.parq7 ? "contained" : null}
+                  >
+                    Si
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    disabled={readOnly}
+                    id="parq7"
+                    onClick={submit}
+                    variant={clientProfile.parq7 ? null : "contained"}
+                  >
+                    No
+                  </Button>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
       </Paper>
-      <Paper size="small" style={{ marginTop: "15px" }} elevation={3}>
+      <Paper size="small" style={{ height: "10%" }} elevation={3}>
         En caso de tener alguna alergia o intolerancia alimenticia indiquese a
         continuación
         <TextField
@@ -301,7 +310,7 @@ function ClientProfile(props) {
           {" "}
         </TextField>
       </Paper>
-      <Paper size="small" style={{ marginTop: "15px" }} elevation={3}>
+      <Paper size="small" style={{ height: "5%" }} elevation={3}>
         {readOnly ? (
           <Button onClick={edit}>Edit</Button>
         ) : (
@@ -311,7 +320,7 @@ function ClientProfile(props) {
           </React.Fragment>
         )}
       </Paper>
-    </Paper>
+    </div>
   );
 }
 export default ClientProfile;
