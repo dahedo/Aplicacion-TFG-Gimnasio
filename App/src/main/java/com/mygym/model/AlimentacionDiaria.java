@@ -21,6 +21,9 @@ public class AlimentacionDiaria {
 	private Integer id;
 
 	@Column
+	private String nombre;
+
+	@Column
 	private String desayuno;
 
 	@Column
@@ -170,6 +173,20 @@ public class AlimentacionDiaria {
 	 */
 	public void setPostEntreno(String postEntreno) {
 		this.postEntreno = postEntreno;
+	}
+
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 }
