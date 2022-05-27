@@ -171,40 +171,38 @@ function NutritionistMenu(props) {
             </Grid>
 
             <Grid item xs={12} md={10}>
-              <Paper elevation={3} style={{ height: "100%" }}>
-                {showProfilePanel ? "Perfil" : null}
-                {showDietsPanel ? "Ver dietas" : null}
-                {createDietsPanel ? <NutritionistCreateDiet /> : null}
-                {showClientsPanel ? (
-                  <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Nombre</TableCell>
-                          <TableCell>Apellidos</TableCell>
-                          <TableCell>Email</TableCell>
+              {showProfilePanel ? "Perfil" : null}
+              {showDietsPanel ? "Ver dietas" : null}
+              {createDietsPanel ? <NutritionistCreateDiet /> : null}
+              {showClientsPanel ? (
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Nombre</TableCell>
+                        <TableCell>Apellidos</TableCell>
+                        <TableCell>Email</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {nutritionistProfile.clientes.map((row) => (
+                        <TableRow
+                          key={row.nombre}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                        >
+                          <TableCell component="th" scope="row">
+                            {row.nombre}
+                          </TableCell>
+                          <TableCell>{row.apellidos}</TableCell>
+                          <TableCell>{row.email}</TableCell>
                         </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {nutritionistProfile.clientes.map((row) => (
-                          <TableRow
-                            key={row.nombre}
-                            sx={{
-                              "&:last-child td, &:last-child th": { border: 0 },
-                            }}
-                          >
-                            <TableCell component="th" scope="row">
-                              {row.nombre}
-                            </TableCell>
-                            <TableCell>{row.apellidos}</TableCell>
-                            <TableCell>{row.email}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                ) : null}
-              </Paper>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              ) : null}
             </Grid>
           </Grid>
         </div>
