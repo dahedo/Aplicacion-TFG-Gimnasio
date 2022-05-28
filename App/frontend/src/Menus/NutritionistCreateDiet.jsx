@@ -14,6 +14,8 @@ import Snackbar from "@mui/material/Snackbar";
 
 import MuiAlert from "@mui/material/Alert";
 import axios from "axios";
+import SearchIcon from "@mui/icons-material/Search";
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -166,7 +168,7 @@ function NutritionistCreateDiet(props) {
       <Paper
         elevation={3}
         style={{
-          height: "9%",
+          height: "60px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-evenly",
@@ -334,26 +336,78 @@ function NutritionistCreateDiet(props) {
           }}
         >
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
+            <TableBody>
               <TableRow>
                 <TableCell>Lunes</TableCell>
-                <TableCell>Martes</TableCell>
-                <TableCell>Miercoles</TableCell>
-                <TableCell>Jueves</TableCell>
-                <TableCell>Viernes</TableCell>
-                <TableCell>Sabado</TableCell>
-                <TableCell>Domingo</TableCell>
+                <TableCell>
+                  <Button>
+                    <SearchIcon fontSize="small" />
+                    {"Buscar"}
+                  </Button>
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {/* <TableRow>
-              <TableCell>Dieta generica 3</TableCell>
-              <TableCell>b</TableCell>
-              <TableCell>c</TableCell>
-              <TableCell>d</TableCell>
-            </TableRow> */}
+              <TableRow>
+                <TableCell>Martes</TableCell>
+                <TableCell>
+                  <Button>
+                    <SearchIcon fontSize="small" />
+                    {"Buscar"}
+                  </Button>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Miercoles</TableCell>
+                <TableCell>
+                  <Button>
+                    <SearchIcon fontSize="small" />
+                    {"Buscar"}
+                  </Button>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Jueves</TableCell>
+                <TableCell>
+                  <Button>
+                    <SearchIcon fontSize="small" />
+                    {"Buscar"}
+                  </Button>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Viernes</TableCell>
+                <TableCell>
+                  <Button>
+                    <SearchIcon fontSize="small" />
+                    {"Buscar"}
+                  </Button>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Sabado</TableCell>
+                <TableCell>
+                  <Button>
+                    <SearchIcon fontSize="small" />
+                    {"Buscar"}
+                  </Button>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Domingo</TableCell>
+                <TableCell>
+                  <Button>
+                    <SearchIcon fontSize="small" />
+                    {"Buscar"}
+                  </Button>
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
+          <div>
+            <Button onClick={guardar}>Guardar</Button>
+            <Button id="cancel-dieta" onClick={createDieta}>
+              Cancelar
+            </Button>
+          </div>
         </TableContainer>
       ) : null}
 
