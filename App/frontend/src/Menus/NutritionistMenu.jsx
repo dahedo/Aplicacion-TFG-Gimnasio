@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ResponsiveAppBar from "../navbar";
 import NutritionistCreateDiet from "./NutritionistCreateDiet";
+import NutritionistViewDiets from "./NutritionistViewDiets";
 import {
   Button,
   Avatar,
@@ -172,7 +173,7 @@ function NutritionistMenu(props) {
 
             <Grid item xs={12} md={10}>
               {showProfilePanel ? "Perfil" : null}
-              {showDietsPanel ? "Ver dietas" : null}
+              {showDietsPanel ? <NutritionistViewDiets /> : null}
               {createDietsPanel ? <NutritionistCreateDiet /> : null}
               {showClientsPanel ? (
                 <TableContainer component={Paper}>
