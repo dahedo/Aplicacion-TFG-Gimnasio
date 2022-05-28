@@ -1,5 +1,6 @@
 package com.mygym.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class AlimentacionDiariaRest {
 	// Inyeccion de dependencia
 	@Autowired
 	private AlimentacionDiariaService alimentacionDiariaService;
+
+	@RequestMapping(value = "/get-all", method = RequestMethod.GET)
+	public Optional<List<AlimentacionDiaria>> getAll() {
+		return Optional.ofNullable(alimentacionDiariaService.getAllAlimentacionDiaria());
+	}
 
 	@RequestMapping(value = "/create-update-alimentacion", method = RequestMethod.POST)
 	public Optional<AlimentacionDiaria> createUpdateAlimentacion(@RequestBody AlimentacionDiaria alimentacionDiaria) {

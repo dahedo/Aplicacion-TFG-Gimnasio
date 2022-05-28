@@ -1,5 +1,7 @@
 package com.mygym.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,11 @@ public class AlimentacionDiariaServiceImpl implements AlimentacionDiariaService 
 
 	@Override
 	public AlimentacionDiaria createUpdateAlimentacionDiaria(AlimentacionDiaria alimentacionDiaria) {
-		AlimentacionDiaria alimentacion = dao.createUpdateAlimentacionDiaria(alimentacionDiaria);
-		return alimentacion;
+		return dao.createUpdateAlimentacionDiaria(alimentacionDiaria);
+	}
+
+	@Override
+	public List<AlimentacionDiaria> getAllAlimentacionDiaria() {
+		return dao.getAllAlimentacionDiaria();
 	}
 }
