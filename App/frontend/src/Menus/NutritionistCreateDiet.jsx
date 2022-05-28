@@ -5,16 +5,15 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
   TextField,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
-
 import MuiAlert from "@mui/material/Alert";
 import axios from "axios";
 import SearchIcon from "@mui/icons-material/Search";
+import NutritionistCreateDailyDiet from "./NutritionistCreateDailyDiet";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -245,86 +244,14 @@ function NutritionistCreateDiet(props) {
         </Paper>
       )}
       {enableDietaDiaria && !enableDietaSemanal ? (
-        <Paper
-          elevation={3}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            height: "65%",
-            padding: "20px 20px 20px 20px",
-          }}
-        >
-          <TextField
-            id="desayuno"
-            size="small"
-            label="Desayuno"
-            onChange={changeDietaDiaria}
-            value={dietaDiaria.desayuno}
-          ></TextField>
-          <TextField
-            id="mediaMañana"
-            size="small"
-            style={{ marginTop: "10px" }}
-            label="Media Mañana"
-            onChange={changeDietaDiaria}
-            value={dietaDiaria.mediaMañana}
-          ></TextField>
-          <TextField
-            id="comida"
-            size="small"
-            style={{ marginTop: "10px" }}
-            label="Comida"
-            onChange={changeDietaDiaria}
-            value={dietaDiaria.comida}
-          ></TextField>
-          <TextField
-            id="merienda"
-            size="small"
-            style={{ marginTop: "10px" }}
-            label="Merienda"
-            onChange={changeDietaDiaria}
-            value={dietaDiaria.merienda}
-          ></TextField>
-          <TextField
-            id="cena"
-            size="small"
-            style={{ marginTop: "10px" }}
-            label="Cena"
-            onChange={changeDietaDiaria}
-            value={dietaDiaria.cena}
-          ></TextField>
-          <TextField
-            id="preEntreno"
-            size="small"
-            style={{ marginTop: "10px" }}
-            label="Pre-Entreno"
-            onChange={changeDietaDiaria}
-            value={dietaDiaria.preEntreno}
-          ></TextField>
-          <TextField
-            id="postEntreno"
-            size="small"
-            style={{ marginTop: "10px" }}
-            label="Post-Entreno"
-            onChange={changeDietaDiaria}
-            value={dietaDiaria.postEntreno}
-          ></TextField>
-          <TextField
-            id="otros"
-            size="small"
-            style={{ marginTop: "10px" }}
-            label="Otros"
-            onChange={changeDietaDiaria}
-            value={dietaDiaria.otros}
-          ></TextField>
-          <div>
-            <Button onClick={guardar}>Guardar</Button>
-            <Button id="cancel-dieta" onClick={createDieta}>
-              Cancelar
-            </Button>
-          </div>
-        </Paper>
+        <NutritionistCreateDailyDiet
+          changeDietaDiaria={changeDietaDiaria}
+          createDieta={createDieta}
+          dietaDiaria={dietaDiaria}
+          guardar={guardar}
+        />
       ) : null}
+
       {enableDietaSemanal && !enableDietaDiaria ? (
         <TableContainer
           component={Paper}
