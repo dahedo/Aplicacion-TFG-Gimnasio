@@ -25,7 +25,7 @@ function NutritionistMenu(props) {
   const [showProfilePanel, setShowProfilePanel] = useState(false);
   const [showDietsPanel, setShowDietsPanel] = useState(false);
   const [createDietsPanel, setCreateDietsPanel] = useState(false);
-
+  const [dailyDietList, setDailyDietList] = useState([]);
   const [nutritionistProfile, setNutritionistProfile] = useState({
     nombre: "",
     apellidos: "",
@@ -47,13 +47,14 @@ function NutritionistMenu(props) {
       }
     }
 
-    const url = `http://localhost:8080/nutricionista/${loggedUser.userId}`;
+    const urlNutritionist = `http://localhost:8080/nutricionista/${loggedUser.userId}`;
+    const urlDailyDiet = `http://localhost:8080/alimentacion-diaria/get-all`;
 
     var token = window.localStorage.getItem("loggedUser");
     token = JSON.parse(token);
 
     axios
-      .get(url, {
+      .get(urlNutritionist, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${token}`,
@@ -66,6 +67,22 @@ function NutritionistMenu(props) {
             apellidos: response.data.apellidos,
             clientes: response.data.clientes,
           });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+    axios
+      .get(urlDailyDiet, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(
+        (response) => {
+          setDailyDietList(response.data);
         },
         (error) => {
           console.log(error);
@@ -173,8 +190,12 @@ function NutritionistMenu(props) {
 
             <Grid item xs={12} md={10}>
               {showProfilePanel ? "Perfil" : null}
-              {showDietsPanel ? <NutritionistViewDiets /> : null}
-              {createDietsPanel ? <NutritionistCreateDiet /> : null}
+              {showDietsPanel ? (
+                <NutritionistViewDiets dailyDietList={dailyDietList} />
+              ) : null}
+              {createDietsPanel ? (
+                <NutritionistCreateDiet dailyDietList={dailyDietList} />
+              ) : null}
               {showClientsPanel ? (
                 <TableContainer component={Paper}>
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">

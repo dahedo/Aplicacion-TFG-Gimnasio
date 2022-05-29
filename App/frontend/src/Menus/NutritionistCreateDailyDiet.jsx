@@ -10,6 +10,7 @@ function NutritionistCreateDailyDiet(props) {
         flexDirection: "column",
         height: "65%",
         padding: "20px 20px 20px 20px",
+        marginTop: "10px",
       }}
     >
       <TextField

@@ -107,8 +107,7 @@ function NutritionistCreateDiet(props) {
   const guardar = async (e) => {
     e.preventDefault();
 
-    setDietaDiaria({
-      ...dietaDiaria,
+    let dieta = {
       nombre:
         "[" +
         nombreDieta +
@@ -119,14 +118,22 @@ function NutritionistCreateDiet(props) {
         "][otros:" +
         otrosDieta +
         "]",
-    });
+      desayuno: dietaDiaria.desayuno,
+      mediaMañana: dietaDiaria.mediaMañana,
+      comida: dietaDiaria.mediaMañana,
+      merienda: dietaDiaria.merienda,
+      cena: dietaDiaria.cena,
+      preEntreno: dietaDiaria.preEntreno,
+      postEntreno: dietaDiaria.postEntreno,
+      otros: dietaDiaria.otros,
+    };
 
     const url = `http://localhost:8080/alimentacion-diaria/create-update-alimentacion`;
     var token = window.localStorage.getItem("loggedUser");
     token = JSON.parse(token);
 
     axios
-      .post(url, dietaDiaria, {
+      .post(url, dieta, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${token}`,
@@ -160,7 +167,6 @@ function NutritionistCreateDiet(props) {
       style={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
         height: "100%",
       }}
     >
@@ -198,6 +204,7 @@ function NutritionistCreateDiet(props) {
             flexDirection: "column",
             justifyContent: "space-between",
             padding: "10px 20px 10px 20px",
+            marginTop: "10px",
           }}
         >
           <div>
@@ -253,7 +260,7 @@ function NutritionistCreateDiet(props) {
       ) : null}
 
       {enableDietaSemanal && !enableDietaDiaria ? (
-        <NutritionistCreateWeeklyDiet />
+        <NutritionistCreateWeeklyDiet dailyDietList={props.dailyDietList} />
       ) : null}
 
       {!enableDietaSemanal && !enableDietaDiaria ? (
@@ -266,6 +273,7 @@ function NutritionistCreateDiet(props) {
               flexDirection: "column",
               justifyContent: "space-between",
               padding: "10px 20px 10px 20px",
+              marginTop: "10px",
             }}
           ></Paper>
           <Paper
@@ -275,6 +283,7 @@ function NutritionistCreateDiet(props) {
               flexDirection: "column",
               height: "65%",
               padding: "20px 20px 20px 20px",
+              marginTop: "10px",
             }}
           ></Paper>
         </>
