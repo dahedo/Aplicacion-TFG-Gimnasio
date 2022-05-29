@@ -35,6 +35,19 @@ public class Dieta {
 		return id;
 	}
 
+	public Dieta() {
+		super();
+	}
+
+	public Dieta(Integer id, String nombre, Set<Cliente> clientes,
+			Set<AlimentacionDiariaDieta> alimentacionDiariaDietas) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.clientes = clientes;
+		this.alimentacionDiariaDietas = alimentacionDiariaDietas;
+	}
+
 	/**
 	 * @return the alimentacionDiariaDietas
 	 */
@@ -68,6 +81,20 @@ public class Dieta {
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	/**
+	 * @return the clientes
+	 */
+	public Set<Cliente> getClientes() {
+		return clientes;
+	}
+
+	/**
+	 * @param clientes the clientes to set
+	 */
+	public void setClientes(Set<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 
 }

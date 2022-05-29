@@ -21,13 +21,8 @@ public class DietaRest {
 
 	// Metodos de peticion HTTP
 
-	// Get (all)
-//	@GetMapping("/find-all")
-//	public List<Dieta> getall() {
-//		return dietaDAO.findAll();
-//	} 
-	@RequestMapping(value = "/update-dieta", method = RequestMethod.POST)
-	public Optional<Dieta> getById(@RequestBody Dieta dieta) {
+	@RequestMapping(value = "/create-update", method = RequestMethod.POST)
+	public Optional<Dieta> createUpdateDieta(@RequestBody Dieta dieta) {
 		System.out.println(dieta.getNombre());
 
 		return Optional.ofNullable(dietaService.updateDieta(dieta));

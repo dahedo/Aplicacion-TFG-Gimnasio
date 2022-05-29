@@ -16,6 +16,23 @@ public class AlimentacionDiaria {
 
 	}
 
+	public AlimentacionDiaria(Integer id, String nombre, String desayuno, String mediaMañana, String comida,
+			String merienda, String cena, String otros, String preEntreno, String postEntreno,
+			Set<AlimentacionDiariaDieta> alimentacionDiariaDietas) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.desayuno = desayuno;
+		this.mediaMañana = mediaMañana;
+		this.comida = comida;
+		this.merienda = merienda;
+		this.cena = cena;
+		this.otros = otros;
+		this.preEntreno = preEntreno;
+		this.postEntreno = postEntreno;
+		this.alimentacionDiariaDietas = alimentacionDiariaDietas;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
