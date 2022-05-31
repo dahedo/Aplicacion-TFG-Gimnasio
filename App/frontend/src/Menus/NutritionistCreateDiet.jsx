@@ -41,26 +41,6 @@ function NutritionistCreateDiet(props) {
   const [enableDietaDiaria, setEnableDietaDiaria] = useState(false);
   const [enableDietaSemanal, setEnableDietaSemanal] = useState(false);
 
-  const changeName = async (e) => {
-    e.preventDefault();
-    switch (e.target.id) {
-      case "nombreDieta":
-        setNombreDieta(e.target.value);
-        break;
-      case "caloriasDieta":
-        setCaloriasDieta(e.target.value);
-        break;
-      case "alergiasDieta":
-        setAlergiasDieta(e.target.value);
-        break;
-      case "otrosDieta":
-        setOtrosDieta(e.target.value);
-        break;
-      default:
-        break;
-    }
-  };
-
   const createDieta = async (e) => {
     e.preventDefault();
     switch (e.target.id) {
@@ -104,64 +84,6 @@ function NutritionistCreateDiet(props) {
     setDietaDiaria({ ...dietaDiaria, [e.target.id]: e.target.value });
   };
 
-  const guardar = async (e) => {
-    e.preventDefault();
-
-    let dieta = {
-      nombre:
-        "[" +
-        nombreDieta +
-        "][" +
-        caloriasDieta +
-        "kcal][Alergias:" +
-        alergiasDieta +
-        "][otros:" +
-        otrosDieta +
-        "]",
-      desayuno: dietaDiaria.desayuno,
-      mediaMañana: dietaDiaria.mediaMañana,
-      comida: dietaDiaria.mediaMañana,
-      merienda: dietaDiaria.merienda,
-      cena: dietaDiaria.cena,
-      preEntreno: dietaDiaria.preEntreno,
-      postEntreno: dietaDiaria.postEntreno,
-      otros: dietaDiaria.otros,
-    };
-
-    const url = `http://localhost:8080/alimentacion-diaria/create-update-alimentacion`;
-    var token = window.localStorage.getItem("loggedUser");
-    token = JSON.parse(token);
-
-    axios
-      .post(url, dieta, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(
-        (response) => {
-          setOpenSnackBar(true);
-          setEnableDietaSemanal(false);
-          setEnableDietaDiaria(false);
-          setDietaDiaria({
-            nombre: "",
-            desayuno: "",
-            mediaMañana: "",
-            comida: "",
-            merienda: "",
-            cena: "",
-            preEntreno: "",
-            postEntreno: "",
-            otros: "",
-          });
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  };
-
   return (
     <div
       style={{
@@ -195,67 +117,15 @@ function NutritionistCreateDiet(props) {
           Crear dieta semanal
         </Button>
       </Paper>
-      {!enableDietaSemanal && !enableDietaDiaria ? null : (
-        <Paper
-          elevation={3}
-          style={{
-            height: "12%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            padding: "10px 20px 10px 20px",
-            marginTop: "10px",
-          }}
-        >
-          <div>
-            Nombre de la dieta:
-            {nombreDieta !== "" ? "  [" + nombreDieta + "]" : ""}
-            {caloriasDieta !== "" ? "[" + caloriasDieta + "kcal]" : ""}
-            {alergiasDieta !== "" ? "[Alergias:" + alergiasDieta + "]" : ""}
-            {otrosDieta !== "" ? "[otros:" + otrosDieta + "]" : ""}
-          </div>
-          <div>
-            <TextField
-              style={{ marginRight: "10px" }}
-              id="nombreDieta"
-              size="small"
-              label="Nombre"
-              variant="outlined"
-              onChange={changeName}
-            ></TextField>
-            <TextField
-              id="caloriasDieta"
-              style={{ marginRight: "10px" }}
-              size="small"
-              label="Nº Calorias"
-              variant="outlined"
-              onChange={changeName}
-            ></TextField>
-            <TextField
-              id="alergiasDieta"
-              style={{ marginRight: "10px" }}
-              size="small"
-              label="Alergias/Intolerancias"
-              variant="outlined"
-              onChange={changeName}
-            ></TextField>
-            <TextField
-              id="otrosDieta"
-              style={{ marginRight: "10px" }}
-              size="small"
-              label="Otros"
-              variant="outlined"
-              onChange={changeName}
-            ></TextField>
-          </div>
-        </Paper>
-      )}
       {enableDietaDiaria && !enableDietaSemanal ? (
         <NutritionistCreateDailyDiet
           changeDietaDiaria={changeDietaDiaria}
+          setEnableDietaSemanal={setEnableDietaSemanal}
+          setEnableDietaDiaria={setEnableDietaDiaria}
           createDieta={createDieta}
           dietaDiaria={dietaDiaria}
-          guardar={guardar}
+          setDietaDiaria={setDietaDiaria}
+          setOpenSnackBar={setOpenSnackBar}
         />
       ) : null}
 

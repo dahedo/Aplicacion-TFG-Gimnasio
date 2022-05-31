@@ -144,7 +144,7 @@ function NutritionistMenu(props) {
               <Paper
                 elevation={3}
                 style={{
-                  height: "100%",
+                  height: "640px",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",

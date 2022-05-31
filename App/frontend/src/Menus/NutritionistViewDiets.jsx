@@ -24,7 +24,6 @@ function NutritionistViewDiets(props) {
       style={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
         height: "100%",
       }}
     >
@@ -62,6 +61,7 @@ function NutritionistViewDiets(props) {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "10px 20px 10px 20px",
+          marginTop: "10px",
         }}
       >
         <TableContainer component={Paper}>
