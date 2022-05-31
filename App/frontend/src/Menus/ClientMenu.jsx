@@ -10,6 +10,7 @@ import jwt from "jwt-decode";
 import "./NutritionistStyles.css";
 import ClientProfile from "./ClientProfile";
 import ClientDiets from "./ClientDiets";
+import ClientExercisesPanel from "./ClientExercisesPanel";
 
 function ClientMenu(props) {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function ClientMenu(props) {
   const [showDietsPanel, setShowDietsPanel] = useState(false);
   const [showTrainningsPanel, setShowTrainningsPanel] = useState(false);
   const [showExercisesPanel, setShowExercisesPanel] = useState(false);
+  const [exerciseData, setExerciseData] = useState([]);
 
   const [clientProfile, setClientProfile] = useState({
     nombre: "",
@@ -56,6 +58,7 @@ function ClientMenu(props) {
     var token = window.localStorage.getItem("loggedUser");
     token = JSON.parse(token);
 
+    //Get client data
     axios
       .get(url, {
         headers: {
@@ -80,6 +83,24 @@ function ClientMenu(props) {
             parq7: response.data.parq7 ? response.data.parq7 : false,
             dieta: response.data.dieta,
           });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+    //Get all exercises
+    const url2 = `http://localhost:8080/ejercicios/get-all`;
+    axios
+      .get(url2, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(
+        (response) => {
+          setExerciseData(response.data);
         },
         (error) => {
           console.log(error);
@@ -131,7 +152,7 @@ function ClientMenu(props) {
           alignItems: "center",
         }}
       >
-        <div style={{ height: "95%", width: "90%" }}>
+        <div style={{ height: "650px", width: "90%" }}>
           <Grid container spacing={2} style={{ height: "100%" }}>
             <Grid item xs={12} md={2} style={{ height: "100%" }}>
               <Paper
@@ -189,8 +210,13 @@ function ClientMenu(props) {
                 <ClientDiets clientDiet={clientProfile.dieta} />
               ) : null}
 
-              {showTrainningsPanel ? "showTrainningsPanel" : null}
-              {showExercisesPanel ? "showExercisesPanel" : null}
+              {showTrainningsPanel ? "Entrenamientos" : null}
+
+              {showExercisesPanel ? (
+                <ClientExercisesPanel
+                  exerciseData={exerciseData}
+                ></ClientExercisesPanel>
+              ) : null}
             </Grid>
           </Grid>
         </div>
