@@ -4,28 +4,32 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Ejercicio {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column
-	private String nombreEjercicio;
+	private String nombre;
 
 	@Column
 	private String grupoMuscular;
 
-	@Lob
 	@Column
-	private String descripcion;
+	private String parteCuerpo;
 
 	@Column
-	private String otraInfo;
+	private String urlImagen;
+
+	@Column
+	private String equipamiento;
 
 	@OneToMany(mappedBy = "ejercicio")
 	private Set<EjercicioEntrenamiento> ejerciciosEntrenamientos;
@@ -79,43 +83,57 @@ public class Ejercicio {
 	/**
 	 * @return the nombreEjercicio
 	 */
-	public String getNombreEjercicio() {
-		return nombreEjercicio;
+	public String getNombre() {
+		return nombre;
 	}
 
 	/**
 	 * @param nombreEjercicio the nombreEjercicio to set
 	 */
-	public void setNombreEjercicio(String nombreEjercicio) {
-		this.nombreEjercicio = nombreEjercicio;
+	public void setNombre(String nombreEjercicio) {
+		this.nombre = nombreEjercicio;
 	}
 
 	/**
-	 * @return the descripcion
+	 * @return the parteCuerpo
 	 */
-	public String getDescripcion() {
-		return descripcion;
+	public String getParteCuerpo() {
+		return parteCuerpo;
 	}
 
 	/**
-	 * @param descripcion the descripcion to set
+	 * @param parteCuerpo the parteCuerpo to set
 	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setParteCuerpo(String parteCuerpo) {
+		this.parteCuerpo = parteCuerpo;
 	}
 
 	/**
-	 * @return the otraInfo
+	 * @return the urlImagen
 	 */
-	public String getOtraInfo() {
-		return otraInfo;
+	public String getUrlImagen() {
+		return urlImagen;
 	}
 
 	/**
-	 * @param otraInfo the otraInfo to set
+	 * @param urlImagen the urlImagen to set
 	 */
-	public void setOtraInfo(String otraInfo) {
-		this.otraInfo = otraInfo;
+	public void setUrlImagen(String urlImagen) {
+		this.urlImagen = urlImagen;
+	}
+
+	/**
+	 * @return the equipamiento
+	 */
+	public String getEquipamiento() {
+		return equipamiento;
+	}
+
+	/**
+	 * @param equipamiento the equipamiento to set
+	 */
+	public void setEquipamiento(String equipamiento) {
+		this.equipamiento = equipamiento;
 	}
 
 }

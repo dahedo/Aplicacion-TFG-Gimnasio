@@ -14,18 +14,16 @@ import com.mygym.model.Ejercicio;
 @RequestMapping("ejercicios")
 public class EjercicioRest {
 
-	//Inyeccion de dependencia
+	// Inyeccion de dependencia
 	@Autowired
 	private EjercicioDAO ejercicioDAO;
-	
-	
-	//Metodos de peticion HTTP
-	
-	//Get (all)
-	@GetMapping("/find-all")
-	public List<Ejercicio> getall(){
+
+	// Metodos de peticion HTTP
+
+	// Get (all)
+	@GetMapping("/get-all")
+	public List<Ejercicio> getall() {
 		return ejercicioDAO.findAll();
 	}
-	
-	
+
 }
