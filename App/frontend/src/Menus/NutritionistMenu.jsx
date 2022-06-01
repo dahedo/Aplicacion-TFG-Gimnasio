@@ -138,13 +138,13 @@ function NutritionistMenu(props) {
           alignItems: "center",
         }}
       >
-        <div style={{ height: "95%", width: "90%" }}>
+        <div style={{ height: "650px", width: "90%" }}>
           <Grid container spacing={2} style={{ height: "100%" }}>
             <Grid item xs={12} md={2} style={{ height: "100%" }}>
               <Paper
                 elevation={3}
                 style={{
-                  height: "640px",
+                  height: "100%",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
@@ -156,7 +156,7 @@ function NutritionistMenu(props) {
                   sx={{ width: 150, height: 150 }}
                   style={{ marginTop: "30px" }}
                 />
-                <p>Bienvenido {nutritionistProfile.nombre}</p>
+                <p>Hola {nutritionistProfile.nombre} !</p>
                 <Button
                   variant="contained"
                   onClick={showProfile}
@@ -188,7 +188,7 @@ function NutritionistMenu(props) {
               </Paper>
             </Grid>
 
-            <Grid item xs={12} md={10}>
+            <Grid item xs={12} md={10} style={{ height: "100%" }}>
               {showProfilePanel ? "Perfil" : null}
               {showDietsPanel ? (
                 <NutritionistViewDiets dailyDietList={dailyDietList} />
@@ -197,7 +197,7 @@ function NutritionistMenu(props) {
                 <NutritionistCreateDiet dailyDietList={dailyDietList} />
               ) : null}
               {showClientsPanel ? (
-                <TableContainer component={Paper}>
+                <TableContainer component={Paper} style={{ height: "100%" }}>
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                       <TableRow>

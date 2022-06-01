@@ -56,7 +56,7 @@ function NutritionistViewDiets(props) {
       <Paper
         elevation={3}
         style={{
-          height: "550px",
+          height: "calc(100% - 70px)",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",

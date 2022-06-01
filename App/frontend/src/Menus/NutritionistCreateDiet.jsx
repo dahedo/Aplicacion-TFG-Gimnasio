@@ -95,7 +95,7 @@ function NutritionistCreateDiet(props) {
       <Paper
         elevation={3}
         style={{
-          height: "60px",
+          height: "70px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-evenly",
@@ -138,7 +138,7 @@ function NutritionistCreateDiet(props) {
           <Paper
             elevation={3}
             style={{
-              height: "12%",
+              height: "80px",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
@@ -151,9 +151,9 @@ function NutritionistCreateDiet(props) {
             style={{
               display: "flex",
               flexDirection: "column",
-              height: "65%",
               padding: "20px 20px 20px 20px",
               marginTop: "10px",
+              height: "410px",
             }}
           ></Paper>
         </>

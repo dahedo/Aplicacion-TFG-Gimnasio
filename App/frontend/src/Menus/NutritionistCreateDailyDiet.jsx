@@ -92,7 +92,7 @@ function NutritionistCreateDailyDiet(props) {
       <Paper
         elevation={3}
         style={{
-          height: "12%",
+          height: "80px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -148,9 +148,9 @@ function NutritionistCreateDailyDiet(props) {
         style={{
           display: "flex",
           flexDirection: "column",
-          height: "65%",
           padding: "20px 20px 20px 20px",
           marginTop: "10px",
+          height: "410px",
         }}
       >
         <TextField
