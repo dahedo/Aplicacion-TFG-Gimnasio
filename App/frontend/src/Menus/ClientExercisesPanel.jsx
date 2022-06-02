@@ -17,16 +17,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function ClientExercisesPanel(props) {
+  const numRows = 13;
   const [page, setPage] = React.useState(0);
   const [enableImage, setEnableImage] = useState(false);
   const [imageToShow, setImageToShow] = useState("");
+  const [ejercicios, setEjercicios] = useState(props.exerciseData);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const ver = async (image) => {
-    console.log(image);
     setEnableImage(true);
     setImageToShow(image);
   };
@@ -34,6 +35,16 @@ function ClientExercisesPanel(props) {
   const handleClose = async (e) => {
     e.preventDefault();
     setEnableImage(false);
+  };
+
+  const filtrar = async (e) => {
+    e.preventDefault();
+    const filteredData = props.exerciseData.filter((data) =>
+      data.nombre.toUpperCase().includes(e.target.value.toUpperCase())
+    );
+
+    setEjercicios(filteredData);
+    setPage(0);
   };
 
   return (
@@ -46,6 +57,7 @@ function ClientExercisesPanel(props) {
         }}
       >
         <TextField
+          onChange={filtrar}
           style={{ margin: "10px 10px 10px 10px" }}
           size="small"
           label="Buscar nombre"
@@ -64,30 +76,41 @@ function ClientExercisesPanel(props) {
         style={{
           display: "flex",
           justifyContent: "center",
+          flexDirection: "column",
           margin: "0px 10px 10px 10px",
           height: "calc(100% - 60px)",
         }}
       >
-        <TableContainer>
+        <TableContainer style={{ height: "calc(100% - 70px)" }}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow style={{ backgroundColor: "#1976d2" }}>
-                <TableCell style={{ color: "white" }} align="left">
+                <TableCell
+                  style={{ color: "white", width: "600px" }}
+                  align="left"
+                >
                   Nonbre
                 </TableCell>
-                <TableCell style={{ color: "white" }}>
+                <TableCell style={{ color: "white", width: "150px" }}>
                   Parte del Cuerpo
                 </TableCell>
-                <TableCell style={{ color: "white" }}>Grupo muscular</TableCell>
-                <TableCell style={{ color: "white" }}>Equipamiento</TableCell>
-                <TableCell style={{ color: "white" }} align="center">
+                <TableCell style={{ color: "white", width: "150px" }}>
+                  Grupo muscular
+                </TableCell>
+                <TableCell style={{ color: "white", width: "150px" }}>
+                  Equipamiento
+                </TableCell>
+                <TableCell
+                  style={{ color: "white", width: "100px" }}
+                  align="center"
+                >
                   Imagen
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.exerciseData
-                .slice(page * 13, page * 13 + 13)
+              {ejercicios
+                .slice(page * numRows, page * numRows + numRows)
                 .map((row) => (
                   <TableRow
                     key={row.nombre}
@@ -95,20 +118,11 @@ function ClientExercisesPanel(props) {
                       "&:last-child td, &:last-child th": { border: 0 },
                     }}
                   >
-                    <TableCell align="left" style={{ width: "600px" }}>
-                      {row.nombre}
-                    </TableCell>
-                    <TableCell align="left" style={{ width: "150px" }}>
-                      {row.parteCuerpo}
-                    </TableCell>
-                    <TableCell align="left" style={{ width: "150px" }}>
-                      {row.grupoMuscular}
-                    </TableCell>
-                    <TableCell style={{ width: "150px" }}>
-                      {row.equipamiento}
-                    </TableCell>
+                    <TableCell align="left">{row.nombre}</TableCell>
+                    <TableCell align="left">{row.parteCuerpo}</TableCell>
+                    <TableCell align="left">{row.grupoMuscular}</TableCell>
+                    <TableCell>{row.equipamiento}</TableCell>
                     <TableCell
-                      style={{ width: "100px" }}
                       align="center"
                       onClick={() => ver(row.urlImagen)}
                     >
@@ -118,16 +132,16 @@ function ClientExercisesPanel(props) {
                 ))}
             </TableBody>
           </Table>
-          <TablePagination
-            style={{ marginRight: 0 }}
-            rowsPerPageOptions={[]}
-            component="div"
-            count={props.exerciseData.length}
-            rowsPerPage={13}
-            page={page}
-            onPageChange={handleChangePage}
-          />
         </TableContainer>
+        <TablePagination
+          style={{ marginRight: 0 }}
+          rowsPerPageOptions={[]}
+          component="div"
+          count={ejercicios.length}
+          rowsPerPage={numRows}
+          page={page}
+          onPageChange={handleChangePage}
+        />
       </div>
 
       <Dialog onClose={handleClose} open={enableImage}>
