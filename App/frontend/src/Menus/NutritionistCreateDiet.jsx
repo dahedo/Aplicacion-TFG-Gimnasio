@@ -19,12 +19,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 function NutritionistCreateDiet(props) {
-  const [nombreDieta, setNombreDieta] = useState("");
-  const [caloriasDieta, setCaloriasDieta] = useState("");
-  const [alergiasDieta, setAlergiasDieta] = useState("");
-  const [otrosDieta, setOtrosDieta] = useState("");
-
-  const [openSnackBar, setOpenSnackBar] = React.useState(false);
+  const [openSnackBarOK, setOpenSnackBarOK] = React.useState(false);
+  const [openSnackBarKO, setOpenSnackBarKO] = React.useState(false);
 
   const [dietaDiaria, setDietaDiaria] = useState({
     nombre: "",
@@ -76,7 +72,8 @@ function NutritionistCreateDiet(props) {
     if (reason === "clickaway") {
       return;
     }
-    setOpenSnackBar(false);
+    setOpenSnackBarOK(false);
+    setOpenSnackBarKO(false);
   };
 
   const changeDietaDiaria = async (e) => {
@@ -123,9 +120,8 @@ function NutritionistCreateDiet(props) {
           setEnableDietaSemanal={setEnableDietaSemanal}
           setEnableDietaDiaria={setEnableDietaDiaria}
           createDieta={createDieta}
-          dietaDiaria={dietaDiaria}
-          setDietaDiaria={setDietaDiaria}
-          setOpenSnackBar={setOpenSnackBar}
+          setOpenSnackBarOK={setOpenSnackBarOK}
+          setOpenSnackBarKO={setOpenSnackBarKO}
         />
       ) : null}
 
@@ -160,12 +156,22 @@ function NutritionistCreateDiet(props) {
       ) : null}
 
       <Snackbar
-        open={openSnackBar}
+        open={openSnackBarOK}
         autoHideDuration={6000}
         onClose={handleClose}
       >
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           Guardado correctamente
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={openSnackBarKO}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Error al guardar
         </Alert>
       </Snackbar>
     </div>

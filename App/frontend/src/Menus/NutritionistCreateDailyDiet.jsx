@@ -7,29 +7,37 @@ function NutritionistCreateDailyDiet(props) {
   const [caloriasDieta, setCaloriasDieta] = useState("");
   const [alergiasDieta, setAlergiasDieta] = useState("");
   const [otrosDieta, setOtrosDieta] = useState("");
+  const [disableButton, setDisableButton] = useState(true);
+  const [dietaDiaria, setDietaDiaria] = useState({
+    nombre: "",
+    desayuno: "",
+    mediaMañana: "",
+    comida: "",
+    merienda: "",
+    cena: "",
+    preEntreno: "",
+    postEntreno: "",
+    otros: "",
+  });
+
+  const changeDietaDiaria = async (e) => {
+    e.preventDefault();
+    setDietaDiaria({ ...dietaDiaria, [e.target.id]: e.target.value });
+  };
 
   const guardar = async (e) => {
     e.preventDefault();
 
     let dieta = {
-      nombre:
-        "[" +
-        nombreDieta +
-        "][" +
-        caloriasDieta +
-        "kcal][Alergias:" +
-        alergiasDieta +
-        "][otros:" +
-        otrosDieta +
-        "]",
-      desayuno: props.dietaDiaria.desayuno,
-      mediaMañana: props.dietaDiaria.mediaMañana,
-      comida: props.dietaDiaria.mediaMañana,
-      merienda: props.dietaDiaria.merienda,
-      cena: props.dietaDiaria.cena,
-      preEntreno: props.dietaDiaria.preEntreno,
-      postEntreno: props.dietaDiaria.postEntreno,
-      otros: props.dietaDiaria.otros,
+      nombre: nombreDieta + caloriasDieta + alergiasDieta + otrosDieta,
+      desayuno: dietaDiaria.desayuno,
+      mediaMañana: dietaDiaria.mediaMañana,
+      comida: dietaDiaria.mediaMañana,
+      merienda: dietaDiaria.merienda,
+      cena: dietaDiaria.cena,
+      preEntreno: dietaDiaria.preEntreno,
+      postEntreno: dietaDiaria.postEntreno,
+      otros: dietaDiaria.otros,
     };
 
     const url = `http://localhost:8080/alimentacion-diaria/create-update-alimentacion`;
@@ -46,7 +54,7 @@ function NutritionistCreateDailyDiet(props) {
       .then(
         (response) => {
           console.log("a");
-          props.setOpenSnackBar(true);
+          props.setOpenSnackBarOK(true);
           props.setEnableDietaSemanal(false);
           props.setEnableDietaDiaria(false);
           props.setDietaDiaria({
@@ -62,7 +70,7 @@ function NutritionistCreateDailyDiet(props) {
           });
         },
         (error) => {
-          console.log(error);
+          props.setOpenSnackBarKO(true);
         }
       );
   };
@@ -71,16 +79,28 @@ function NutritionistCreateDailyDiet(props) {
     e.preventDefault();
     switch (e.target.id) {
       case "nombreDieta":
-        setNombreDieta(e.target.value);
+        setNombreDieta(e.target.value.replace(/ /g, "_") + " ");
         break;
       case "caloriasDieta":
-        setCaloriasDieta(e.target.value);
+        setCaloriasDieta(
+          e.target.value === ""
+            ? ""
+            : e.target.value.replace(/ /g, "_") + "kcal"
+        );
         break;
       case "alergiasDieta":
-        setAlergiasDieta(e.target.value);
+        setAlergiasDieta(
+          e.target.value === ""
+            ? ""
+            : " Alergias:" + e.target.value.replace(/ /g, "_")
+        );
         break;
       case "otrosDieta":
-        setOtrosDieta(e.target.value);
+        setOtrosDieta(
+          e.target.value === ""
+            ? ""
+            : " Otros:" + e.target.value.replace(/ /g, "_")
+        );
         break;
       default:
         break;
@@ -92,55 +112,48 @@ function NutritionistCreateDailyDiet(props) {
       <Paper
         elevation={3}
         style={{
-          height: "80px",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
+          flexDirection: "row",
+          alignItems: "center",
+          height: "50px",
           padding: "10px 20px 10px 20px",
-          marginTop: "10px",
+          marginTop: "3px",
         }}
       >
-        <div>
-          Nombre de la dieta:
-          {nombreDieta !== "" ? "  [" + nombreDieta + "]" : ""}
-          {caloriasDieta !== "" ? "[" + caloriasDieta + "kcal]" : ""}
-          {alergiasDieta !== "" ? "[Alergias:" + alergiasDieta + "]" : ""}
-          {otrosDieta !== "" ? "[otros:" + otrosDieta + "]" : ""}
-        </div>
-        <div>
-          <TextField
-            style={{ marginRight: "10px" }}
-            id="nombreDieta"
-            size="small"
-            label="Nombre"
-            variant="outlined"
-            onChange={changeName}
-          ></TextField>
-          <TextField
-            id="caloriasDieta"
-            style={{ marginRight: "10px" }}
-            size="small"
-            label="Nº Calorias"
-            variant="outlined"
-            onChange={changeName}
-          ></TextField>
-          <TextField
-            id="alergiasDieta"
-            style={{ marginRight: "10px" }}
-            size="small"
-            label="Alergias/Intolerancias"
-            variant="outlined"
-            onChange={changeName}
-          ></TextField>
-          <TextField
-            id="otrosDieta"
-            style={{ marginRight: "10px" }}
-            size="small"
-            label="Otros"
-            variant="outlined"
-            onChange={changeName}
-          ></TextField>
-        </div>
+        <TextField
+          required
+          style={{ marginRight: "10px" }}
+          id="nombreDieta"
+          size="small"
+          label="Nombre"
+          variant="outlined"
+          onChange={changeName}
+        ></TextField>
+        <TextField
+          required
+          id="caloriasDieta"
+          style={{ marginRight: "10px" }}
+          size="small"
+          label="Nº Calorias"
+          variant="outlined"
+          onChange={changeName}
+        ></TextField>
+        <TextField
+          id="alergiasDieta"
+          style={{ marginRight: "10px" }}
+          size="small"
+          label="Alergias/Intolerancias"
+          variant="outlined"
+          onChange={changeName}
+        ></TextField>
+        <TextField
+          id="otrosDieta"
+          style={{ marginRight: "10px" }}
+          size="small"
+          label="Otros"
+          variant="outlined"
+          onChange={changeName}
+        ></TextField>
       </Paper>
 
       <Paper
@@ -148,77 +161,118 @@ function NutritionistCreateDailyDiet(props) {
         style={{
           display: "flex",
           flexDirection: "column",
-          padding: "20px 20px 20px 20px",
-          marginTop: "10px",
-          height: "410px",
+          padding: "5px 20px 5px 20px",
+          marginTop: "3px",
+          height: "484px",
         }}
       >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            color: "rgba(0, 0, 0, 0.65)",
+            height: "40px",
+          }}
+        >
+          Nombre: {nombreDieta}
+          {caloriasDieta}
+          {alergiasDieta}
+          {otrosDieta}
+        </div>
         <TextField
           id="desayuno"
           size="small"
           label="Desayuno"
-          onChange={props.changeDietaDiaria}
-          value={props.dietaDiaria.desayuno}
+          onChange={changeDietaDiaria}
+          value={dietaDiaria.desayuno}
         ></TextField>
         <TextField
           id="mediaMañana"
           size="small"
           style={{ marginTop: "10px" }}
           label="Media Mañana"
-          onChange={props.changeDietaDiaria}
-          value={props.dietaDiaria.mediaMañana}
+          onChange={changeDietaDiaria}
+          value={dietaDiaria.mediaMañana}
         ></TextField>
         <TextField
           id="comida"
           size="small"
           style={{ marginTop: "10px" }}
           label="Comida"
-          onChange={props.changeDietaDiaria}
-          value={props.dietaDiaria.comida}
+          onChange={changeDietaDiaria}
+          value={dietaDiaria.comida}
         ></TextField>
         <TextField
           id="merienda"
           size="small"
           style={{ marginTop: "10px" }}
           label="Merienda"
-          onChange={props.changeDietaDiaria}
-          value={props.dietaDiaria.merienda}
+          onChange={changeDietaDiaria}
+          value={dietaDiaria.merienda}
         ></TextField>
         <TextField
           id="cena"
           size="small"
           style={{ marginTop: "10px" }}
           label="Cena"
-          onChange={props.changeDietaDiaria}
-          value={props.dietaDiaria.cena}
+          onChange={changeDietaDiaria}
+          value={dietaDiaria.cena}
         ></TextField>
         <TextField
           id="preEntreno"
           size="small"
           style={{ marginTop: "10px" }}
           label="Pre-Entreno"
-          onChange={props.changeDietaDiaria}
-          value={props.dietaDiaria.preEntreno}
+          onChange={changeDietaDiaria}
+          value={dietaDiaria.preEntreno}
         ></TextField>
         <TextField
           id="postEntreno"
           size="small"
           style={{ marginTop: "10px" }}
           label="Post-Entreno"
-          onChange={props.changeDietaDiaria}
-          value={props.dietaDiaria.postEntreno}
+          onChange={changeDietaDiaria}
+          value={dietaDiaria.postEntreno}
         ></TextField>
         <TextField
           id="otros"
           size="small"
           style={{ marginTop: "10px" }}
           label="Otros"
-          onChange={props.changeDietaDiaria}
-          value={props.dietaDiaria.otros}
+          onChange={changeDietaDiaria}
+          value={dietaDiaria.otros}
         ></TextField>
-        <div>
-          <Button onClick={guardar}>Guardar</Button>
-          <Button id="cancel-dieta" onClick={props.createDieta}>
+        <div
+          style={{ display: "flex", justifyContent: "right", height: "50px" }}
+        >
+          <Button
+            disabled={
+              nombreDieta !== "" &&
+              caloriasDieta !== "" &&
+              (dietaDiaria.desayuno !== "") |
+                (dietaDiaria.mediaMañana !== "") |
+                (dietaDiaria.comida !== "") |
+                (dietaDiaria.merienda !== "") |
+                (dietaDiaria.cena !== "") |
+                (dietaDiaria.preEntreno !== "") |
+                (dietaDiaria.postEntreno !== "") |
+                (dietaDiaria.otros !== "")
+                ? false
+                : true
+            }
+            style={{ margin: "10px 10px 10px 10px" }}
+            onClick={guardar}
+            variant="contained"
+          >
+            Guardar
+          </Button>
+
+          <Button
+            style={{ margin: "10px 0px 10px 10px" }}
+            id="cancel-dieta"
+            variant="contained"
+            onClick={props.createDieta}
+          >
             Cancelar
           </Button>
         </div>
