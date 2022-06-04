@@ -72,7 +72,7 @@ function NutritionistCreateDailyDiet(props) {
           props.setOpenSnackBarOK(true);
           props.setEnableDietaSemanal(false);
           props.setEnableDietaDiaria(false);
-          props.setDietaDiaria({
+          setDietaDiaria({
             nombre: "",
             desayuno: "",
             mediaMañana: "",
