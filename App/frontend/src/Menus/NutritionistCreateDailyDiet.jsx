@@ -286,7 +286,7 @@ function NutritionistCreateDailyDiet(props) {
             style={{ margin: "10px 0px 10px 10px" }}
             id="cancel-dieta"
             variant="contained"
-            onClick={props.createDieta}
+            onClick={cancel}
           >
             Cancelar
           </Button>
