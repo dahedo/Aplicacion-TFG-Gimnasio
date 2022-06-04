@@ -24,6 +24,21 @@ function NutritionistCreateDailyDiet(props) {
     e.preventDefault();
     setDietaDiaria({ ...dietaDiaria, [e.target.id]: e.target.value });
   };
+  const cancel = () => {
+    setDietaDiaria({
+      nombre: "",
+      desayuno: "",
+      mediaMañana: "",
+      comida: "",
+      merienda: "",
+      cena: "",
+      preEntreno: "",
+      postEntreno: "",
+      otros: "",
+    });
+    props.setEnableDietaSemanal(false);
+    props.setEnableDietaDiaria(false);
+  };
 
   const guardar = async (e) => {
     e.preventDefault();

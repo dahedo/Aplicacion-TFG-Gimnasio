@@ -1,17 +1,7 @@
-import {
-  Button,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  TextField,
-} from "@mui/material";
+import { Button, Paper } from "@mui/material";
 import React, { useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import axios from "axios";
 import NutritionistCreateDailyDiet from "./NutritionistCreateDailyDiet";
 import NutritionistCreateWeeklyDiet from "./NutritionistCreateWeeklyDiet";
 
@@ -21,19 +11,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 function NutritionistCreateDiet(props) {
   const [openSnackBarOK, setOpenSnackBarOK] = React.useState(false);
   const [openSnackBarKO, setOpenSnackBarKO] = React.useState(false);
-
-  const [dietaDiaria, setDietaDiaria] = useState({
-    nombre: "",
-    desayuno: "",
-    mediaMañana: "",
-    comida: "",
-    merienda: "",
-    cena: "",
-    preEntreno: "",
-    postEntreno: "",
-    otros: "",
-  });
-
   const [enableDietaDiaria, setEnableDietaDiaria] = useState(false);
   const [enableDietaSemanal, setEnableDietaSemanal] = useState(false);
 
@@ -45,23 +22,9 @@ function NutritionistCreateDiet(props) {
         setEnableDietaDiaria(true);
         break;
       case "create-dieta-semanal":
+        props.reloadDiets();
         setEnableDietaSemanal(true);
         setEnableDietaDiaria(false);
-        break;
-      case "cancel-dieta":
-        setEnableDietaSemanal(false);
-        setEnableDietaDiaria(false);
-        setDietaDiaria({
-          nombre: "",
-          desayuno: "",
-          mediaMañana: "",
-          comida: "",
-          merienda: "",
-          cena: "",
-          preEntreno: "",
-          postEntreno: "",
-          otros: "",
-        });
         break;
       default:
         break;
@@ -74,11 +37,6 @@ function NutritionistCreateDiet(props) {
     }
     setOpenSnackBarOK(false);
     setOpenSnackBarKO(false);
-  };
-
-  const changeDietaDiaria = async (e) => {
-    e.preventDefault();
-    setDietaDiaria({ ...dietaDiaria, [e.target.id]: e.target.value });
   };
 
   return (
@@ -116,10 +74,8 @@ function NutritionistCreateDiet(props) {
       </Paper>
       {enableDietaDiaria && !enableDietaSemanal ? (
         <NutritionistCreateDailyDiet
-          changeDietaDiaria={changeDietaDiaria}
           setEnableDietaSemanal={setEnableDietaSemanal}
           setEnableDietaDiaria={setEnableDietaDiaria}
-          createDieta={createDieta}
           setOpenSnackBarOK={setOpenSnackBarOK}
           setOpenSnackBarKO={setOpenSnackBarKO}
         />
