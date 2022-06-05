@@ -46,13 +46,10 @@ function NutritionistMenu(props) {
         navigate("/menuEntrenador");
       }
     }
-
     const urlNutritionist = `http://localhost:8080/nutricionista/${loggedUser.userId}`;
-    const urlDailyDiet = `http://localhost:8080/alimentacion-diaria/get-all`;
 
     var token = window.localStorage.getItem("loggedUser");
     token = JSON.parse(token);
-
     axios
       .get(urlNutritionist, {
         headers: {
@@ -73,6 +70,14 @@ function NutritionistMenu(props) {
         }
       );
 
+    reloadDiets();
+  }, []);
+
+  const reloadDiets = async () => {
+    const urlDailyDiet = `http://localhost:8080/alimentacion-diaria/get-all`;
+    var token = window.localStorage.getItem("loggedUser");
+    token = JSON.parse(token);
+
     axios
       .get(urlDailyDiet, {
         headers: {
@@ -88,10 +93,6 @@ function NutritionistMenu(props) {
           console.log(error);
         }
       );
-  }, []);
-
-  const submit = async (e) => {
-    e.preventDefault();
   };
 
   const showDiets = async (e) => {
@@ -194,7 +195,10 @@ function NutritionistMenu(props) {
                 <NutritionistViewDiets dailyDietList={dailyDietList} />
               ) : null}
               {createDietsPanel ? (
-                <NutritionistCreateDiet dailyDietList={dailyDietList} />
+                <NutritionistCreateDiet
+                  dailyDietList={dailyDietList}
+                  reloadDiets={reloadDiets}
+                />
               ) : null}
               {showClientsPanel ? (
                 <TableContainer component={Paper} style={{ height: "100%" }}>

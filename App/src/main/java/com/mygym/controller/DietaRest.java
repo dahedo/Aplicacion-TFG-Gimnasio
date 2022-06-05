@@ -23,7 +23,6 @@ public class DietaRest {
 
 	@RequestMapping(value = "/create-update", method = RequestMethod.POST)
 	public Optional<Dieta> createUpdateDieta(@RequestBody Dieta dieta) {
-		System.out.println(dieta.getNombre());
 
 		return Optional.ofNullable(dietaService.updateDieta(dieta));
 	}

@@ -2,6 +2,7 @@ package com.mygym.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Dieta {
 	@OneToMany(mappedBy = "dieta")
 	private Set<Cliente> clientes;
 
-	@OneToMany(mappedBy = "dieta")
+	@OneToMany(mappedBy = "dieta", cascade = CascadeType.ALL)
 	private Set<AlimentacionDiariaDieta> alimentacionDiariaDietas;
 
 	//////////////////////////

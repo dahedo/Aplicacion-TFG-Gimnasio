@@ -82,7 +82,13 @@ function NutritionistCreateDiet(props) {
       ) : null}
 
       {enableDietaSemanal && !enableDietaDiaria ? (
-        <NutritionistCreateWeeklyDiet dailyDietList={props.dailyDietList} />
+        <NutritionistCreateWeeklyDiet
+          setEnableDietaSemanal={setEnableDietaSemanal}
+          setEnableDietaDiaria={setEnableDietaDiaria}
+          setOpenSnackBarOK={setOpenSnackBarOK}
+          setOpenSnackBarKO={setOpenSnackBarKO}
+          dailyDietList={props.dailyDietList}
+        />
       ) : null}
 
       {!enableDietaSemanal && !enableDietaDiaria ? (
@@ -90,12 +96,12 @@ function NutritionistCreateDiet(props) {
           <Paper
             elevation={3}
             style={{
-              height: "80px",
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
+              flexDirection: "row",
+              alignItems: "center",
+              height: "50px",
               padding: "10px 20px 10px 20px",
-              marginTop: "10px",
+              marginTop: "3px",
             }}
           ></Paper>
           <Paper
@@ -103,9 +109,9 @@ function NutritionistCreateDiet(props) {
             style={{
               display: "flex",
               flexDirection: "column",
-              padding: "20px 20px 20px 20px",
-              marginTop: "10px",
-              height: "410px",
+              padding: "5px 20px 5px 20px",
+              marginTop: "3px",
+              height: "486px",
             }}
           ></Paper>
         </>

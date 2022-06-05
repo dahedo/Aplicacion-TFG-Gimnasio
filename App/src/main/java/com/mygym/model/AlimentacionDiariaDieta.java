@@ -1,5 +1,6 @@
 package com.mygym.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class AlimentacionDiariaDieta {
@@ -17,8 +18,8 @@ public class AlimentacionDiariaDieta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
-	@JsonDeserialize(as = Dieta.class)
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JsonIgnore
 	@JoinColumn(name = "dieta_id")
 	private Dieta dieta;
 
