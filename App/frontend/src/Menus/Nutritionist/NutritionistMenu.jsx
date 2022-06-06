@@ -1,40 +1,35 @@
 import React, { useEffect, useState } from "react";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import ResponsiveAppBar from "../navbar";
 import { useNavigate } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import { Button, TextField } from "@mui/material";
+import ResponsiveAppBar from "../../navbar";
+import NutritionistCreateDiet from "./NutritionistCreateDiet";
+import NutritionistViewDiets from "./NutritionistViewDiets";
+import {
+  Button,
+  Avatar,
+  Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import axios from "axios";
 import jwt from "jwt-decode";
-import "./NutritionistStyles.css";
-import ClientProfile from "./ClientProfile";
-import ClientDiets from "./ClientDiets";
-import ClientExercisesPanel from "./ClientExercisesPanel";
 
-function ClientMenu(props) {
+function NutritionistMenu(props) {
   const navigate = useNavigate();
 
+  const [showClientsPanel, setShowClientsPanel] = useState(false);
   const [showProfilePanel, setShowProfilePanel] = useState(false);
   const [showDietsPanel, setShowDietsPanel] = useState(false);
-  const [showTrainningsPanel, setShowTrainningsPanel] = useState(false);
-  const [showExercisesPanel, setShowExercisesPanel] = useState(false);
-  const [exerciseData, setExerciseData] = useState([]);
-
-  const [clientProfile, setClientProfile] = useState({
+  const [createDietsPanel, setCreateDietsPanel] = useState(false);
+  const [dailyDietList, setDailyDietList] = useState([]);
+  const [nutritionistProfile, setNutritionistProfile] = useState({
     nombre: "",
     apellidos: "",
-    email: false,
-    fechaNacimiento: "",
-    username: "",
-    parq1: false,
-    parq2: false,
-    parq3: false,
-    parq4: false,
-    parq5: false,
-    parq6: false,
-    parq7: false,
-    dieta: "",
+    clientes: [],
   });
 
   useEffect(() => {
@@ -44,23 +39,19 @@ function ClientMenu(props) {
       navigate("/login");
     } else {
       loggedUser = jwt(loggedUser);
-
+      if (loggedUser.rol === "CLIENTE") {
+        navigate("/menuCliente");
+      }
       if (loggedUser.rol === "ENTRENADOR") {
         navigate("/menuEntrenador");
       }
-      if (loggedUser.rol === "NUTRICIONISTA") {
-        navigate("/menuNutricionista");
-      }
     }
-
-    const url = `http://localhost:8080/clientes/${loggedUser.userId}`;
+    const urlNutritionist = `http://localhost:8080/nutricionista/${loggedUser.userId}`;
 
     var token = window.localStorage.getItem("loggedUser");
     token = JSON.parse(token);
-
-    //Get client data
     axios
-      .get(url, {
+      .get(urlNutritionist, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${token}`,
@@ -68,20 +59,10 @@ function ClientMenu(props) {
       })
       .then(
         (response) => {
-          setClientProfile({
+          setNutritionistProfile({
             nombre: response.data.nombre,
             apellidos: response.data.apellidos,
-            email: response.data.email,
-            fechaNacimiento: response.data.fechaNacimiento,
-            username: response.data.username,
-            parq1: response.data.parq1 ? response.data.parq1 : false,
-            parq2: response.data.parq2 ? response.data.parq2 : false,
-            parq3: response.data.parq3 ? response.data.parq3 : false,
-            parq4: response.data.parq4 ? response.data.parq4 : false,
-            parq5: response.data.parq5 ? response.data.parq5 : false,
-            parq6: response.data.parq6 ? response.data.parq6 : false,
-            parq7: response.data.parq7 ? response.data.parq7 : false,
-            dieta: response.data.dieta,
+            clientes: response.data.clientes,
           });
         },
         (error) => {
@@ -89,10 +70,16 @@ function ClientMenu(props) {
         }
       );
 
-    //Get all exercises
-    const url2 = `http://localhost:8080/ejercicios/get-all`;
+    reloadDiets();
+  }, []);
+
+  const reloadDiets = async () => {
+    const urlDailyDiet = `http://localhost:8080/alimentacion-diaria/get-all`;
+    var token = window.localStorage.getItem("loggedUser");
+    token = JSON.parse(token);
+
     axios
-      .get(url2, {
+      .get(urlDailyDiet, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${token}`,
@@ -100,44 +87,44 @@ function ClientMenu(props) {
       })
       .then(
         (response) => {
-          setExerciseData(response.data);
+          setDailyDietList(response.data);
         },
         (error) => {
           console.log(error);
         }
       );
-  }, []);
-
-  const showProfile = async (e) => {
-    e.preventDefault();
-    setShowProfilePanel(true);
-    setShowDietsPanel(false);
-    setShowTrainningsPanel(false);
-    setShowExercisesPanel(false);
   };
 
   const showDiets = async (e) => {
     e.preventDefault();
     setShowProfilePanel(false);
+    setShowClientsPanel(false);
     setShowDietsPanel(true);
-    setShowTrainningsPanel(false);
-    setShowExercisesPanel(false);
+    setCreateDietsPanel(false);
   };
 
-  const showTrainnings = async (e) => {
+  const createDiets = async (e) => {
     e.preventDefault();
     setShowProfilePanel(false);
+    setShowClientsPanel(false);
     setShowDietsPanel(false);
-    setShowTrainningsPanel(true);
-    setShowExercisesPanel(false);
+    setCreateDietsPanel(true);
   };
 
-  const showExercises = async (e) => {
+  const showProfile = async (e) => {
+    e.preventDefault();
+    setShowProfilePanel(true);
+    setShowClientsPanel(false);
+    setShowDietsPanel(false);
+    setCreateDietsPanel(false);
+  };
+
+  const showClients = async (e) => {
     e.preventDefault();
     setShowProfilePanel(false);
+    setShowClientsPanel(true);
     setShowDietsPanel(false);
-    setShowTrainningsPanel(false);
-    setShowExercisesPanel(true);
+    setCreateDietsPanel(false);
   };
 
   return (
@@ -170,7 +157,7 @@ function ClientMenu(props) {
                   sx={{ width: 150, height: 150 }}
                   style={{ marginTop: "30px" }}
                 />
-                <p>Bienvenido {clientProfile.nombre}</p>
+                <p>Hola {nutritionistProfile.nombre} !</p>
                 <Button
                   variant="contained"
                   onClick={showProfile}
@@ -183,39 +170,64 @@ function ClientMenu(props) {
                   onClick={showDiets}
                   style={{ width: "90%", marginTop: "100px" }}
                 >
-                  Dietas
+                  Ver dietas
                 </Button>
                 <Button
                   variant="contained"
-                  onClick={showTrainnings}
+                  onClick={createDiets}
                   style={{ width: "90%", marginTop: "30px" }}
                 >
-                  Entrenamientos
+                  Crear dietas
                 </Button>
                 <Button
                   variant="contained"
-                  onClick={showExercises}
+                  onClick={showClients}
                   style={{ width: "90%", marginTop: "30px" }}
                 >
-                  Ejercicios
+                  Mis clientes
                 </Button>
               </Paper>
             </Grid>
 
-            <Grid item xs={12} md={10}>
-              {showProfilePanel ? (
-                <ClientProfile clientProfile={clientProfile} />
-              ) : null}
+            <Grid item xs={12} md={10} style={{ height: "100%" }}>
+              {showProfilePanel ? "Perfil" : null}
               {showDietsPanel ? (
-                <ClientDiets clientDiet={clientProfile.dieta} />
+                <NutritionistViewDiets dailyDietList={dailyDietList} />
               ) : null}
-
-              {showTrainningsPanel ? "Entrenamientos" : null}
-
-              {showExercisesPanel ? (
-                <ClientExercisesPanel
-                  exerciseData={exerciseData}
-                ></ClientExercisesPanel>
+              {createDietsPanel ? (
+                <NutritionistCreateDiet
+                  dailyDietList={dailyDietList}
+                  reloadDiets={reloadDiets}
+                />
+              ) : null}
+              {showClientsPanel ? (
+                <TableContainer component={Paper} style={{ height: "100%" }}>
+                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Nombre</TableCell>
+                        <TableCell>Apellidos</TableCell>
+                        <TableCell>Email</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {nutritionistProfile.clientes.map((row) => (
+                        <TableRow
+                          key={row.nombre}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                        >
+                          <TableCell component="th" scope="row">
+                            {row.nombre}
+                          </TableCell>
+                          <TableCell>{row.apellidos}</TableCell>
+                          <TableCell>{row.email}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               ) : null}
             </Grid>
           </Grid>
@@ -224,5 +236,4 @@ function ClientMenu(props) {
     </div>
   );
 }
-
-export default ClientMenu;
+export default NutritionistMenu;

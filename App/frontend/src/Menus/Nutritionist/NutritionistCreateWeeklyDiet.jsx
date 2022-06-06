@@ -14,7 +14,7 @@ import {
   TableRow,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import NutritionistCreateWeeklyDietTable from "./NutritionistCreateWeeklyDietTable";
@@ -31,6 +31,10 @@ function NutritionistCreateWeeklyDiet(props) {
   const [alergiasDieta, setAlergiasDieta] = useState("");
   const [otrosDieta, setOtrosDieta] = useState("");
   const [dailyDietList, setDailyDietList] = useState(props.dailyDietList);
+
+  useEffect(() => {
+    setDailyDietList(props.dailyDietList);
+  }, [props.dailyDietList]);
   const [enableBusqueda, setEnableBusqueda] = useState({
     enable: false,
     day: null,
@@ -178,7 +182,6 @@ function NutritionistCreateWeeklyDiet(props) {
     setPage(newPage);
   };
   const filtrar = (e) => {
-    e.preventDefault();
     const filteredData = props.dailyDietList.filter((data) =>
       data.nombre.toUpperCase().includes(e.target.value.toUpperCase())
     );
@@ -403,7 +406,7 @@ function RowDialog(props) {
   return (
     <React.Fragment>
       <TableRow>
-        <TableCell style={{ width: "60px" }}>
+        <TableCell style={{ padding: "7px", width: "60px" }}>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -412,8 +415,8 @@ function RowDialog(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell>{row.nombre}</TableCell>
-        <TableCell style={{ width: "60px" }} align="right">
+        <TableCell style={{ padding: "7px" }}>{row.nombre}</TableCell>
+        <TableCell style={{ padding: "7px", width: "60px" }} align="right">
           <Button
             onClick={(e) =>
               props.seleccionarDieta(row, props.enableBusqueda.day, e)

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MuenuCliente from "./Menus/ClientMenu";
+import MuenuCliente from "./Menus/Client/ClientMenu";
 import Login from "./Login/Login";
 import LandingPage from "./LandingPage";
-import MuenuEntrenador from "./Menus/MenuEntrenador";
-import NutritionistMenu from "./Menus/NutritionistMenu";
+import MuenuEntrenador from "./Menus/Trainer/MenuEntrenador";
+import NutritionistMenu from "./Menus/Nutritionist/NutritionistMenu";
 
 function App() {
   return (

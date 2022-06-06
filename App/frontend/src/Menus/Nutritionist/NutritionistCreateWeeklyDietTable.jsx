@@ -57,7 +57,7 @@ function RowTable(props) {
   return (
     <React.Fragment>
       <TableRow>
-        <TableCell style={{ width: "60px" }}>
+        <TableCell style={{ padding: "7px", width: "60px" }}>
           {row.alimentacionDiaria ? (
             <IconButton
               aria-label="expand row"
@@ -68,11 +68,17 @@ function RowTable(props) {
             </IconButton>
           ) : null}
         </TableCell>
-        <TableCell component="th" scope="row" style={{ width: "100px" }}>
+        <TableCell
+          component="th"
+          scope="row"
+          style={{ padding: "7px", width: "100px" }}
+        >
           {semana[row.diaSemana - 1]}
         </TableCell>
-        <TableCell>{row.alimentacionDiaria?.nombre}</TableCell>
-        <TableCell align="right">
+        <TableCell style={{ padding: "7px" }}>
+          {row.alimentacionDiaria?.nombre}
+        </TableCell>
+        <TableCell style={{ padding: "7px" }} align="right">
           {row.alimentacionDiaria?.nombre ? (
             <Button
               onClick={() => props.cancelRow(row.diaSemana)}
