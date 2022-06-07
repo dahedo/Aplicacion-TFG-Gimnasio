@@ -10,6 +10,7 @@ import jwt from "jwt-decode";
 import ClientProfile from "./ClientProfile";
 import ClientDiets from "./ClientDiets";
 import ClientExercisesPanel from "./ClientExercisesPanel";
+import ClientReviews from "./ClientReviews";
 
 function ClientMenu(props) {
   const navigate = useNavigate();
@@ -18,9 +19,11 @@ function ClientMenu(props) {
   const [showDietsPanel, setShowDietsPanel] = useState(false);
   const [showTrainningsPanel, setShowTrainningsPanel] = useState(false);
   const [showExercisesPanel, setShowExercisesPanel] = useState(false);
+  const [showReviewsPanel, setShowReviewsPanel] = useState(false);
   const [exerciseData, setExerciseData] = useState([]);
 
   const [clientProfile, setClientProfile] = useState({
+    id: null,
     nombre: "",
     apellidos: "",
     email: false,
@@ -34,6 +37,7 @@ function ClientMenu(props) {
     parq6: false,
     parq7: false,
     dieta: "",
+    revisiones: [],
   });
 
   useEffect(() => {
@@ -52,41 +56,10 @@ function ClientMenu(props) {
       }
     }
 
-    const url = `http://localhost:8080/clientes/${loggedUser.userId}`;
-
     var token = window.localStorage.getItem("loggedUser");
     token = JSON.parse(token);
 
-    //Get client data
-    axios
-      .get(url, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(
-        (response) => {
-          setClientProfile({
-            nombre: response.data.nombre,
-            apellidos: response.data.apellidos,
-            email: response.data.email,
-            fechaNacimiento: response.data.fechaNacimiento,
-            username: response.data.username,
-            parq1: response.data.parq1 ? response.data.parq1 : false,
-            parq2: response.data.parq2 ? response.data.parq2 : false,
-            parq3: response.data.parq3 ? response.data.parq3 : false,
-            parq4: response.data.parq4 ? response.data.parq4 : false,
-            parq5: response.data.parq5 ? response.data.parq5 : false,
-            parq6: response.data.parq6 ? response.data.parq6 : false,
-            parq7: response.data.parq7 ? response.data.parq7 : false,
-            dieta: response.data.dieta,
-          });
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    getClientData();
 
     //Get all exercises
     const url2 = `http://localhost:8080/ejercicios/get-all`;
@@ -107,36 +80,92 @@ function ClientMenu(props) {
       );
   }, []);
 
-  const showProfile = async (e) => {
-    e.preventDefault();
-    setShowProfilePanel(true);
-    setShowDietsPanel(false);
-    setShowTrainningsPanel(false);
-    setShowExercisesPanel(false);
+  const getClientData = () => {
+    console.log("Cargando info cliente...");
+
+    var loggedUser = window.localStorage.getItem("loggedUser");
+    loggedUser = jwt(loggedUser);
+    const url = `http://localhost:8080/clientes/${loggedUser.userId}`;
+
+    var token = window.localStorage.getItem("loggedUser");
+    token = JSON.parse(token);
+
+    //Get client data
+    axios
+      .get(url, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(
+        (response) => {
+          setClientProfile({
+            id: response.data.user_id,
+            nombre: response.data.nombre,
+            apellidos: response.data.apellidos,
+            email: response.data.email,
+            fechaNacimiento: response.data.fechaNacimiento,
+            username: response.data.username,
+            parq1: response.data.parq1 ? response.data.parq1 : false,
+            parq2: response.data.parq2 ? response.data.parq2 : false,
+            parq3: response.data.parq3 ? response.data.parq3 : false,
+            parq4: response.data.parq4 ? response.data.parq4 : false,
+            parq5: response.data.parq5 ? response.data.parq5 : false,
+            parq6: response.data.parq6 ? response.data.parq6 : false,
+            parq7: response.data.parq7 ? response.data.parq7 : false,
+            dieta: response.data.dieta,
+            revisiones: response.data.revisiones,
+          });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   };
 
-  const showDiets = async (e) => {
+  const selectFromMenu = async (e) => {
     e.preventDefault();
-    setShowProfilePanel(false);
-    setShowDietsPanel(true);
-    setShowTrainningsPanel(false);
-    setShowExercisesPanel(false);
-  };
+    switch (e.target.id) {
+      case "show-profile":
+        setShowProfilePanel(true);
+        setShowDietsPanel(false);
+        setShowTrainningsPanel(false);
+        setShowExercisesPanel(false);
+        setShowReviewsPanel(false);
+        break;
+      case "show-diets":
+        setShowProfilePanel(false);
+        setShowDietsPanel(true);
+        setShowTrainningsPanel(false);
+        setShowExercisesPanel(false);
 
-  const showTrainnings = async (e) => {
-    e.preventDefault();
-    setShowProfilePanel(false);
-    setShowDietsPanel(false);
-    setShowTrainningsPanel(true);
-    setShowExercisesPanel(false);
-  };
-
-  const showExercises = async (e) => {
-    e.preventDefault();
-    setShowProfilePanel(false);
-    setShowDietsPanel(false);
-    setShowTrainningsPanel(false);
-    setShowExercisesPanel(true);
+        setShowReviewsPanel(false);
+        break;
+      case "show-trainnings":
+        setShowProfilePanel(false);
+        setShowDietsPanel(false);
+        setShowTrainningsPanel(true);
+        setShowExercisesPanel(false);
+        setShowReviewsPanel(false);
+        break;
+      case "show-exercises":
+        setShowProfilePanel(false);
+        setShowDietsPanel(false);
+        setShowTrainningsPanel(false);
+        setShowExercisesPanel(true);
+        setShowReviewsPanel(false);
+        break;
+      case "show-reviews":
+        setShowProfilePanel(false);
+        setShowDietsPanel(false);
+        setShowTrainningsPanel(false);
+        setShowExercisesPanel(false);
+        setShowReviewsPanel(true);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -169,34 +198,46 @@ function ClientMenu(props) {
                   sx={{ width: 150, height: 150 }}
                   style={{ marginTop: "30px" }}
                 />
-                <p>Bienvenido {clientProfile.nombre}</p>
+                <p>Hola {clientProfile.nombre} !</p>
                 <Button
+                  id="show-profile"
                   variant="contained"
-                  onClick={showProfile}
+                  onClick={selectFromMenu}
                   style={{ width: "90%", marginTop: "30px" }}
                 >
                   Perfil
                 </Button>
                 <Button
+                  id="show-diets"
                   variant="contained"
-                  onClick={showDiets}
-                  style={{ width: "90%", marginTop: "100px" }}
+                  onClick={selectFromMenu}
+                  style={{ width: "90%", marginTop: "70px" }}
                 >
                   Dietas
                 </Button>
                 <Button
+                  id="show-trainnings"
                   variant="contained"
-                  onClick={showTrainnings}
+                  onClick={selectFromMenu}
                   style={{ width: "90%", marginTop: "30px" }}
                 >
                   Entrenamientos
                 </Button>
                 <Button
+                  id="show-exercises"
                   variant="contained"
-                  onClick={showExercises}
+                  onClick={selectFromMenu}
                   style={{ width: "90%", marginTop: "30px" }}
                 >
                   Ejercicios
+                </Button>
+                <Button
+                  id="show-reviews"
+                  variant="contained"
+                  onClick={selectFromMenu}
+                  style={{ width: "90%", marginTop: "30px" }}
+                >
+                  Revisiones
                 </Button>
               </Paper>
             </Grid>
@@ -208,13 +249,18 @@ function ClientMenu(props) {
               {showDietsPanel ? (
                 <ClientDiets clientDiet={clientProfile.dieta} />
               ) : null}
-
               {showTrainningsPanel ? "Entrenamientos" : null}
-
               {showExercisesPanel ? (
                 <ClientExercisesPanel
                   exerciseData={exerciseData}
                 ></ClientExercisesPanel>
+              ) : null}
+              {showReviewsPanel ? (
+                <ClientReviews
+                  reviews={clientProfile.revisiones}
+                  clientId={clientProfile.id}
+                  getClientData={getClientData}
+                />
               ) : null}
             </Grid>
           </Grid>

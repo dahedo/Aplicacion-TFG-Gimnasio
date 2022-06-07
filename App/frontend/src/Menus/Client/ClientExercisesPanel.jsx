@@ -86,22 +86,28 @@ function ClientExercisesPanel(props) {
             <TableHead>
               <TableRow style={{ backgroundColor: "#1976d2" }}>
                 <TableCell
-                  style={{ color: "white", width: "600px" }}
+                  style={{ padding: "7px", color: "white", width: "600px" }}
                   align="left"
                 >
                   Nonbre
                 </TableCell>
-                <TableCell style={{ color: "white", width: "150px" }}>
+                <TableCell
+                  style={{ padding: "7px", color: "white", width: "150px" }}
+                >
                   Parte del Cuerpo
                 </TableCell>
-                <TableCell style={{ color: "white", width: "150px" }}>
+                <TableCell
+                  style={{ padding: "7px", color: "white", width: "150px" }}
+                >
                   Grupo muscular
                 </TableCell>
-                <TableCell style={{ color: "white", width: "150px" }}>
+                <TableCell
+                  style={{ padding: "7px", color: "white", width: "150px" }}
+                >
                   Equipamiento
                 </TableCell>
                 <TableCell
-                  style={{ color: "white", width: "100px" }}
+                  style={{ padding: "7px", color: "white", width: "100px" }}
                   align="center"
                 >
                   Imagen
@@ -118,11 +124,20 @@ function ClientExercisesPanel(props) {
                       "&:last-child td, &:last-child th": { border: 0 },
                     }}
                   >
-                    <TableCell align="left">{row.nombre}</TableCell>
-                    <TableCell align="left">{row.parteCuerpo}</TableCell>
-                    <TableCell align="left">{row.grupoMuscular}</TableCell>
-                    <TableCell>{row.equipamiento}</TableCell>
+                    <TableCell style={{ padding: "7px" }} align="left">
+                      {row.nombre}
+                    </TableCell>
+                    <TableCell style={{ padding: "7px" }} align="left">
+                      {row.parteCuerpo}
+                    </TableCell>
+                    <TableCell style={{ padding: "7px" }} align="left">
+                      {row.grupoMuscular}
+                    </TableCell>
+                    <TableCell style={{ padding: "7px" }}>
+                      {row.equipamiento}
+                    </TableCell>
                     <TableCell
+                      style={{ padding: "7px" }}
                       align="center"
                       onClick={() => ver(row.urlImagen)}
                     >

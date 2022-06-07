@@ -2,6 +2,7 @@ package com.mygym.model.Usuarios;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -9,8 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mygym.model.Dieta;
 import com.mygym.model.EntrenamientoCliente;
+import com.mygym.model.Revision;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "user_id")
@@ -56,6 +59,10 @@ public class Cliente extends Usuario {
 	@ManyToOne
 	@JoinColumn(name = "dieta_id", nullable = true)
 	private Dieta dieta;
+
+	@JsonManagedReference
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	private Set<Revision> revisiones;
 
 	/**
 	 * @return the nombre
@@ -237,6 +244,20 @@ public class Cliente extends Usuario {
 	 */
 	public void setDieta(Dieta dieta) {
 		this.dieta = dieta;
+	}
+
+	/**
+	 * @return the revisiones
+	 */
+	public Set<Revision> getRevisiones() {
+		return revisiones;
+	}
+
+	/**
+	 * @param revisiones the revisiones to set
+	 */
+	public void setRevisiones(Set<Revision> revisiones) {
+		this.revisiones = revisiones;
 	}
 
 	public Cliente() {
