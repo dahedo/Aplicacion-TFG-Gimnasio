@@ -267,7 +267,7 @@ function ClientMenu(props) {
               {showReviewsPanel ? (
                 <ClientReviews
                   reviews={clientProfile.revisiones}
-                  clientId={clientProfile.id}
+                  clientId={clientProfile.user_id}
                   getClientData={getClientData}
                 />
               ) : null}

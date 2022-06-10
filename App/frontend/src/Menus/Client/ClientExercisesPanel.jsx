@@ -27,18 +27,16 @@ function ClientExercisesPanel(props) {
     setPage(newPage);
   };
 
-  const ver = async (image) => {
+  const ver = (image) => {
     setEnableImage(true);
     setImageToShow(image);
   };
 
-  const handleClose = async (e) => {
-    e.preventDefault();
+  const handleClose = (e) => {
     setEnableImage(false);
   };
 
-  const filtrar = async (e) => {
-    e.preventDefault();
+  const filtrar = (e) => {
     const filteredData = props.exerciseData.filter((data) =>
       data.nombre.toUpperCase().includes(e.target.value.toUpperCase())
     );
@@ -82,7 +80,7 @@ function ClientExercisesPanel(props) {
         }}
       >
         <TableContainer style={{ height: "calc(100% - 70px)" }}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table aria-label="simple table">
             <TableHead>
               <TableRow style={{ backgroundColor: "#1976d2" }}>
                 <TableCell

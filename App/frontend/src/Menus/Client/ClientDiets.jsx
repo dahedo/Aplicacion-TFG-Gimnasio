@@ -1,140 +1,133 @@
 import {
   Button,
+  Collapse,
   Dialog,
+  IconButton,
   Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
+  TablePagination,
   TableRow,
 } from "@mui/material";
+import defaultDiets from "../../Data/defaultDiets.json";
 import React, { useState } from "react";
 
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
 function ClientDiets(props) {
-  console.log(props);
+  const numRows = 7;
+  const [page, setPage] = React.useState(0);
   const [dialogEnabled, setDialogEnabled] = useState(false);
 
-  const tableHeaders = [
-    "",
-    "Desayuno",
-    "Media mañana",
-    "Comida",
-    "Merienda",
-    "Cena",
-    "Pre-entreno",
-    "Post-entreno",
-    "Otros",
-  ];
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-  const semana = [
-    "Lunes",
-    "Martes",
-    "Miercoles",
-    "Jueves",
-    "Viernes",
-    "Sabado",
-    "Domingo",
-  ];
-
-  const openDialog = async (e) => {
+  const openDialog = (e) => {
     e.preventDefault();
     setDialogEnabled(true);
   };
-  const handleClose = async (e) => {
+  const handleClose = (e) => {
     e.preventDefault();
     setDialogEnabled(false);
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        height: "100%",
-      }}
-    >
-      <Paper elevation={3} style={{ height: "29%" }}>
-        <div style={{ margin: "20px" }}>
-          <h2>Dieta asignada a mi:</h2>
-          <Button onClick={openDialog}>Abrir dieta</Button>
-        </div>
-      </Paper>
-
-      <Paper elevation={3} style={{ height: "69%" }}>
-        <div style={{ margin: "10px" }}>
-          <h2>Dietas genéricas:</h2>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Nombre</TableCell>
-                  <TableCell>Calorias</TableCell>
-                  <TableCell>Descripción</TableCell>
-                  <TableCell>Lupa</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Dieta generica 1</TableCell>
-                  <TableCell>b</TableCell>
-                  <TableCell>c</TableCell>
-                  <TableCell>d</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Dieta generica 2</TableCell>
-                  <TableCell>b</TableCell>
-                  <TableCell>c</TableCell>
-                  <TableCell>d</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Dieta generica 3</TableCell>
-                  <TableCell>b</TableCell>
-                  <TableCell>c</TableCell>
-                  <TableCell>d</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
-      </Paper>
-
-      <Dialog
-        fullWidth={true}
-        maxWidth={"lg"}
-        onClose={handleClose}
-        open={dialogEnabled}
-      >
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <div style={{ height: "100%" }}>
+      <Paper elevation={3} style={{ height: "100%" }}>
+        <TableContainer>
+          <Table
+            aria-label="simple table"
+            style={{ margin: "10px 10px 10px 10px " }}
+          >
             <TableHead>
-              <TableRow key="sadsadasd">
-                {tableHeaders.map((e, i) => (
-                  <TableCell key={i}>{e}</TableCell>
-                ))}
+              <TableRow style={{ backgroundColor: "#1976d2" }}>
+                <TableCell style={{ color: "white" }} colSpan={6}>
+                  Dieta asignada a mi
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.clientDiet?.alimentacionDiariaDietas?.map((e, i) => (
-                <TableRow key={i}>
-                  <TableCell>{semana[i]}</TableCell>
-                  <TableCell>{e.alimentacionDiaria.desayuno}</TableCell>
-                  <TableCell>{e.alimentacionDiaria.mediaMañana}</TableCell>
-                  <TableCell>{e.alimentacionDiaria.comida}</TableCell>
-                  <TableCell>{e.alimentacionDiaria.merienda}</TableCell>
-                  <TableCell>{e.alimentacionDiaria.cena}</TableCell>
-                  <TableCell>{e.alimentacionDiaria.preEntreno}</TableCell>
-                  <TableCell>{e.alimentacionDiaria.postEntreno}</TableCell>
-                  <TableCell>{e.alimentacionDiaria.otros}</TableCell>
-                </TableRow>
-              ))}
+              <TableRow>
+                <TableCell>Mi dieta</TableCell>
+              </TableRow>
+            </TableBody>
+            <TableHead>
+              <TableRow style={{ backgroundColor: "#1976d2" }}>
+                <TableCell style={{ color: "white" }} colSpan={6}>
+                  Dietas genericas
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {defaultDiets
+                .slice(page * numRows, page * numRows + numRows)
+                .map((diet) => {
+                  return <CustomRow diet={diet} />;
+                })}
             </TableBody>
           </Table>
         </TableContainer>
-      </Dialog>
+        <TablePagination
+          style={{ marginRight: 0 }}
+          rowsPerPageOptions={[]}
+          component="div"
+          count={defaultDiets.length}
+          rowsPerPage={numRows}
+          page={page}
+          onPageChange={handleChangePage}
+        />
+      </Paper>
     </div>
   );
 }
 
 export default ClientDiets;
+
+function CustomRow(props) {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <React.Fragment>
+      <TableRow>
+        <TableCell style={{ padding: "7px", width: "60px" }}>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+        <TableCell>{props.diet.nombre}</TableCell>
+      </TableRow>
+      {open ? (
+        <TableRow style={{ backgroundColor: "rgba(224, 224, 224, 1)" }}>
+          <TableCell colSpan={4}>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <Table component={Paper} size="small" style={{ width: "100%" }}>
+                <TableBody>
+                  {Object.entries(props.diet).map(([key, value]) =>
+                    key !== "nombre" &&
+                    key !== "id" &&
+                    value !== "" &&
+                    value !== null ? (
+                      <TableRow key={key}>
+                        <TableCell>{key}</TableCell>
+                        <TableCell>{value}</TableCell>
+                      </TableRow>
+                    ) : null
+                  )}
+                </TableBody>
+              </Table>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      ) : null}
+    </React.Fragment>
+  );
+}
