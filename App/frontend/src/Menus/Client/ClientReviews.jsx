@@ -52,7 +52,7 @@ function ClientReviews(props) {
   const [nextReview, setNextReview] = React.useState(null);
 
   useEffect(() => {
-    if (props.reviews !== null) {
+    if (props.reviews && props.reviews.length > 0) {
       const lastDate = props.reviews.sort((a, b) =>
         b.fechaRevision
           .split("/")
@@ -547,54 +547,62 @@ function ClientReviews(props) {
                   </TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
-                {props.reviews
-                  .sort((a, b) =>
-                    b.fechaRevision
-                      .split("/")
-                      .reverse()
-                      .join()
-                      .localeCompare(
-                        a.fechaRevision.split("/").reverse().join()
-                      )
-                  )
-                  .slice(page * numRows, page * numRows + numRows)
-                  .map((row) => (
-                    <TableRow key={row.id}>
-                      <TableCell align="center">{row.fechaRevision}</TableCell>
-                      <TableCell align="center">{row.peso}</TableCell>
-                      <TableCell align="center">{row.cuello}</TableCell>
-                      <TableCell align="center">{row.hombros}</TableCell>
-                      <TableCell align="center">{row.pecho}</TableCell>
-                      <TableCell align="center">{row.cintura}</TableCell>
-                      <TableCell align="center">{row.cadera}</TableCell>
-                      <TableCell align="center">
-                        {row.antebrazoIzquierdo}
-                      </TableCell>
-                      <TableCell align="center">
-                        {row.antebrazoDerecho}
-                      </TableCell>
-                      <TableCell align="center">
-                        {row.bicepsIzquierdo}
-                      </TableCell>
-                      <TableCell align="center">{row.bicepsDerecho}</TableCell>
-                      <TableCell align="center">{row.musloIzquierdo}</TableCell>
-                      <TableCell align="center">{row.musloDerecho}</TableCell>
+              {props.reviews && props.reviews !== [] ? (
+                <TableBody>
+                  {props.reviews
+                    .sort((a, b) =>
+                      b.fechaRevision
+                        .split("/")
+                        .reverse()
+                        .join()
+                        .localeCompare(
+                          a.fechaRevision.split("/").reverse().join()
+                        )
+                    )
+                    .slice(page * numRows, page * numRows + numRows)
+                    .map((row) => (
+                      <TableRow key={row.id}>
+                        <TableCell align="center">
+                          {row.fechaRevision}
+                        </TableCell>
+                        <TableCell align="center">{row.peso}</TableCell>
+                        <TableCell align="center">{row.cuello}</TableCell>
+                        <TableCell align="center">{row.hombros}</TableCell>
+                        <TableCell align="center">{row.pecho}</TableCell>
+                        <TableCell align="center">{row.cintura}</TableCell>
+                        <TableCell align="center">{row.cadera}</TableCell>
+                        <TableCell align="center">
+                          {row.antebrazoIzquierdo}
+                        </TableCell>
+                        <TableCell align="center">
+                          {row.antebrazoDerecho}
+                        </TableCell>
+                        <TableCell align="center">
+                          {row.bicepsIzquierdo}
+                        </TableCell>
+                        <TableCell align="center">
+                          {row.bicepsDerecho}
+                        </TableCell>
+                        <TableCell align="center">
+                          {row.musloIzquierdo}
+                        </TableCell>
+                        <TableCell align="center">{row.musloDerecho}</TableCell>
 
-                      <TableCell
-                        align="center"
-                        style={{
-                          padding: "2px 2px 2px 2px",
-                        }}
-                        onClick={() => setComentDialog(row.comentarios)}
-                      >
-                        {row.comentarios !== "" ? (
-                          <CommentOutlinedIcon size="small" />
-                        ) : null}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
+                        <TableCell
+                          align="center"
+                          style={{
+                            padding: "2px 2px 2px 2px",
+                          }}
+                          onClick={() => setComentDialog(row.comentarios)}
+                        >
+                          {row.comentarios !== "" ? (
+                            <CommentOutlinedIcon size="small" />
+                          ) : null}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              ) : null}
             </Table>
           </TableContainer>
           <TablePagination
