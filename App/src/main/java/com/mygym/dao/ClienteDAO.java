@@ -6,4 +6,5 @@ public interface ClienteDAO {
 
 	public Cliente findById(long id);
 
+	public Cliente createUpdateCliente(Cliente cliente);
 }

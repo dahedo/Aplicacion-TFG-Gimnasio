@@ -45,6 +45,15 @@ public class Cliente extends Usuario {
 	@Column
 	private Boolean parq7;
 
+	@Column
+	private Integer altura;
+
+	@Column(length = 3000)
+	private String alergias;
+
+	@Column(length = 3000)
+	private String lesiones;
+
 	@ManyToOne
 	@JoinColumn(name = "entrenador_id", nullable = true)
 	private Entrenador entrenador;
@@ -258,6 +267,48 @@ public class Cliente extends Usuario {
 	 */
 	public void setRevisiones(Set<Revision> revisiones) {
 		this.revisiones = revisiones;
+	}
+
+	/**
+	 * @return the alergias
+	 */
+	public String getAlergias() {
+		return alergias;
+	}
+
+	/**
+	 * @param alergias the alergias to set
+	 */
+	public void setAlergias(String alergias) {
+		this.alergias = alergias;
+	}
+
+	/**
+	 * @return the lesiones
+	 */
+	public String getLesiones() {
+		return lesiones;
+	}
+
+	/**
+	 * @param lesiones the lesiones to set
+	 */
+	public void setLesiones(String lesiones) {
+		this.lesiones = lesiones;
+	}
+
+	/**
+	 * @return the altura
+	 */
+	public Integer getAltura() {
+		return altura;
+	}
+
+	/**
+	 * @param altura the altura to set
+	 */
+	public void setAltura(Integer altura) {
+		this.altura = altura;
 	}
 
 	public Cliente() {

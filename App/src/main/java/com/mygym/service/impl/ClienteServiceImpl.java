@@ -1,5 +1,7 @@
 package com.mygym.service.impl;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,7 @@ import com.mygym.model.Usuarios.Cliente;
 import com.mygym.service.ClienteService;
 
 @Service
+@Transactional
 public class ClienteServiceImpl implements ClienteService {
 
 	@Autowired
@@ -15,8 +18,12 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public Cliente findById(long id) {
-		Cliente cliente = clienteDao.findById(id);
-		return cliente;
+		return clienteDao.findById(id);
+	}
+
+	@Override
+	public Cliente createUpdateCliente(Cliente cliente) {
+		return clienteDao.createUpdateCliente(cliente);
 	}
 
 }

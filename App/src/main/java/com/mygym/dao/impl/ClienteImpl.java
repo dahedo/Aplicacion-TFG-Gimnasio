@@ -23,4 +23,17 @@ public class ClienteImpl implements ClienteDAO {
 		return cliente;
 	}
 
+	@Override
+	public Cliente createUpdateCliente(Cliente cliente) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		Cliente cli = currentSession.get(Cliente.class, cliente.getUser_id());
+
+		cliente.setUsername(cli.getUsername());
+		cliente.setPassword(cli.getPassword());
+		cliente.setRol(cli.getRol());
+
+		return (Cliente) currentSession.merge(cliente);
+
+	}
+
 }

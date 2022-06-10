@@ -23,7 +23,7 @@ function ClientMenu(props) {
   const [exerciseData, setExerciseData] = useState([]);
 
   const [clientProfile, setClientProfile] = useState({
-    id: null,
+    user_id: null,
     nombre: "",
     apellidos: "",
     email: false,
@@ -37,7 +37,10 @@ function ClientMenu(props) {
     parq6: false,
     parq7: false,
     dieta: "",
-    revisiones: [],
+    altura: null,
+    alergias: "",
+    lesiones: "",
+    revisiones: null,
   });
 
   useEffect(() => {
@@ -81,7 +84,7 @@ function ClientMenu(props) {
   }, []);
 
   const getClientData = () => {
-    console.log("Cargando info cliente...");
+    console.log("reloading client...");
 
     var loggedUser = window.localStorage.getItem("loggedUser");
     loggedUser = jwt(loggedUser);
@@ -101,7 +104,7 @@ function ClientMenu(props) {
       .then(
         (response) => {
           setClientProfile({
-            id: response.data.user_id,
+            user_id: response.data.user_id,
             nombre: response.data.nombre,
             apellidos: response.data.apellidos,
             email: response.data.email,
@@ -115,6 +118,9 @@ function ClientMenu(props) {
             parq6: response.data.parq6 ? response.data.parq6 : false,
             parq7: response.data.parq7 ? response.data.parq7 : false,
             dieta: response.data.dieta,
+            altura: response.data.altura,
+            alergias: response.data.alergias,
+            lesiones: response.data.lesiones,
             revisiones: response.data.revisiones,
           });
         },
@@ -244,7 +250,10 @@ function ClientMenu(props) {
 
             <Grid item xs={12} md={10}>
               {showProfilePanel ? (
-                <ClientProfile clientProfile={clientProfile} />
+                <ClientProfile
+                  clientProfile={clientProfile}
+                  getClientData={getClientData}
+                />
               ) : null}
               {showDietsPanel ? (
                 <ClientDiets clientDiet={clientProfile.dieta} />
