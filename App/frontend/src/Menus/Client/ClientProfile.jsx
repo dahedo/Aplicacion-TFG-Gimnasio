@@ -64,6 +64,10 @@ function ClientProfile(props) {
     setClientProfile({ ...clientProfile, [e.target.id]: e.target.value });
   };
 
+  const handleChangeDate = (newValue) => {
+    setClientProfile({ ...clientProfile, fechaNacimiento: newValue });
+  };
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -123,19 +127,24 @@ function ClientProfile(props) {
             value={clientProfile.email}
           />
 
-          {console.log(clientProfile.fechaNacimiento)}
-          {console.log(new Date(clientProfile.fechaNacimiento))}
           <MobileDatePicker
             disabled={readOnly}
+            label="Fecha de nacimiento"
             id="fechaNacimiento"
+            inputFormat="dd/MM/yyyy"
             disableFuture
-            label="Fecha nacimiento"
-            value={new Date(clientProfile.fechaNacimiento)}
-            onChange={changeData}
+            value={
+              clientProfile.fechaNacimiento
+                ? clientProfile.fechaNacimiento
+                : null
+            }
+            onChange={handleChangeDate}
+            error={false}
             renderInput={(params) => (
               <TextField
                 style={{ minWidth: "180px", margin: "5px 5px 5px 5px" }}
                 size="small"
+                error={false}
                 {...params}
               />
             )}

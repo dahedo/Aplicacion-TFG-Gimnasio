@@ -27,23 +27,17 @@ function ClientDiets(props) {
     setPage(newPage);
   };
 
-  const openDialog = (e) => {
-    e.preventDefault();
-    setDialogEnabled(true);
-  };
-  const handleClose = (e) => {
-    e.preventDefault();
-    setDialogEnabled(false);
-  };
-
   return (
-    <div style={{ height: "100%" }}>
-      <Paper elevation={3} style={{ height: "100%" }}>
+    <div style={{ height: "613px" }}>
+      <Paper
+        elevation={3}
+        style={{
+          height: "100%",
+          padding: "10px",
+        }}
+      >
         <TableContainer>
-          <Table
-            aria-label="simple table"
-            style={{ margin: "10px 10px 10px 10px " }}
-          >
+          <Table aria-label="simple table">
             <TableHead>
               <TableRow style={{ backgroundColor: "#1976d2" }}>
                 <TableCell style={{ color: "white" }} colSpan={6}>
@@ -56,22 +50,10 @@ function ClientDiets(props) {
                 <TableCell>Mi dieta</TableCell>
               </TableRow>
             </TableBody>
-            <TableHead>
-              <TableRow style={{ backgroundColor: "#1976d2" }}>
-                <TableCell style={{ color: "white" }} colSpan={6}>
-                  Dietas genericas
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {defaultDiets
-                .slice(page * numRows, page * numRows + numRows)
-                .map((diet) => {
-                  return <CustomRow diet={diet} />;
-                })}
-            </TableBody>
           </Table>
         </TableContainer>
+
+        <CustomTable page={page} numRows={numRows} />
         <TablePagination
           style={{ marginRight: 0 }}
           rowsPerPageOptions={[]}
@@ -87,6 +69,33 @@ function ClientDiets(props) {
 }
 
 export default ClientDiets;
+
+function CustomTable(props) {
+  const { page, numRows } = props;
+  return (
+    <TableContainer style={{ height: "450px" }}>
+      <Table stickyHeader aria-label="sticky table">
+        <TableHead>
+          <TableRow>
+            <TableCell
+              style={{ color: "white", backgroundColor: "#1976d2" }}
+              colSpan={6}
+            >
+              Dietas genericas
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {defaultDiets
+            .slice(page * numRows, page * numRows + numRows)
+            .map((diet) => {
+              return <CustomRow diet={diet} />;
+            })}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
 
 function CustomRow(props) {
   const [open, setOpen] = React.useState(false);

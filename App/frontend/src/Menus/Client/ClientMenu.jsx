@@ -27,7 +27,7 @@ function ClientMenu(props) {
     nombre: "",
     apellidos: "",
     email: false,
-    fechaNacimiento: "",
+    fechaNacimiento: null,
     username: "",
     parq1: false,
     parq2: false,
