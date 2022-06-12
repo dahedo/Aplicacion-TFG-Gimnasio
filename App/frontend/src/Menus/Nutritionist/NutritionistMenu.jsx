@@ -64,16 +64,16 @@ function NutritionistMenu(props) {
             apellidos: response.data.apellidos,
             clientes: response.data.clientes,
           });
+
+          reloadDiets();
         },
         (error) => {
           console.log(error);
         }
       );
-
-    reloadDiets();
   }, []);
 
-  const reloadDiets = async () => {
+  const reloadDiets = () => {
     const urlDailyDiet = `http://localhost:8080/alimentacion-diaria/get-all`;
     var token = window.localStorage.getItem("loggedUser");
     token = JSON.parse(token);
@@ -95,32 +95,28 @@ function NutritionistMenu(props) {
       );
   };
 
-  const showDiets = async (e) => {
-    e.preventDefault();
+  const showDiets = (e) => {
     setShowProfilePanel(false);
     setShowClientsPanel(false);
     setShowDietsPanel(true);
     setCreateDietsPanel(false);
   };
 
-  const createDiets = async (e) => {
-    e.preventDefault();
+  const createDiets = (e) => {
     setShowProfilePanel(false);
     setShowClientsPanel(false);
     setShowDietsPanel(false);
     setCreateDietsPanel(true);
   };
 
-  const showProfile = async (e) => {
-    e.preventDefault();
+  const showProfile = (e) => {
     setShowProfilePanel(true);
     setShowClientsPanel(false);
     setShowDietsPanel(false);
     setCreateDietsPanel(false);
   };
 
-  const showClients = async (e) => {
-    e.preventDefault();
+  const showClients = (e) => {
     setShowProfilePanel(false);
     setShowClientsPanel(true);
     setShowDietsPanel(false);
@@ -192,7 +188,10 @@ function NutritionistMenu(props) {
             <Grid item xs={12} md={10} style={{ height: "100%" }}>
               {showProfilePanel ? "Perfil" : null}
               {showDietsPanel ? (
-                <NutritionistViewDiets dailyDietList={dailyDietList} />
+                <NutritionistViewDiets
+                  reloadDiets={reloadDiets}
+                  dailyDietList={dailyDietList}
+                />
               ) : null}
               {createDietsPanel ? (
                 <NutritionistCreateDiet

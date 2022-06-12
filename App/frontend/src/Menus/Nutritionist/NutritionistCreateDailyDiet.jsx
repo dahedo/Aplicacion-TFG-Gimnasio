@@ -40,9 +40,7 @@ function NutritionistCreateDailyDiet(props) {
     props.setEnableDietaDiaria(false);
   };
 
-  const guardar = async (e) => {
-    e.preventDefault();
-
+  const guardar = (e) => {
     let dieta = {
       nombre: nombreDieta + caloriasDieta + alergiasDieta + otrosDieta,
       desayuno: dietaDiaria.desayuno,
@@ -68,7 +66,6 @@ function NutritionistCreateDailyDiet(props) {
       })
       .then(
         (response) => {
-          console.log("a");
           props.setOpenSnackBarOK(true);
           props.setEnableDietaSemanal(false);
           props.setEnableDietaDiaria(false);
@@ -83,6 +80,7 @@ function NutritionistCreateDailyDiet(props) {
             postEntreno: "",
             otros: "",
           });
+          props.reloadDiets();
         },
         (error) => {
           props.setOpenSnackBarKO(true);
