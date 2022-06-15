@@ -77,7 +77,10 @@ function NutritionistViewDiets(props) {
       ) : null}
 
       {!viewDietaDiaria && viewDietaSemanal ? (
-        <NutritionistViewWeeklyDiets weeklyDietList={props.weeklyDietList} />
+        <NutritionistViewWeeklyDiets
+          dailyDietList={props.dailyDietList}
+          weeklyDietList={props.weeklyDietList}
+        />
       ) : null}
 
       {!viewDietaDiaria && !viewDietaSemanal ? (

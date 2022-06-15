@@ -1,5 +1,7 @@
 package com.mygym.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,13 @@ public class DietaServiceImpl implements DietaService {
 
 	@Override
 	public Dieta updateDieta(Dieta d) {
-		Dieta dieta = dao.updateDieta(d);
-		return dieta;
+		return dao.updateDieta(d);
+	}
+
+	@Override
+	public List<Dieta> getAllDietas() {
+
+		return dao.getAllDietas();
 	}
 
 }

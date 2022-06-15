@@ -1,5 +1,6 @@
 package com.mygym.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,8 @@ public class DietaRest {
 		return Optional.ofNullable(dietaService.updateDieta(dieta));
 	}
 
+	@RequestMapping(value = "/get-all", method = RequestMethod.GET)
+	public Optional<List<Dieta>> getAll() {
+		return Optional.ofNullable(dietaService.getAllDietas());
+	}
 }

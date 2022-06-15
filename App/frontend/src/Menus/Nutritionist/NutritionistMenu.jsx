@@ -26,6 +26,7 @@ function NutritionistMenu(props) {
   const [showDietsPanel, setShowDietsPanel] = useState(false);
   const [createDietsPanel, setCreateDietsPanel] = useState(false);
   const [dailyDietList, setDailyDietList] = useState([]);
+  const [weeklyDietList, setWeeklyDietList] = useState([]);
   const [nutritionistProfile, setNutritionistProfile] = useState({
     nombre: "",
     apellidos: "",
@@ -88,6 +89,30 @@ function NutritionistMenu(props) {
       .then(
         (response) => {
           setDailyDietList(response.data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+    reloadWeeklyDiets();
+  };
+
+  const reloadWeeklyDiets = () => {
+    const urlDailyDiet = `http://localhost:8080/dietas/get-all`;
+    var token = window.localStorage.getItem("loggedUser");
+    token = JSON.parse(token);
+
+    axios
+      .get(urlDailyDiet, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(
+        (response) => {
+          setWeeklyDietList(response.data);
         },
         (error) => {
           console.log(error);
@@ -191,6 +216,7 @@ function NutritionistMenu(props) {
                 <NutritionistViewDiets
                   reloadDiets={reloadDiets}
                   dailyDietList={dailyDietList}
+                  weeklyDietList={weeklyDietList}
                 />
               ) : null}
               {createDietsPanel ? (
