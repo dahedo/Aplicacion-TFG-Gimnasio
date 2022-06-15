@@ -21,6 +21,7 @@ import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import axios from "axios";
+
 function NutritionistViewDailyDiets(props) {
   const numRows = 9;
   const [page, setPage] = React.useState(0);
@@ -58,7 +59,7 @@ function NutritionistViewDailyDiets(props) {
       .then(
         (response) => {
           setOpen(false);
-
+          props.setOpenSnackBarOK(true);
           props.reloadDiets();
         },
         (error) => {

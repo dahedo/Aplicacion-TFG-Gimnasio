@@ -1,11 +1,28 @@
 import { Button, Paper } from "@mui/material";
 import NutritionistViewDailyDiets from "./NutritionistViewDailyDiets";
 import NutritionistViewWeeklyDiets from "./NutritionistViewWeeklyDiets";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import React, { useState } from "react";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function NutritionistViewDiets(props) {
   const [viewDietaDiaria, setViewDietaDiaria] = useState(false);
   const [viewDietaSemanal, setViewDietaSemanal] = useState(false);
+
+  const [openSnackBarOK, setOpenSnackBarOK] = React.useState(false);
+  const [openSnackBarKO, setOpenSnackBarKO] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackBarOK(false);
+    setOpenSnackBarKO(false);
+  };
 
   const showDiets = (e) => {
     switch (e.target.id) {
@@ -54,11 +71,13 @@ function NutritionistViewDiets(props) {
         <NutritionistViewDailyDiets
           reloadDiets={props.reloadDiets}
           dailyDietList={props.dailyDietList}
+          setOpenSnackBarOK={setOpenSnackBarOK}
+          setOpenSnackBarKO={setOpenSnackBarKO}
         />
       ) : null}
 
       {!viewDietaDiaria && viewDietaSemanal ? (
-        <NutritionistViewWeeklyDiets />
+        <NutritionistViewWeeklyDiets weeklyDietList={props.weeklyDietList} />
       ) : null}
 
       {!viewDietaDiaria && !viewDietaSemanal ? (
@@ -71,6 +90,26 @@ function NutritionistViewDiets(props) {
           }}
         />
       ) : null}
+
+      <Snackbar
+        open={openSnackBarOK}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Guardado correctamente
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={openSnackBarKO}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Error al guardar
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
