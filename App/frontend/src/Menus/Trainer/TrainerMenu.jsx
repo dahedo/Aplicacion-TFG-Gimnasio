@@ -5,6 +5,7 @@ import ResponsiveAppBar from "../../navbar";
 import jwt from "jwt-decode";
 import axios from "axios";
 import TrainerCreateTrainnings from "./TrainerCreateTrainnings";
+import TrainerViewTrainnings from "./TrainerViewTrainnings";
 
 function MuenuEntrenador(props) {
   const navigate = useNavigate();
@@ -153,7 +154,7 @@ function MuenuEntrenador(props) {
 
             <Grid item xs={12} md={10} style={{ height: "100%" }}>
               {showProfilePanel ? "Perfil" : null}
-              {showTrainningsPanel ? <> ver entrenamientos</> : null}
+              {showTrainningsPanel ? <TrainerViewTrainnings /> : null}
               {createTrainningsPanel ? <TrainerCreateTrainnings /> : null}
               {showClientsPanel ? <>ver clientes</> : null}
             </Grid>
