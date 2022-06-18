@@ -1,4 +1,4 @@
-package com.mygym.model;
+package com.mygym.model.entrenamientos;
 
 import java.util.Set;
 
@@ -32,7 +32,7 @@ public class Ejercicio {
 	private String equipamiento;
 
 	@OneToMany(mappedBy = "ejercicio")
-	private Set<EjercicioEntrenamiento> ejerciciosEntrenamientos;
+	private Set<EjercicioEntrenamientoDiario> ejerciciosEntrenamientos;
 
 	//////////////////////////
 	//////////////////////////
@@ -48,14 +48,14 @@ public class Ejercicio {
 	/**
 	 * @return the ejerciciosEntrenamientos
 	 */
-	public Set<EjercicioEntrenamiento> getEjerciciosEntrenamientos() {
+	public Set<EjercicioEntrenamientoDiario> getEjerciciosEntrenamientos() {
 		return ejerciciosEntrenamientos;
 	}
 
 	/**
 	 * @param ejerciciosEntrenamientos the ejerciciosEntrenamientos to set
 	 */
-	public void setEjerciciosEntrenamientos(Set<EjercicioEntrenamiento> ejerciciosEntrenamientos) {
+	public void setEjerciciosEntrenamientos(Set<EjercicioEntrenamientoDiario> ejerciciosEntrenamientos) {
 		this.ejerciciosEntrenamientos = ejerciciosEntrenamientos;
 	}
 

@@ -1,6 +1,6 @@
 package com.mygym.dao;
 
-import com.mygym.model.Usuarios.Entrenador;
+import com.mygym.model.usuarios.Entrenador;
 
 public interface EntrenadorDAO {
 

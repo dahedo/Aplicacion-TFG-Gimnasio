@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mygym.dao.EjercicioDAO;
-import com.mygym.model.Ejercicio;
+import com.mygym.model.entrenamientos.Ejercicio;
 
 @RestController
 @RequestMapping("ejercicios")

@@ -1,6 +1,6 @@
 package com.mygym.service;
 
-import com.mygym.model.AlimentacionDiariaDieta;
+import com.mygym.model.nutricion.AlimentacionDiariaDieta;
 
 public interface AlimentacionDiariaDietaService {
 

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mygym.dao.EntrenadorDAO;
-import com.mygym.model.Usuarios.Entrenador;
+import com.mygym.model.usuarios.Entrenador;
 import com.mygym.service.EntrenadorService;
 
 @Service

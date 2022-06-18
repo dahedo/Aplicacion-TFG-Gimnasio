@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mygym.model.Usuarios.Entrenador;
+import com.mygym.model.usuarios.Entrenador;
 import com.mygym.service.EntrenadorService;
 
 @RestController

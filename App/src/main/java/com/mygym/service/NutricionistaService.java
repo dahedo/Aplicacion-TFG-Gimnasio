@@ -1,6 +1,6 @@
 package com.mygym.service;
 
-import com.mygym.model.Usuarios.Nutricionista;
+import com.mygym.model.usuarios.Nutricionista;
 
 public interface NutricionistaService {
 

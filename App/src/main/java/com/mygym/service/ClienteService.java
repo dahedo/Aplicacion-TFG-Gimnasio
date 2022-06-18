@@ -1,6 +1,6 @@
 package com.mygym.service;
 
-import com.mygym.model.Usuarios.Cliente;
+import com.mygym.model.usuarios.Cliente;
 
 public interface ClienteService {
 

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mygym.dao.AlimentacionDiariaDietaDAO;
-import com.mygym.model.AlimentacionDiariaDieta;
+import com.mygym.model.nutricion.AlimentacionDiariaDieta;
 
 @Transactional
 @Repository

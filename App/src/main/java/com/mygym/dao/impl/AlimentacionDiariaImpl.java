@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mygym.dao.AlimentacionDiariaDAO;
-import com.mygym.model.AlimentacionDiaria;
+import com.mygym.model.nutricion.AlimentacionDiaria;
 
 @Repository
 public class AlimentacionDiariaImpl implements AlimentacionDiariaDAO {

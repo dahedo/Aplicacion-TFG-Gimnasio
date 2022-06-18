@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mygym.model.Usuarios.Cliente;
+import com.mygym.model.usuarios.Cliente;
 
 @Entity
 public class Revision {

@@ -3,7 +3,7 @@ package com.mygym.dao;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.mygym.model.Usuarios.Usuario;
+import com.mygym.model.usuarios.Usuario;
 
 @Repository
 public interface UsuarioDAO extends CrudRepository<Usuario, Integer> {

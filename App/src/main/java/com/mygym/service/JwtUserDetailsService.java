@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.mygym.config.UserDetailsImpl;
 import com.mygym.dao.UsuarioDAO;
 import com.mygym.model.UserDTO;
-import com.mygym.model.Usuarios.Usuario;
+import com.mygym.model.usuarios.Usuario;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {

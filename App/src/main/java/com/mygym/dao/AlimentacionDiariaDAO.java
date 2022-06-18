@@ -2,7 +2,7 @@ package com.mygym.dao;
 
 import java.util.List;
 
-import com.mygym.model.AlimentacionDiaria;
+import com.mygym.model.nutricion.AlimentacionDiaria;
 
 public interface AlimentacionDiariaDAO {
 

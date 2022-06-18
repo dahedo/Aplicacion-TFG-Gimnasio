@@ -1,4 +1,4 @@
-package com.mygym.model.Usuarios;
+package com.mygym.model.usuarios;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

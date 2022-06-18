@@ -1,6 +1,6 @@
 package com.mygym.dao;
 
-import com.mygym.model.Usuarios.Nutricionista;
+import com.mygym.model.usuarios.Nutricionista;
 
 public interface NutricionistaDAO {
 

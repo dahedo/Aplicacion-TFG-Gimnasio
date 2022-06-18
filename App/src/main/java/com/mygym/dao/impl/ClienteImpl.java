@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mygym.dao.ClienteDAO;
-import com.mygym.model.Usuarios.Cliente;
+import com.mygym.model.usuarios.Cliente;
 
 @Repository
 public class ClienteImpl implements ClienteDAO {

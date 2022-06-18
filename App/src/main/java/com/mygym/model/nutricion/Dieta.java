@@ -1,4 +1,4 @@
-package com.mygym.model;
+package com.mygym.model.nutricion;
 
 import java.util.Set;
 
@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.mygym.model.Usuarios.Cliente;
+import com.mygym.model.usuarios.Cliente;
 
 @Entity
 public class Dieta {

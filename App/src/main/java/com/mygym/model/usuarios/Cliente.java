@@ -1,5 +1,6 @@
-package com.mygym.model.Usuarios;
+package com.mygym.model.usuarios;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,10 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.mygym.model.Dieta;
-import com.mygym.model.EntrenamientoCliente;
 import com.mygym.model.Revision;
+import com.mygym.model.entrenamientos.EntrenamientoSemanal;
+import com.mygym.model.nutricion.Dieta;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "user_id")
@@ -27,8 +29,8 @@ public class Cliente extends Usuario {
 	@Column
 	private String email;
 
-	@Column
-	private String fechaNacimiento;
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private Date fechaNacimiento;
 
 	@Column
 	private Boolean parq1;
@@ -62,8 +64,8 @@ public class Cliente extends Usuario {
 	@JoinColumn(name = "nutricionista_id", nullable = true)
 	private Nutricionista nutricionista;
 
-	@OneToMany(mappedBy = "entrenamiento")
-	private Set<EntrenamientoCliente> entrenamientosClientes;
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private Date fechaAsignacionDieta;
 
 	@ManyToOne
 	@JoinColumn(name = "dieta_id", nullable = true)
@@ -72,6 +74,10 @@ public class Cliente extends Usuario {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Set<Revision> revisiones;
+
+	@ManyToOne
+	@JoinColumn(name = "entrenamientoSemanal_id", nullable = true)
+	private EntrenamientoSemanal entrenamientoSemanal;
 
 	/**
 	 * @return the nombre
@@ -85,6 +91,27 @@ public class Cliente extends Usuario {
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	/**
+	 * @return the fechaAsignacionDieta
+	 */
+	public Date getFechaAsignacionDieta() {
+		return fechaAsignacionDieta;
+	}
+
+	/**
+	 * @param fechaAsignacionDieta the fechaAsignacionDieta to set
+	 */
+	public void setFechaAsignacionDieta(Date fechaAsignacionDieta) {
+		this.fechaAsignacionDieta = fechaAsignacionDieta;
+	}
+
+	/**
+	 * @param fechaNacimiento the fechaNacimiento to set
+	 */
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	/**
@@ -113,34 +140,6 @@ public class Cliente extends Usuario {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	/**
-	 * @return the fechaNacimiento
-	 */
-	public String getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	/**
-	 * @param fechaNacimiento the fechaNacimiento to set
-	 */
-	public void setFechaNacimiento(String fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
-	/**
-	 * @return the entrenamientosClientes
-	 */
-	public Set<EntrenamientoCliente> getEntrenamientosClientes() {
-		return entrenamientosClientes;
-	}
-
-	/**
-	 * @param entrenamientosClientes the entrenamientosClientes to set
-	 */
-	public void setEntrenamientosClientes(Set<EntrenamientoCliente> entrenamientosClientes) {
-		this.entrenamientosClientes = entrenamientosClientes;
 	}
 
 	/**

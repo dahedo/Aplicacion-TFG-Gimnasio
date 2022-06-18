@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mygym.dao.DietaDAO;
-import com.mygym.model.Dieta;
+import com.mygym.model.nutricion.Dieta;
 import com.mygym.service.DietaService;
 
 @Service

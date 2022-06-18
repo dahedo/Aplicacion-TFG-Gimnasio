@@ -1,6 +1,6 @@
 package com.mygym.service;
 
-import com.mygym.model.Usuarios.Entrenador;
+import com.mygym.model.usuarios.Entrenador;
 
 public interface EntrenadorService {
 

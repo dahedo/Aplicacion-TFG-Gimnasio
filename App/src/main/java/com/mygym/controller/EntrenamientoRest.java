@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mygym.dao.EntrenamientoDAO;
-import com.mygym.model.Entrenamiento;
+import com.mygym.model.entrenamientos.EntrenamientoDiario;
 
 @RestController
 @RequestMapping("entremanientos")
@@ -22,7 +22,7 @@ public class EntrenamientoRest {
 
 	// Get (all)
 	@GetMapping("/find-all")
-	public List<Entrenamiento> getall() {
+	public List<EntrenamientoDiario> getall() {
 		return entrenamientoDAO.findAll();
 	}
 }

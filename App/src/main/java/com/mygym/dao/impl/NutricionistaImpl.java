@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mygym.dao.NutricionistaDAO;
-import com.mygym.model.Usuarios.Nutricionista;
+import com.mygym.model.usuarios.Nutricionista;
 
 @Repository
 public class NutricionistaImpl implements NutricionistaDAO {

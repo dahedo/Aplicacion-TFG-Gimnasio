@@ -1,4 +1,4 @@
-package com.mygym.model;
+package com.mygym.model.nutricion;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

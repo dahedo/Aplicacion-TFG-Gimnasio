@@ -1,4 +1,4 @@
-package com.mygym.model;
+package com.mygym.model.entrenamientos;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -6,7 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class EjercicioEntrenamiento {
+public class EjercicioEntrenamientoDiario {
 
 	@Id
 	private Integer id;
@@ -17,7 +17,7 @@ public class EjercicioEntrenamiento {
 
 	@ManyToOne
 	@JoinColumn(name = "entrenamiento_id")
-	private Entrenamiento entrenamiento;
+	private EntrenamientoDiario entrenamiento;
 
 	/**
 	 * @return the id
@@ -50,14 +50,14 @@ public class EjercicioEntrenamiento {
 	/**
 	 * @return the entrenamiento
 	 */
-	public Entrenamiento getEntrenamiento() {
+	public EntrenamientoDiario getEntrenamiento() {
 		return entrenamiento;
 	}
 
 	/**
 	 * @param entrenamiento the entrenamiento to set
 	 */
-	public void setEntrenamiento(Entrenamiento entrenamiento) {
+	public void setEntrenamiento(EntrenamientoDiario entrenamiento) {
 		this.entrenamiento = entrenamiento;
 	}
 
