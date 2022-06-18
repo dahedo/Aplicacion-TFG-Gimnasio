@@ -4,13 +4,14 @@ import { useNavigate } from "react-router-dom";
 import ResponsiveAppBar from "../../navbar";
 import jwt from "jwt-decode";
 import axios from "axios";
+import TrainerCreateTrainnings from "./TrainerCreateTrainnings";
 
 function MuenuEntrenador(props) {
   const navigate = useNavigate();
 
   const [showClientsPanel, setShowClientsPanel] = useState(false);
   const [showProfilePanel, setShowProfilePanel] = useState(false);
-  const [showTrainningsPanel, setShowDietsPanel] = useState(false);
+  const [showTrainningsPanel, setShowTrainningsPanel] = useState(false);
   const [createTrainningsPanel, setCreateTrainningsPanel] = useState(false);
   const [trainerProfile, setTrainerProfile] = useState({
     nombre: "",
@@ -53,8 +54,6 @@ function MuenuEntrenador(props) {
             apellidos: response.data.apellidos,
             clientes: response.data.clientes,
           });
-
-          // reloadDiets();
         },
         (error) => {
           console.log(error);
@@ -65,28 +64,28 @@ function MuenuEntrenador(props) {
   const showTrainnings = (e) => {
     setShowProfilePanel(false);
     setShowClientsPanel(false);
-    setShowDietsPanel(true);
+    setShowTrainningsPanel(true);
     setCreateTrainningsPanel(false);
   };
 
-  const createDiets = (e) => {
+  const createTrainning = (e) => {
     setShowProfilePanel(false);
     setShowClientsPanel(false);
-    setShowDietsPanel(false);
+    setShowTrainningsPanel(false);
     setCreateTrainningsPanel(true);
   };
 
   const showProfile = (e) => {
     setShowProfilePanel(true);
     setShowClientsPanel(false);
-    setShowDietsPanel(false);
+    setShowTrainningsPanel(false);
     setCreateTrainningsPanel(false);
   };
 
   const showClients = (e) => {
     setShowProfilePanel(false);
     setShowClientsPanel(true);
-    setShowDietsPanel(false);
+    setShowTrainningsPanel(false);
     setCreateTrainningsPanel(false);
   };
 
@@ -137,7 +136,7 @@ function MuenuEntrenador(props) {
                 </Button>
                 <Button
                   variant="contained"
-                  onClick={createDiets}
+                  onClick={createTrainning}
                   style={{ width: "90%", marginTop: "30px" }}
                 >
                   Crear entrenamientos
@@ -155,7 +154,7 @@ function MuenuEntrenador(props) {
             <Grid item xs={12} md={10} style={{ height: "100%" }}>
               {showProfilePanel ? "Perfil" : null}
               {showTrainningsPanel ? <> ver entrenamientos</> : null}
-              {createTrainningsPanel ? <> crear entrenamientos</> : null}
+              {createTrainningsPanel ? <TrainerCreateTrainnings /> : null}
               {showClientsPanel ? <>ver clientes</> : null}
             </Grid>
           </Grid>
