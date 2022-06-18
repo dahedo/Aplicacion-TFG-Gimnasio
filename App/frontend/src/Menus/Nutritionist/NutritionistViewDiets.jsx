@@ -80,6 +80,8 @@ function NutritionistViewDiets(props) {
         <NutritionistViewWeeklyDiets
           dailyDietList={props.dailyDietList}
           weeklyDietList={props.weeklyDietList}
+          setOpenSnackBarOK={setOpenSnackBarOK}
+          setOpenSnackBarKO={setOpenSnackBarKO}
         />
       ) : null}
 

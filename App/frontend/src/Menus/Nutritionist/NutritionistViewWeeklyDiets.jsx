@@ -14,6 +14,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
@@ -27,10 +28,13 @@ function NutritionistViewWeeklyDiets(props) {
   const [editWeeklyDiet, setEditWeeklyDiet] = useState({
     open: false,
     selectedDiet: {
+      id: null,
       nombre: "",
       alimentacionDiariaDietas: [],
     },
   });
+  console.log(props.weeklyDietList);
+
   const [enableBusqueda, setEnableBusqueda] = useState({
     enable: false,
     day: null,
@@ -54,9 +58,11 @@ function NutritionistViewWeeklyDiets(props) {
   };
 
   const handleClickOpen = (row) => {
+    console.log(row);
     setEditWeeklyDiet({
       open: true,
       selectedDiet: {
+        id: row.id,
         nombre: row.nombre,
         alimentacionDiariaDietas: row.alimentacionDiariaDietas,
       },
@@ -66,6 +72,7 @@ function NutritionistViewWeeklyDiets(props) {
     setEditWeeklyDiet({
       open: false,
       selectedDiet: {
+        id: null,
         nombre: "",
         alimentacionDiariaDietas: [],
       },
@@ -79,17 +86,46 @@ function NutritionistViewWeeklyDiets(props) {
     setEnableBusqueda({ ...enableBusqueda, open: true, day: day });
   };
 
+  const hola = () => {
+    console.log(editWeeklyDiet.selectedDiet);
+    console.log(props.weeklyDietList);
+    // const url = `http://localhost:8080/dietas/create-update`;
+    // var token = window.localStorage.getItem("loggedUser");
+    // token = JSON.parse(token);
+
+    // axios
+    //   .post(url, editWeeklyDiet.selectedDiet, {
+    //     headers: {
+    //       "Access-Control-Allow-Origin": "*",
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   })
+    //   .then(
+    //     (response) => {
+    //       props.setOpenSnackBarOK(true);
+    //     },
+    //     (error) => {
+    //       props.setOpenSnackBarKO(true);
+    //     }
+    //   );
+  };
+
   const seleccionarDieta = (row, day, e) => {
     let newDieta = editWeeklyDiet.selectedDiet;
     const newArr = newDieta.alimentacionDiariaDietas.map((obj) => {
       if (obj.diaSemana === day) {
-        return { alimentacionDiaria: row, diaSemana: day };
+        return {
+          // id: row !== null ? row.id : null,
+          alimentacionDiaria: row,
+          diaSemana: day,
+        };
       }
       return obj;
     });
     setEditWeeklyDiet({
       open: true,
       selectedDiet: {
+        id: editWeeklyDiet.selectedDiet.id,
         nombre: editWeeklyDiet.selectedDiet.nombre,
         alimentacionDiariaDietas: newArr,
       },
@@ -98,23 +134,6 @@ function NutritionistViewWeeklyDiets(props) {
     setEnableBusqueda({
       enable: false,
       day: null,
-    });
-  };
-  const deleteRow = (day) => {
-    const newArr = editWeeklyDiet.selectedDiet.alimentacionDiariaDietas.map(
-      (obj) => {
-        if (obj.diaSemana === day) {
-          return { alimentacionDiaria: null, diaSemana: day };
-        }
-        return obj;
-      }
-    );
-    setEditWeeklyDiet({
-      open: true,
-      selectedDiet: {
-        nombre: editWeeklyDiet.selectedDiet.nombre,
-        alimentacionDiariaDietas: newArr,
-      },
     });
   };
 
@@ -205,7 +224,16 @@ function NutritionistViewWeeklyDiets(props) {
               justifyContent: "flex-end",
             }}
           >
-            <Button style={{ margin: "10px 5px 5px 5px" }} variant="contained">
+            <Button
+              disabled={
+                editWeeklyDiet.selectedDiet.alimentacionDiariaDietas.filter(
+                  (dDiet) => dDiet.alimentacionDiaria !== null
+                ).length !== 7
+              }
+              onClick={hola}
+              style={{ margin: "10px 5px 5px 5px" }}
+              variant="contained"
+            >
               Guardar
             </Button>
             <Button
