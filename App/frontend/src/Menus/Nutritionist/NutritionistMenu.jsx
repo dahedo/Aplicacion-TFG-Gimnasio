@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ResponsiveAppBar from "../../navbar";
 import NutritionistCreateDiet from "./NutritionistCreateDiet";
 import NutritionistViewDiets from "./NutritionistViewDiets";
+import NutritionistAssignedClients from "./NutritionistAssignedClients";
 import {
   Button,
   Avatar,
@@ -226,33 +227,9 @@ function NutritionistMenu(props) {
                 />
               ) : null}
               {showClientsPanel ? (
-                <TableContainer component={Paper} style={{ height: "100%" }}>
-                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Nombre</TableCell>
-                        <TableCell>Apellidos</TableCell>
-                        <TableCell>Email</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {nutritionistProfile.clientes.map((row) => (
-                        <TableRow
-                          key={row.nombre}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell component="th" scope="row">
-                            {row.nombre}
-                          </TableCell>
-                          <TableCell>{row.apellidos}</TableCell>
-                          <TableCell>{row.email}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+                <NutritionistAssignedClients
+                  nutritionistProfile={nutritionistProfile}
+                />
               ) : null}
             </Grid>
           </Grid>
