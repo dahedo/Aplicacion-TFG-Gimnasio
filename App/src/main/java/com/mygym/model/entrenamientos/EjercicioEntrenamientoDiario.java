@@ -1,6 +1,10 @@
 package com.mygym.model.entrenamientos;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -9,9 +13,16 @@ import javax.persistence.ManyToOne;
 public class EjercicioEntrenamientoDiario {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne
+	@Column
+	private Integer repeticiones;
+
+	@Column
+	private Integer series;
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ejercicio_id")
 	private Ejercicio ejercicio;
 
@@ -59,6 +70,48 @@ public class EjercicioEntrenamientoDiario {
 	 */
 	public void setEntrenamiento(EntrenamientoDiario entrenamiento) {
 		this.entrenamiento = entrenamiento;
+	}
+
+	/**
+	 * @return the repeticiones
+	 */
+	public Integer getRepeticiones() {
+		return repeticiones;
+	}
+
+	/**
+	 * @param repeticiones the repeticiones to set
+	 */
+	public void setRepeticiones(Integer repeticiones) {
+		this.repeticiones = repeticiones;
+	}
+
+	/**
+	 * @return the series
+	 */
+	public Integer getSeries() {
+		return series;
+	}
+
+	/**
+	 * @param series the series to set
+	 */
+	public void setSeries(Integer series) {
+		this.series = series;
+	}
+
+	public EjercicioEntrenamientoDiario(Integer id, Integer repeticiones, Integer series, Ejercicio ejercicio,
+			EntrenamientoDiario entrenamiento) {
+		super();
+		this.id = id;
+		this.repeticiones = repeticiones;
+		this.series = series;
+		this.ejercicio = ejercicio;
+		this.entrenamiento = entrenamiento;
+	}
+
+	public EjercicioEntrenamientoDiario() {
+		super();
 	}
 
 }

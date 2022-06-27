@@ -2,6 +2,7 @@ package com.mygym.model.entrenamientos;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Ejercicio {
 	@Column
 	private String equipamiento;
 
-	@OneToMany(mappedBy = "ejercicio")
+	@OneToMany(mappedBy = "ejercicio", cascade = CascadeType.ALL)
 	private Set<EjercicioEntrenamientoDiario> ejerciciosEntrenamientos;
 
 	//////////////////////////
