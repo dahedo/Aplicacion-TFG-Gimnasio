@@ -19,10 +19,22 @@ function ClientProfile(props) {
   const [openSnackBarKO, setOpenSnackBarKO] = React.useState(false);
 
   const submit = (e) => {
-    setClientProfile({
-      ...clientProfile,
-      [e.target.id]: !clientProfile[e.target.id],
-    });
+    if (e.target.id.includes("parametrosCliente")) {
+      let property = e.target.id.split(".");
+
+      setClientProfile({
+        ...clientProfile,
+        parametrosCliente: {
+          ...clientProfile.parametrosCliente,
+          [property[1]]: !clientProfile.parametrosCliente[property[1]],
+        },
+      });
+    } else {
+      setClientProfile({
+        ...clientProfile,
+        [e.target.id]: !clientProfile[e.target.id],
+      });
+    }
   };
 
   const cancel = (e) => {
@@ -61,7 +73,21 @@ function ClientProfile(props) {
   };
 
   const changeData = (e) => {
-    setClientProfile({ ...clientProfile, [e.target.id]: e.target.value });
+    if (e.target.id.includes("parametrosCliente")) {
+      let property = e.target.id.split(".");
+      setClientProfile({
+        ...clientProfile,
+        parametrosCliente: {
+          ...clientProfile.parametrosCliente,
+          [property[1]]: e.target.value,
+        },
+      });
+    } else {
+      setClientProfile({
+        ...clientProfile,
+        [e.target.id]: e.target.value,
+      });
+    }
   };
 
   const handleChangeDate = (newValue) => {
@@ -181,20 +207,29 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq1"
+                      id="parametrosCliente.parq1"
                       onClick={submit}
                       style={{ padding: "5px" }}
-                      variant={clientProfile.parq1 ? "contained" : null}
+                      variant={
+                        clientProfile.parametrosCliente?.parq1
+                          ? "contained"
+                          : null
+                      }
                     >
+                      {console.log(clientProfile.parametrosCliente?.parq1)}
                       Si
                     </Button>
                   </TableCell>
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq1"
+                      id="parametrosCliente.parq1"
                       onClick={submit}
-                      variant={clientProfile.parq1 ? null : "contained"}
+                      variant={
+                        clientProfile.parametrosCliente?.parq1
+                          ? null
+                          : "contained"
+                      }
                     >
                       No
                     </Button>
@@ -208,9 +243,13 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq2"
+                      id="parametrosCliente.parq2"
                       onClick={submit}
-                      variant={clientProfile.parq2 ? "contained" : null}
+                      variant={
+                        clientProfile.parametrosCliente?.parq2
+                          ? "contained"
+                          : null
+                      }
                     >
                       Si
                     </Button>
@@ -218,9 +257,13 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq2"
+                      id="parametrosCliente.parq2"
                       onClick={submit}
-                      variant={clientProfile.parq2 ? null : "contained"}
+                      variant={
+                        clientProfile.parametrosCliente?.parq2
+                          ? null
+                          : "contained"
+                      }
                     >
                       No
                     </Button>
@@ -234,9 +277,13 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq3"
+                      id="parametrosCliente.parq3"
                       onClick={submit}
-                      variant={clientProfile.parq3 ? "contained" : null}
+                      variant={
+                        clientProfile.parametrosCliente?.parq3
+                          ? "contained"
+                          : null
+                      }
                     >
                       Si
                     </Button>
@@ -244,9 +291,13 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq3"
+                      id="parametrosCliente.parq3"
                       onClick={submit}
-                      variant={clientProfile.parq3 ? null : "contained"}
+                      variant={
+                        clientProfile.parametrosCliente?.parq3
+                          ? null
+                          : "contained"
+                      }
                     >
                       No
                     </Button>
@@ -261,9 +312,13 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq4"
+                      id="parametrosCliente.parq4"
                       onClick={submit}
-                      variant={clientProfile.parq4 ? "contained" : null}
+                      variant={
+                        clientProfile.parametrosCliente?.parq4
+                          ? "contained"
+                          : null
+                      }
                     >
                       Si
                     </Button>
@@ -271,9 +326,13 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq4"
+                      id="parametrosCliente.parq4"
                       onClick={submit}
-                      variant={clientProfile.parq4 ? null : "contained"}
+                      variant={
+                        clientProfile.parametrosCliente?.parq4
+                          ? null
+                          : "contained"
+                      }
                     >
                       No
                     </Button>
@@ -288,9 +347,13 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq5"
+                      id="parametrosCliente.parq5"
                       onClick={submit}
-                      variant={clientProfile.parq5 ? "contained" : null}
+                      variant={
+                        clientProfile.parametrosCliente?.parq5
+                          ? "contained"
+                          : null
+                      }
                     >
                       Si
                     </Button>
@@ -298,9 +361,13 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq5"
+                      id="parametrosCliente.parq5"
                       onClick={submit}
-                      variant={clientProfile.parq5 ? null : "contained"}
+                      variant={
+                        clientProfile.parametrosCliente?.parq5
+                          ? null
+                          : "contained"
+                      }
                     >
                       No
                     </Button>
@@ -315,9 +382,13 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq6"
+                      id="parametrosCliente.parq6"
                       onClick={submit}
-                      variant={clientProfile.parq6 ? "contained" : null}
+                      variant={
+                        clientProfile.parametrosCliente?.parq6
+                          ? "contained"
+                          : null
+                      }
                     >
                       Si
                     </Button>
@@ -325,9 +396,13 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq6"
+                      id="parametrosCliente.parq6"
                       onClick={submit}
-                      variant={clientProfile.parq6 ? null : "contained"}
+                      variant={
+                        clientProfile.parametrosCliente?.parq6
+                          ? null
+                          : "contained"
+                      }
                     >
                       No
                     </Button>
@@ -342,9 +417,13 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq7"
+                      id="parametrosCliente.parq7"
                       onClick={submit}
-                      variant={clientProfile.parq7 ? "contained" : null}
+                      variant={
+                        clientProfile.parametrosCliente?.parq7
+                          ? "contained"
+                          : null
+                      }
                     >
                       Si
                     </Button>
@@ -352,9 +431,13 @@ function ClientProfile(props) {
                   <TableCell style={{ padding: "7px" }}>
                     <Button
                       disabled={readOnly}
-                      id="parq7"
+                      id="parametrosCliente.parq7"
                       onClick={submit}
-                      variant={clientProfile.parq7 ? null : "contained"}
+                      variant={
+                        clientProfile.parametrosCliente?.parq7
+                          ? null
+                          : "contained"
+                      }
                     >
                       No
                     </Button>
@@ -384,11 +467,11 @@ function ClientProfile(props) {
             disabled={readOnly}
             size="small"
             style={{ width: "500px", margin: "5px 10px 5px 5px" }}
-            id="alergias"
+            id="parametrosCliente.alergias"
             label="Alergias e intolerancias"
             variant="outlined"
             onChange={changeData}
-            value={clientProfile.alergias}
+            value={clientProfile.parametrosCliente.alergias}
           ></TextField>
         </Paper>
         <Paper
@@ -412,11 +495,11 @@ function ClientProfile(props) {
             disabled={readOnly}
             size="small"
             style={{ width: "500px", margin: "5px 10px 5px 5px" }}
-            id="lesiones"
+            id="parametrosCliente.lesiones"
             label="Lesiones o dolores"
             variant="outlined"
             onChange={changeData}
-            value={clientProfile.lesiones}
+            value={clientProfile.parametrosCliente.lesiones}
           ></TextField>
         </Paper>
 
