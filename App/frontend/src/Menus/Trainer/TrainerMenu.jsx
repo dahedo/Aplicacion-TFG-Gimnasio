@@ -11,9 +11,9 @@ function MuenuEntrenador(props) {
   const navigate = useNavigate();
 
   const [showClientsPanel, setShowClientsPanel] = useState(false);
-  const [showProfilePanel, setShowProfilePanel] = useState(false);
   const [showTrainningsPanel, setShowTrainningsPanel] = useState(false);
   const [createTrainningsPanel, setCreateTrainningsPanel] = useState(false);
+  const [exerciseData, setExerciseData] = useState([]);
   const [trainerProfile, setTrainerProfile] = useState({
     nombre: "",
     apellidos: "",
@@ -60,31 +60,48 @@ function MuenuEntrenador(props) {
           console.log(error);
         }
       );
+
+    //
+    //get all exercises
+    //
+
+    const url2 = `http://localhost:8080/ejercicios/get-all`;
+    axios
+      .get(url2, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(
+        (response) => {
+          setExerciseData(response.data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }, []);
 
   const showTrainnings = (e) => {
-    setShowProfilePanel(false);
     setShowClientsPanel(false);
     setShowTrainningsPanel(true);
     setCreateTrainningsPanel(false);
   };
 
   const createTrainning = (e) => {
-    setShowProfilePanel(false);
     setShowClientsPanel(false);
     setShowTrainningsPanel(false);
     setCreateTrainningsPanel(true);
   };
 
   const showProfile = (e) => {
-    setShowProfilePanel(true);
     setShowClientsPanel(false);
     setShowTrainningsPanel(false);
     setCreateTrainningsPanel(false);
   };
 
   const showClients = (e) => {
-    setShowProfilePanel(false);
     setShowClientsPanel(true);
     setShowTrainningsPanel(false);
     setCreateTrainningsPanel(false);
@@ -123,13 +140,6 @@ function MuenuEntrenador(props) {
                 <p>Hola {trainerProfile.nombre} !</p>
                 <Button
                   variant="contained"
-                  onClick={showProfile}
-                  style={{ width: "90%", marginTop: "30px" }}
-                >
-                  Perfil
-                </Button>
-                <Button
-                  variant="contained"
                   onClick={showTrainnings}
                   style={{ width: "90%", marginTop: "100px" }}
                 >
@@ -153,9 +163,10 @@ function MuenuEntrenador(props) {
             </Grid>
 
             <Grid item xs={12} md={10} style={{ height: "100%" }}>
-              {showProfilePanel ? "Perfil" : null}
               {showTrainningsPanel ? <TrainerViewTrainnings /> : null}
-              {createTrainningsPanel ? <TrainerCreateTrainnings /> : null}
+              {createTrainningsPanel ? (
+                <TrainerCreateTrainnings exerciseData={exerciseData} />
+              ) : null}
               {showClientsPanel ? <>ver clientes</> : null}
             </Grid>
           </Grid>

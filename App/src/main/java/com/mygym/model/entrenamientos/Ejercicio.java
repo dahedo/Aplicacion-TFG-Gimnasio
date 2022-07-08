@@ -47,13 +47,6 @@ public class Ejercicio {
 	}
 
 	/**
-	 * @return the ejerciciosEntrenamientos
-	 */
-	public Set<EjercicioEntrenamientoDiario> getEjerciciosEntrenamientos() {
-		return ejerciciosEntrenamientos;
-	}
-
-	/**
 	 * @param ejerciciosEntrenamientos the ejerciciosEntrenamientos to set
 	 */
 	public void setEjerciciosEntrenamientos(Set<EjercicioEntrenamientoDiario> ejerciciosEntrenamientos) {
