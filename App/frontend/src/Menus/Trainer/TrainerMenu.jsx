@@ -1,4 +1,4 @@
-import { Avatar, Button, Grid, Paper } from "@mui/material";
+import { Alert, Avatar, Button, Grid, Paper, Snackbar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ResponsiveAppBar from "../../navbar";
@@ -14,11 +14,21 @@ function MuenuEntrenador(props) {
   const [showTrainningsPanel, setShowTrainningsPanel] = useState(false);
   const [createTrainningsPanel, setCreateTrainningsPanel] = useState(false);
   const [exerciseData, setExerciseData] = useState([]);
+  const [openSnackBarOK, setOpenSnackBarOK] = React.useState(false);
+  const [openSnackBarKO, setOpenSnackBarKO] = React.useState(false);
   const [trainerProfile, setTrainerProfile] = useState({
     nombre: "",
     apellidos: "",
     clientes: [],
   });
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackBarOK(false);
+    setOpenSnackBarKO(false);
+  };
 
   useEffect(() => {
     var loggedUser = window.localStorage.getItem("loggedUser");
@@ -165,11 +175,43 @@ function MuenuEntrenador(props) {
             <Grid item xs={12} md={10} style={{ height: "100%" }}>
               {showTrainningsPanel ? <TrainerViewTrainnings /> : null}
               {createTrainningsPanel ? (
-                <TrainerCreateTrainnings exerciseData={exerciseData} />
+                <TrainerCreateTrainnings
+                  exerciseData={exerciseData}
+                  setOpenSnackBarOK={setOpenSnackBarOK}
+                  setOpenSnackBarKO={setOpenSnackBarKO}
+                />
               ) : null}
               {showClientsPanel ? <>ver clientes</> : null}
             </Grid>
           </Grid>
+
+          <Snackbar
+            open={openSnackBarOK}
+            autoHideDuration={6000}
+            onClose={handleClose}
+          >
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Guardado correctamente
+            </Alert>
+          </Snackbar>
+
+          <Snackbar
+            open={openSnackBarKO}
+            autoHideDuration={6000}
+            onClose={handleClose}
+          >
+            <Alert
+              onClose={handleClose}
+              severity="error"
+              sx={{ width: "100%" }}
+            >
+              Error al guardar
+            </Alert>
+          </Snackbar>
         </div>
       </div>
     </div>

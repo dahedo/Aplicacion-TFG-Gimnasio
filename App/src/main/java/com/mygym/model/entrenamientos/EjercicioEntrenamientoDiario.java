@@ -1,13 +1,15 @@
 package com.mygym.model.entrenamientos;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class EjercicioEntrenamientoDiario {
@@ -22,11 +24,12 @@ public class EjercicioEntrenamientoDiario {
 	@Column
 	private Integer series;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "ejercicio_id")
 	private Ejercicio ejercicio;
 
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "entrenamiento_id")
 	private EntrenamientoDiario entrenamiento;
 

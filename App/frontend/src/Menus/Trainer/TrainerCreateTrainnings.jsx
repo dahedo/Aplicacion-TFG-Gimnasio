@@ -9,8 +9,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 function TrainerCreateTrainnings(props) {
-  const [openSnackBarOK, setOpenSnackBarOK] = React.useState(false);
-  const [openSnackBarKO, setOpenSnackBarKO] = React.useState(false);
+  const { setOpenSnackBarOK, setOpenSnackBarKO } = props;
   const [enableDailyTrainning, setEnableDailyTrainning] = useState(false);
   const [enableWeeklyTrainning, setEnableWeeklyTrainning] = useState(false);
 
@@ -28,14 +27,6 @@ function TrainerCreateTrainnings(props) {
       default:
         break;
     }
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenSnackBarOK(false);
-    setOpenSnackBarKO(false);
   };
 
   return (
@@ -72,7 +63,11 @@ function TrainerCreateTrainnings(props) {
         </Button>
       </Paper>
       {enableDailyTrainning && !enableWeeklyTrainning ? (
-        <TrainerCreateDailyTrainning />
+        <TrainerCreateDailyTrainning
+          exerciseData={props.exerciseData}
+          setOpenSnackBarOK={setOpenSnackBarOK}
+          setOpenSnackBarKO={setOpenSnackBarKO}
+        />
       ) : null}
 
       {enableWeeklyTrainning && !enableDailyTrainning ? (
@@ -104,26 +99,6 @@ function TrainerCreateTrainnings(props) {
           ></Paper>
         </>
       ) : null}
-
-      <Snackbar
-        open={openSnackBarOK}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Guardado correctamente
-        </Alert>
-      </Snackbar>
-
-      <Snackbar
-        open={openSnackBarKO}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Error al guardar
-        </Alert>
-      </Snackbar>
     </div>
   );
 }

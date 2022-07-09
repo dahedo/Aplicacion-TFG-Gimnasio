@@ -1,5 +1,7 @@
 package com.mygym.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,11 @@ public class EntrenamientoDiarioServiceImpl implements EntrenamientoDiarioServic
 	public EntrenamientoDiario createUpdateEntrenamientoDiario(EntrenamientoDiario entrenamientoDiario) {
 
 		return dao.createUpdateEntrenamientoDiario(entrenamientoDiario);
+	}
+
+	@Override
+	public List<EntrenamientoDiario> getAllEntrenamientosDiarios() {
+		return dao.getAllEntrenamientosDiarios();
 	}
 
 }
