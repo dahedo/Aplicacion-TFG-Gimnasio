@@ -23,7 +23,8 @@ public class EntrenamientoDiarioRest {
 	// Metodos de peticion HTTP
 
 	@RequestMapping(value = "/create-update", method = RequestMethod.POST)
-	public Optional<EntrenamientoDiario> createUpdateDieta(@RequestBody EntrenamientoDiario entrenamientoDiario) {
+	public Optional<EntrenamientoDiario> createUpdateEntrenamientoDiario(
+			@RequestBody EntrenamientoDiario entrenamientoDiario) {
 		return Optional.ofNullable(entrenamientoDiarioService.createUpdateEntrenamientoDiario(entrenamientoDiario));
 	}
 
