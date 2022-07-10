@@ -1,4 +1,5 @@
 
+-- Usuarios Clientes
 INSERT INTO gym.usuario(user_id,password, rol, username)VALUES(1,'$2a$12$YZ49io/A2sZ2kDvAXZ4wMOke67occMwiqiELBuqTlYCYwGroBfye2', 2, 'Cliente1');
 INSERT INTO gym.usuario(user_id,password, rol, username)VALUES(2,'$2a$12$d6GwQDnGMkUwQKiVwH0xdeJEFj/05M9O7DvTFP23Jtp5JNE4PP7Ze', 2, 'Cliente2');
 INSERT INTO gym.usuario(user_id,password, rol, username)VALUES(3,'$2a$12$NwTW1OD4ihIoPD7WmrvGHe0z.Mdj53DoRKvRkivkcpeEnaHjfKhwG', 2, 'Cliente3');
@@ -9,44 +10,48 @@ INSERT INTO gym.usuario(user_id,password, rol, username)VALUES(7,'$2a$12$./Bz4mo
 INSERT INTO gym.usuario(user_id,password, rol, username)VALUES(8,'$2a$12$j.yqd/ezaWj51VCJOXEDKOqc7.y5I1xTKwpSaP.nrKSUfC3Og9jca', 2, 'Cliente8');
 INSERT INTO gym.usuario(user_id,password, rol, username)VALUES(9,'$2a$12$Ew0QAkS4Ra1jBC0ROq.XreqQ81WHo3k0VEMjM3Qu.cWajpMuioH1W', 2, 'Cliente9');
 
-
+--Usuarios Nutricionistas
 INSERT INTO gym.usuario(user_id,password, rol, username)VALUES(10,'$2a$12$EdkcrYxSp.gg9TVqX/KEgedjT1UUyUc32zkmczJJYWoCV3rAVOnOC', 1, 'Nutricionista1');
 INSERT INTO gym.usuario(user_id,password, rol, username)VALUES(11,'$2a$12$gdafnJFGPUCfOFa4snEjQuwMwXT1KmwYaOBbgrrTlB7ioINC3j5hy', 1, 'Nutricionista2');
+
+--Usuarios Entrenadores
 INSERT INTO gym.usuario(user_id,password, rol, username)VALUES(12,'$2a$12$j8cbV6wMu9jMGVjFAVaXVevvSdlkxU4Xt/CmDkR58XCPPgFy39Xx6', 0, 'Entrenador1');
 INSERT INTO gym.usuario(user_id,password, rol, username)VALUES(13,'$2a$12$RfSwJORn59fFSGHxE6gT5umDyLFrShLW8sYH.RFweJoUohMKizPEm', 0, 'Entrenador2'); 
+ 
+--Nutricionista
+INSERT INTO gym.nutricionista(apellidos,nombre,user_id)VALUES ("Ortiz","Estefanía",10);
 
+--Entrenador
+INSERT INTO gym.entrenador (apellidos,nombre,user_id)VALUES ("San Felix","Borja",12);
 
-INSERT INTO gym.nutricionista (apellidos,nombre,user_id)VALUES ("Ortiz","Estefanía",10);
-INSERT INTO gym.entrenador  (apellidos,nombre,user_id)VALUES ("San Felix","Borja",12);
-
-
+--Clientes
 INSERT INTO gym.cliente (apellidos,email,fecha_nacimiento,nombre,user_id,entrenador_id,nutricionista_id)
-   VALUES("Ahedo García",  		"danielAhedo@miemail.com",	"28-12-1998",	"Daniel",	1,12	,null)
-		,("Gomez Perez",		"pepeperez@yahoo.es",		"14-02-1995",	"Pepe",		2,12	,10)
-		,("Acacio",				"acaciofran2@miemail.com",	"28-12-1998",	"Fran",		3,12	,10)
-		,("FuenteVilla Perez",	"ramonfvperez@gmail.es",	"14-02-1995",	"Ramón",	4,NULL	,10)
-		,("Alamo García",		"hugoalamo@miemail.com",	"28-12-1998",	"Hugo",		5,null	,null)
-		,("Diaz Arosa",			"pepediazarosa@yahoo.es",	"14-02-1995",	"Pepe",		6,NULL	,NULL)
-		,("De la Fuente Prieto","helanafuente@miemail.com",	"28-12-1998",	"Helena",	7,null	,null)
-		,("Gomez de la Riva",	"raul_gomez@yahoo.es",		"14-02-1995",	"Raul",		8,NULL	,NULL);
-		
-		
+   VALUES("Ahedo García",  		"danielAhedo@miemail.com",	"1998-12-02",	"Daniel",	1,12	,null)
+		,("Gomez Perez",		"pepeperez@yahoo.es",		"1995-12-02",	"Pepe",		2,12	,10)
+		,("Acacio",				"acaciofran2@miemail.com",	"1998-12-02",	"Fran",		3,12	,10)
+		,("FuenteVilla Perez",	"ramonfvperez@gmail.es",	"1995-12-02",	"Ramón",	4,NULL	,10)
+		,("Alamo García",		"hugoalamo@miemail.com",	"1998-12-02",	"Hugo",		5,null	,null)
+		,("Diaz Arosa",			"pepediazarosa@yahoo.es",	"1995-12-02",	"Pepe",		6,NULL	,NULL)
+		,("De la Fuente Prieto","helanafuente@miemail.com",	"1998-12-02",	"Helena",	7,null	,null)
+		,("Gomez de la Riva",	"raul_gomez@yahoo.es",		"1995-12-02",	"Raul",		8,NULL	,NULL);
 
-		
---  Auto-generated SQL script #202205232344
+--  Dietas Diarias
 INSERT INTO gym.alimentacion_diaria (id,cena,comida,desayuno,media_mañana,merienda,otros,post_entreno,pre_entreno)
 	VALUES (1,"pescado","pollo","colacao",NULL,NULL,NULL,NULL,NULL),
 			(2,"patata","brocoli","cafe","Manzana","platano",NULL,NULL,NULL);
 	
-INSERT INTO gym.dieta (id,nombre)
-	VALUES (1,"Mi dieta");
+--Dieta Semanal
+INSERT INTO gym.dieta (id,nombre) VALUES (1,"Mi dieta");
  
-	
-	--  Auto-generated SQL script #202205241926
+--Relacion dieta diaria a semanal
 INSERT INTO gym.alimentacion_diaria_dieta (id,dia_semana,alimentacion_diaria_id,dieta_id)
-	VALUES (1,1,1,1),
-			(2,2,2,1);
-			
+	VALUES (1,1,1,1),(2,2,2,1);
+
+
+--Entrenamientos diarios
+INSERT INTO gym.entrenamiento_diario (nombre) VALUES ('Entrenamiento test 1'),('Entrenamiento test 2');
+
+--Ejercicios
 INSERT INTO gym.ejercicio (equipamiento,grupo_muscular,nombre,parte_cuerpo,url_imagen)
 	VALUES  ('peso corporal', 'abdominales','3/4 sit-up','waist','http://d205bpvrqc9yn1.cloudfront.net/0001.gif'),
 ('peso corporal', 'abdominales','45° side bend','waist','http://d205bpvrqc9yn1.cloudfront.net/0002.gif'),
@@ -148,11 +153,6 @@ INSERT INTO gym.ejercicio (equipamiento,grupo_muscular,nombre,parte_cuerpo,url_i
 ('barbell', 'quads','barbell bench front squat','pierna superior','http://d205bpvrqc9yn1.cloudfront.net/0024.gif'),
 ('barbell', 'pectorals','barbell bench press','pecho','http://d205bpvrqc9yn1.cloudfront.net/0025.gif');
 
-
-
-	
-
-
-
-
-
+--Relaciones entre ejercicios y entrenamientos diarios
+INSERT INTO gym.ejercicio_entrenamiento_diario (id,repeticiones,series,ejercicio_id,entrenamiento_id) VALUES
+	 (1,0,0,2,1),(2,0,0,4,1),(3,0,0,1,1),(4,4,4,11,2),(5,3,3,24,2),(6,2,2,13,2);
