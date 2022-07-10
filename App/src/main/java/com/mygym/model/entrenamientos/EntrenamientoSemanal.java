@@ -51,4 +51,19 @@ public class EntrenamientoSemanal {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	/**
+	 * @return the entrenamientoDiarios
+	 */
+	public Set<EntrenamientoSemanalDiario> getEntrenamientoDiarios() {
+		return entrenamientoDiarios;
+	}
+
+	/**
+	 * @param entrenamientoDiarios the entrenamientoDiarios to set
+	 */
+	public void setEntrenamientoDiarios(Set<EntrenamientoSemanalDiario> entrenamientoDiarios) {
+		this.entrenamientoDiarios = entrenamientoDiarios;
+	}
+
 }

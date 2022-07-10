@@ -12,8 +12,6 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mygym.dao.EntrenamientoDiarioDAO;
 import com.mygym.model.entrenamientos.EjercicioEntrenamientoDiario;
 import com.mygym.model.entrenamientos.EntrenamientoDiario;
@@ -26,17 +24,6 @@ public class EntrenamientoDiarioImpl implements EntrenamientoDiarioDAO {
 
 	@Override
 	public EntrenamientoDiario createUpdateEntrenamientoDiario(EntrenamientoDiario entrenamientoDiario) {
-
-		ObjectMapper mapper = new ObjectMapper();
-		// Converting the Object to JSONString
-		String jsonString = null;
-		try {
-			jsonString = mapper.writeValueAsString(entrenamientoDiario);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(jsonString);
 
 		for (EjercicioEntrenamientoDiario ejercicioEntmntoDiario : entrenamientoDiario.getEjercicioEntrenamiento()) {
 
