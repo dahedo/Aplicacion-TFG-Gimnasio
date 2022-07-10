@@ -38,13 +38,6 @@ public class EntrenamientoDiario {
 	}
 
 	/**
-	 * @return the entrenamientosSemanales
-	 */
-	public Set<EntrenamientoSemanalDiario> getEntrenamientosSemanales() {
-		return entrenamientosSemanales;
-	}
-
-	/**
 	 * @param entrenamientosSemanales the entrenamientosSemanales to set
 	 */
 	public void setEntrenamientosSemanales(Set<EntrenamientoSemanalDiario> entrenamientosSemanales) {
