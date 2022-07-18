@@ -1,8 +1,8 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Navigate, useNavigate } from "react-router-dom";
+import logo from "./Assets/NavBarIcon.svg";
 
 const ResponsiveAppBar = (props) => {
   const [redirect, setRedirect] = React.useState(false);
@@ -35,20 +35,21 @@ const ResponsiveAppBar = (props) => {
           justifyContent: "space-between",
         }}
       >
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+        <img
+          src={logo}
+          alt=""
           onClick={goMain}
-        >
-          LOGO
-        </Typography>
+          style={{ margin: "10px 10px 10px 5px" }}
+        />
 
         {props.loginVisivility ? (
           <Button
+            sx={{
+              color: "white",
+              borderColor: "white",
+            }}
             variant="outlined"
-            style={{ backgroundColor: "green" }}
+            style={{ margin: "15px 20px 15px 10px" }}
             onClick={redirectToLogin}
           >
             Login
@@ -56,8 +57,12 @@ const ResponsiveAppBar = (props) => {
         ) : null}
         {props.logoutVisivility ? (
           <Button
+            sx={{
+              color: "white",
+              borderColor: "white",
+            }}
             variant="outlined"
-            style={{ backgroundColor: "red" }}
+            style={{ margin: "15px 20px 15px 10px" }}
             onClick={logoutButton}
           >
             Logout
