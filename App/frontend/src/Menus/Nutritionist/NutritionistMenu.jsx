@@ -23,7 +23,6 @@ function NutritionistMenu(props) {
   const navigate = useNavigate();
 
   const [showClientsPanel, setShowClientsPanel] = useState(false);
-  const [showProfilePanel, setShowProfilePanel] = useState(false);
   const [showDietsPanel, setShowDietsPanel] = useState(false);
   const [createDietsPanel, setCreateDietsPanel] = useState(false);
   const [dailyDietList, setDailyDietList] = useState([]);
@@ -122,28 +121,18 @@ function NutritionistMenu(props) {
   };
 
   const showDiets = (e) => {
-    setShowProfilePanel(false);
     setShowClientsPanel(false);
     setShowDietsPanel(true);
     setCreateDietsPanel(false);
   };
 
   const createDiets = (e) => {
-    setShowProfilePanel(false);
     setShowClientsPanel(false);
     setShowDietsPanel(false);
     setCreateDietsPanel(true);
   };
 
-  const showProfile = (e) => {
-    setShowProfilePanel(true);
-    setShowClientsPanel(false);
-    setShowDietsPanel(false);
-    setCreateDietsPanel(false);
-  };
-
   const showClients = (e) => {
-    setShowProfilePanel(false);
     setShowClientsPanel(true);
     setShowDietsPanel(false);
     setCreateDietsPanel(false);
@@ -180,13 +169,7 @@ function NutritionistMenu(props) {
                   style={{ marginTop: "30px" }}
                 />
                 <p>Hola {nutritionistProfile.nombre} !</p>
-                <Button
-                  variant="contained"
-                  onClick={showProfile}
-                  style={{ width: "90%", marginTop: "30px" }}
-                >
-                  Perfil
-                </Button>
+
                 <Button
                   variant="contained"
                   onClick={showDiets}
@@ -212,7 +195,6 @@ function NutritionistMenu(props) {
             </Grid>
 
             <Grid item xs={12} md={10} style={{ height: "100%" }}>
-              {showProfilePanel ? "Perfil" : null}
               {showDietsPanel ? (
                 <NutritionistViewDiets
                   reloadDiets={reloadDiets}
