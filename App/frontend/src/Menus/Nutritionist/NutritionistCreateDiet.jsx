@@ -11,7 +11,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 function NutritionistCreateDiet(props) {
   const [openSnackBarOK, setOpenSnackBarOK] = React.useState(false);
   const [openSnackBarKO, setOpenSnackBarKO] = React.useState(false);
-  const [enableDietaDiaria, setEnableDietaDiaria] = useState(false);
+
+  const [enableDietaDiaria, setEnableDietaDiaria] = useState(true);
   const [enableDietaSemanal, setEnableDietaSemanal] = useState(false);
 
   const createDieta = async (e) => {
@@ -57,6 +58,15 @@ function NutritionistCreateDiet(props) {
         }}
       >
         <Button
+          sx={
+            enableDietaDiaria
+              ? {
+                  color: "black !important",
+                  backgroundColor: "#B7B7B7 !important",
+                }
+              : null
+          }
+          disabled={enableDietaDiaria}
           onClick={createDieta}
           id="create-dieta-diaria"
           variant="contained"
@@ -65,6 +75,15 @@ function NutritionistCreateDiet(props) {
         </Button>
 
         <Button
+          sx={
+            enableDietaSemanal
+              ? {
+                  color: "black !important",
+                  backgroundColor: "#B7B7B7 !important",
+                }
+              : null
+          }
+          disabled={enableDietaSemanal}
           onClick={createDieta}
           id="create-dieta-semanal"
           variant="contained"
@@ -91,32 +110,6 @@ function NutritionistCreateDiet(props) {
           setOpenSnackBarKO={setOpenSnackBarKO}
           dailyDietList={props.dailyDietList}
         />
-      ) : null}
-
-      {!enableDietaSemanal && !enableDietaDiaria ? (
-        <>
-          <Paper
-            elevation={3}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              height: "50px",
-              padding: "10px 20px 10px 20px",
-              marginTop: "3px",
-            }}
-          ></Paper>
-          <Paper
-            elevation={3}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              padding: "5px 20px 5px 20px",
-              marginTop: "3px",
-              height: "486px",
-            }}
-          ></Paper>
-        </>
       ) : null}
 
       <Snackbar

@@ -10,7 +10,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 function NutritionistViewDiets(props) {
-  const [viewDietaDiaria, setViewDietaDiaria] = useState(false);
+  const [viewDietaDiaria, setViewDietaDiaria] = useState(true);
   const [viewDietaSemanal, setViewDietaSemanal] = useState(false);
 
   const [openSnackBarOK, setOpenSnackBarOK] = React.useState(false);
@@ -34,10 +34,6 @@ function NutritionistViewDiets(props) {
         setViewDietaDiaria(false);
         setViewDietaSemanal(true);
         break;
-      default:
-        setViewDietaDiaria(false);
-        setViewDietaSemanal(false);
-        break;
     }
   };
 
@@ -59,10 +55,36 @@ function NutritionistViewDiets(props) {
           justifyContent: "space-evenly",
         }}
       >
-        <Button onClick={showDiets} id="show-daily-diets" variant="contained">
+        <Button
+          sx={
+            viewDietaDiaria
+              ? {
+                  color: "black !important",
+                  backgroundColor: "#B7B7B7 !important",
+                }
+              : null
+          }
+          disabled={viewDietaDiaria}
+          onClick={showDiets}
+          id="show-daily-diets"
+          variant="contained"
+        >
           Ver dietas diarias
         </Button>
-        <Button onClick={showDiets} id="show-weekly-diets" variant="contained">
+        <Button
+          sx={
+            viewDietaSemanal
+              ? {
+                  color: "black !important",
+                  backgroundColor: "#B7B7B7 !important",
+                }
+              : null
+          }
+          disabled={viewDietaSemanal}
+          onClick={showDiets}
+          id="show-weekly-diets"
+          variant="contained"
+        >
           Ver dietas semanales
         </Button>
       </Paper>
@@ -82,17 +104,6 @@ function NutritionistViewDiets(props) {
           weeklyDietList={props.weeklyDietList}
           setOpenSnackBarOK={setOpenSnackBarOK}
           setOpenSnackBarKO={setOpenSnackBarKO}
-        />
-      ) : null}
-
-      {!viewDietaDiaria && !viewDietaSemanal ? (
-        <Paper
-          elevation={3}
-          style={{
-            height: "calc(100% - 73px)",
-            padding: "10px 20px 10px 20px",
-            marginTop: "3px",
-          }}
         />
       ) : null}
 

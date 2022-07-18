@@ -22,8 +22,8 @@ import jwt from "jwt-decode";
 function NutritionistMenu(props) {
   const navigate = useNavigate();
 
+  const [showDietsPanel, setShowDietsPanel] = useState(true);
   const [showClientsPanel, setShowClientsPanel] = useState(false);
-  const [showDietsPanel, setShowDietsPanel] = useState(false);
   const [createDietsPanel, setCreateDietsPanel] = useState(false);
   const [dailyDietList, setDailyDietList] = useState([]);
   const [weeklyDietList, setWeeklyDietList] = useState([]);
@@ -171,6 +171,15 @@ function NutritionistMenu(props) {
                 <p>Hola {nutritionistProfile.nombre} !</p>
 
                 <Button
+                  sx={
+                    showDietsPanel
+                      ? {
+                          color: "black !important",
+                          backgroundColor: "#B7B7B7 !important",
+                        }
+                      : null
+                  }
+                  disabled={showDietsPanel}
                   variant="contained"
                   onClick={showDiets}
                   style={{ width: "90%", marginTop: "100px" }}
@@ -178,6 +187,15 @@ function NutritionistMenu(props) {
                   Ver dietas
                 </Button>
                 <Button
+                  sx={
+                    createDietsPanel
+                      ? {
+                          color: "black !important",
+                          backgroundColor: "#B7B7B7 !important",
+                        }
+                      : null
+                  }
+                  disabled={createDietsPanel}
                   variant="contained"
                   onClick={createDiets}
                   style={{ width: "90%", marginTop: "30px" }}
@@ -185,6 +203,15 @@ function NutritionistMenu(props) {
                   Crear dietas
                 </Button>
                 <Button
+                  sx={
+                    showClientsPanel
+                      ? {
+                          color: "black !important",
+                          backgroundColor: "#B7B7B7 !important",
+                        }
+                      : null
+                  }
+                  disabled={showClientsPanel}
                   variant="contained"
                   onClick={showClients}
                   style={{ width: "90%", marginTop: "30px" }}
