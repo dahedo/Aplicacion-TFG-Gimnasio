@@ -87,27 +87,25 @@ function NutritionistViewWeeklyDiets(props) {
   };
 
   const hola = () => {
-    console.log(editWeeklyDiet.selectedDiet);
-    console.log(props.weeklyDietList);
-    // const url = `http://localhost:8080/dietas/create-update`;
-    // var token = window.localStorage.getItem("loggedUser");
-    // token = JSON.parse(token);
+    const url = `http://localhost:8080/dietas/create-update`;
+    var token = window.localStorage.getItem("loggedUser");
+    token = JSON.parse(token);
 
-    // axios
-    //   .post(url, editWeeklyDiet.selectedDiet, {
-    //     headers: {
-    //       "Access-Control-Allow-Origin": "*",
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   })
-    //   .then(
-    //     (response) => {
-    //       props.setOpenSnackBarOK(true);
-    //     },
-    //     (error) => {
-    //       props.setOpenSnackBarKO(true);
-    //     }
-    //   );
+    axios
+      .post(url, editWeeklyDiet.selectedDiet, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(
+        (response) => {
+          props.setOpenSnackBarOK(true);
+        },
+        (error) => {
+          props.setOpenSnackBarKO(true);
+        }
+      );
   };
 
   const seleccionarDieta = (row, day, e) => {

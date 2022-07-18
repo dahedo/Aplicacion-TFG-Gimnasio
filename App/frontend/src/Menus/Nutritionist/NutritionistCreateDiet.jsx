@@ -84,6 +84,7 @@ function NutritionistCreateDiet(props) {
 
       {enableDietaSemanal && !enableDietaDiaria ? (
         <NutritionistCreateWeeklyDiet
+          reloadDiets={props.reloadDiets}
           setEnableDietaSemanal={setEnableDietaSemanal}
           setEnableDietaDiaria={setEnableDietaDiaria}
           setOpenSnackBarOK={setOpenSnackBarOK}

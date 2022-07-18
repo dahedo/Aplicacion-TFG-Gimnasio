@@ -1,11 +1,13 @@
 package com.mygym.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -29,6 +31,31 @@ public class DietaImpl implements DietaDAO {
 			AlimentacionDiariaDieta a = new AlimentacionDiariaDieta();
 			a = alimentacionDiariaDieta;
 			a.setDieta(d);
+		}
+
+		// update
+		if (d.getId() != (null)) {
+			for (AlimentacionDiariaDieta alimentacionDiariaDieta : d.getAlimentacionDiariaDietas()) {
+				if (alimentacionDiariaDieta.getId() == null) {
+					CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+					CriteriaQuery<AlimentacionDiariaDieta> criteriaQuery = builder
+							.createQuery(AlimentacionDiariaDieta.class);
+					Root<AlimentacionDiariaDieta> root = criteriaQuery.from(AlimentacionDiariaDieta.class);
+
+					ArrayList<Predicate> conditions = new ArrayList<>();
+					conditions.add(builder.equal(root.get("dieta"), d.getId()));
+					conditions.add(builder.equal(root.get("diaSemana"), alimentacionDiariaDieta.getDiaSemana()));
+
+					criteriaQuery.select(root).where(conditions.toArray(new Predicate[conditions.size()]));
+
+					javax.persistence.Query query = entityManager.createQuery(criteriaQuery);
+					AlimentacionDiariaDieta alimDiariaDieta = (AlimentacionDiariaDieta) query.getSingleResult();
+
+					if (alimDiariaDieta != null) {
+						alimentacionDiariaDieta.setId(alimDiariaDieta.getId());
+					}
+				}
+			}
 		}
 
 		Session currentSession = entityManager.unwrap(Session.class);

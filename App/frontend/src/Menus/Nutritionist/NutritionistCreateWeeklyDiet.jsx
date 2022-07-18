@@ -153,6 +153,7 @@ function NutritionistCreateWeeklyDiet(props) {
           props.setOpenSnackBarOK(true);
           props.setEnableDietaSemanal(false);
           props.setEnableDietaDiaria(false);
+          props.reloadDiets();
         },
         (error) => {
           props.setOpenSnackBarKO(true);
