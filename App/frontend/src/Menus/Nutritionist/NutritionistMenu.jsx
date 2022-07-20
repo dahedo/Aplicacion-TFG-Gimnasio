@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ResponsiveAppBar from "../../navbar";
-import NutritionistCreateDiet from "./NutritionistCreateDiet";
-import NutritionistViewDiets from "./NutritionistViewDiets";
-import NutritionistAssignedClients from "./NutritionistAssignedClients";
+import NutritionistCreateDiet from "./CreateDiet/NutritionistCreateDiet";
+import NutritionistViewDiets from "./ViewDiet/NutritionistViewDiets";
+import NutritionistAssignedClients from "./AsignedClients/NutritionistAssignedClients";
 import {
   Button,
   Avatar,

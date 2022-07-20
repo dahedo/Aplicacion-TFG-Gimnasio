@@ -58,7 +58,6 @@ function NutritionistViewWeeklyDiets(props) {
   };
 
   const handleClickOpen = (row) => {
-    console.log(row);
     setEditWeeklyDiet({
       open: true,
       selectedDiet: {
@@ -86,7 +85,7 @@ function NutritionistViewWeeklyDiets(props) {
     setEnableBusqueda({ ...enableBusqueda, open: true, day: day });
   };
 
-  const hola = () => {
+  const save = () => {
     const url = `http://localhost:8080/dietas/create-update`;
     var token = window.localStorage.getItem("loggedUser");
     token = JSON.parse(token);
@@ -101,6 +100,15 @@ function NutritionistViewWeeklyDiets(props) {
       .then(
         (response) => {
           props.setOpenSnackBarOK(true);
+          props.reloadDiets();
+          setEditWeeklyDiet({
+            open: false,
+            selectedDiet: {
+              id: null,
+              nombre: "",
+              alimentacionDiariaDietas: [],
+            },
+          });
         },
         (error) => {
           props.setOpenSnackBarKO(true);
@@ -228,7 +236,7 @@ function NutritionistViewWeeklyDiets(props) {
                   (dDiet) => dDiet.alimentacionDiaria !== null
                 ).length !== 7
               }
-              onClick={hola}
+              onClick={save}
               style={{ margin: "10px 5px 5px 5px" }}
               variant="contained"
             >

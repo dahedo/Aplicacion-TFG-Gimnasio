@@ -100,6 +100,7 @@ function NutritionistViewDiets(props) {
 
       {!viewDietaDiaria && viewDietaSemanal ? (
         <NutritionistViewWeeklyDiets
+          reloadDiets={props.reloadDiets}
           dailyDietList={props.dailyDietList}
           weeklyDietList={props.weeklyDietList}
           setOpenSnackBarOK={setOpenSnackBarOK}
