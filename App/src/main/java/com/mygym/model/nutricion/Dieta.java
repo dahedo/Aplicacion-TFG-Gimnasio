@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mygym.model.usuarios.Cliente;
 
 @Entity
@@ -22,6 +23,7 @@ public class Dieta {
 	@Column
 	private String nombre;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "dieta")
 	private Set<Cliente> clientes;
 

@@ -32,6 +32,11 @@ function NutritionistMenu(props) {
     apellidos: "",
     clientes: [],
   });
+  const [clients, setClients] = useState({
+    new: [],
+    reviewed: [],
+    nonReviewed: [],
+  });
 
   useEffect(() => {
     var loggedUser = window.localStorage.getItem("loggedUser");
@@ -66,6 +71,7 @@ function NutritionistMenu(props) {
             clientes: response.data.clientes,
           });
 
+          filterClients(response.data.clientes);
           reloadDiets();
         },
         (error) => {
@@ -73,6 +79,56 @@ function NutritionistMenu(props) {
         }
       );
   }, []);
+
+  const getMaxDate = (list) => {
+    return new Date(
+      Math.max(
+        ...list.map((element) => {
+          const myDate = element.fechaRevision.split("/");
+          return new Date(myDate[2], myDate[1] - 1, myDate[0]);
+        })
+      )
+    );
+  };
+
+  const filterClients = (clientList) => {
+    const newClients = clientList.filter(
+      (client) => client.fechaAsignacionDieta === null && client.dieta === null
+    );
+
+    const notNew = clientList.filter(
+      (client) =>
+        client.dieta !== null &&
+        client.fechaAsignacionDieta !== null &&
+        client.revisiones.length !== 0
+    );
+
+    const reviewedClients = notNew.filter(
+      (client) =>
+        getMaxDate(client.revisiones) <=
+        new Date(
+          client.fechaAsignacionDieta.split("/")[2],
+          client.fechaAsignacionDieta.split("/")[1] - 1,
+          client.fechaAsignacionDieta.split("/")[0]
+        )
+    );
+
+    const nonReviewedClients = notNew.filter(
+      (client) =>
+        getMaxDate(client.revisiones) >
+        new Date(
+          client.fechaAsignacionDieta.split("/")[2],
+          client.fechaAsignacionDieta.split("/")[1] - 1,
+          client.fechaAsignacionDieta.split("/")[0]
+        )
+    );
+
+    setClients({
+      new: newClients,
+      reviewed: reviewedClients,
+      nonReviewed: nonReviewedClients,
+    });
+  };
 
   const reloadDiets = () => {
     const urlDailyDiet = `http://localhost:8080/alimentacion-diaria/get-all`;
@@ -238,6 +294,9 @@ function NutritionistMenu(props) {
               {showClientsPanel ? (
                 <NutritionistAssignedClients
                   nutritionistProfile={nutritionistProfile}
+                  newClients={clients.new}
+                  reviewedClients={clients.reviewed}
+                  nonReviewedClients={clients.nonReviewed}
                 />
               ) : null}
             </Grid>
