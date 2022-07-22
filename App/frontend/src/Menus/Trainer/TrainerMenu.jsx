@@ -6,6 +6,7 @@ import jwt from "jwt-decode";
 import axios from "axios";
 import TrainerCreateTrainnings from "./CreateTrainings/TrainerCreateTrainnings";
 import TrainerViewTrainnings from "./ViewTrainings/TrainerViewTrainnings";
+import TrainerAsignedClients from "./AsignedClients/TrainerAsignedClients";
 
 function MuenuEntrenador(props) {
   const navigate = useNavigate();
@@ -214,7 +215,7 @@ function MuenuEntrenador(props) {
                   setOpenSnackBarKO={setOpenSnackBarKO}
                 />
               ) : null}
-              {showClientsPanel ? <>ver clientes</> : null}
+              {showClientsPanel ? <TrainerAsignedClients /> : null}
             </Grid>
           </Grid>
 
