@@ -1,4 +1,5 @@
 import {
+  Button,
   Dialog,
   Paper,
   Table,
@@ -10,13 +11,21 @@ import {
   TableRow,
   TextField,
 } from "@mui/material";
-
-import React, { useState } from "react";
+import WeeklyDiet from "../ViewDiet/WeeklyDiet";
+import NutritionistDialogSelectWDiet from "./NutritionistDialogSelectWDiet";
+import React from "react";
 
 function NutritionistReviewClientDialog(props) {
-  const { enableReviewDialog, handleCloseReviewDialog } = props;
-  const numRows = 6;
+  const {
+    setEnableReviewDialoge,
+    enableReviewDialog,
+    handleCloseReviewDialog,
+  } = props;
+  const [openSelectDietDialog, setOpenSelectDietDialog] = React.useState(false);
+
+  const numRows = 5;
   const [page, setPage] = React.useState(0);
+  const empty = { id: "", nombre: "", alimentacionDiariaDietas: [] };
   const tableHeaderData = [
     "Fecha",
     "Peso",
@@ -53,14 +62,13 @@ function NutritionistReviewClientDialog(props) {
     } else return "";
   }
 
+  const save = () => {
+    console.log(setEnableReviewDialoge);
+  };
+
   return (
-    <Dialog
-      fullWidth={true}
-      maxWidth={"xl"}
-      onClose={handleCloseReviewDialog}
-      open={enableReviewDialog.open}
-    >
-      <Paper style={{ height: "600px", padding: "20px 20px 20px 20px" }}>
+    <Dialog fullWidth={true} maxWidth={"xl"} open={enableReviewDialog.open}>
+      <Paper style={{ height: "680px", padding: "20px 20px 0px 20px" }}>
         <TextField
           size="small"
           label="Nombre"
@@ -81,14 +89,49 @@ function NutritionistReviewClientDialog(props) {
           label="Altura"
           value={enableReviewDialog.clientToReview?.altura}
         />
-        <TextField size="small" label="Aalergias / Intolerancias"></TextField>
+        <TextField
+          size="small"
+          label="Alergias / Intolerancias"
+          value={enableReviewDialog.clientToReview?.parametrosCliente?.alergias}
+        ></TextField>
+        <TextField
+          size="small"
+          label="Lesiones"
+          value={enableReviewDialog.clientToReview?.parametrosCliente?.lesiones}
+        ></TextField>
 
+        {/* Dieta semanal asignada */}
         <TableContainer
           style={{
-            marginTop: "10px",
+            marginTop: "5px",
             borderRadius: "4px",
             border: " 1px solid rgba(224, 224, 224, 1) ",
-            height: "calc(100% - 360px)",
+            height: "315px",
+          }}
+        >
+          <Table>
+            <TableBody>
+              <WeeklyDiet
+                key={enableReviewDialog.clientToReview?.dieta?.id}
+                row={
+                  enableReviewDialog.clientToReview?.dieta
+                    ? enableReviewDialog.clientToReview?.dieta
+                    : empty
+                }
+                open={true}
+                handleClickOpen={() => setOpenSelectDietDialog(true)}
+              />
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        {/* Revisiones de cliente */}
+        <TableContainer
+          style={{
+            marginTop: "5px",
+            borderRadius: "4px",
+            border: " 1px solid rgba(224, 224, 224, 1) ",
+            height: "210px",
           }}
         >
           <Table
@@ -173,7 +216,7 @@ function NutritionistReviewClientDialog(props) {
           </Table>
         </TableContainer>
         <TablePagination
-          style={{ marginRight: 0 }}
+          style={{ height: "55px" }}
           rowsPerPageOptions={[]}
           component="div"
           count={
@@ -185,15 +228,39 @@ function NutritionistReviewClientDialog(props) {
           page={page}
           onPageChange={handleChangePage}
         />
-
-        <TableContainer
+        <div
           style={{
-            borderRadius: "4px",
-            border: " 1px solid rgba(224, 224, 224, 1) ",
-            height: "calc(100% - 350px)",
+            height: "30px",
           }}
-        ></TableContainer>
+        >
+          <Button
+            style={{
+              height: "25px",
+              marginRight: "5px",
+            }}
+            variant="contained"
+            onClick={save}
+          >
+            Guardar
+          </Button>
+          <Button
+            style={{
+              height: "25px",
+            }}
+            variant="contained"
+            onClick={handleCloseReviewDialog}
+          >
+            Cancelar
+          </Button>
+        </div>
       </Paper>
+      <NutritionistDialogSelectWDiet
+        open={openSelectDietDialog}
+        setOpenSelectDietDialog={setOpenSelectDietDialog}
+        weeklyDietList={props.weeklyDietList}
+        enableReviewDialog={enableReviewDialog}
+        setEnableReviewDialoge={setEnableReviewDialoge}
+      ></NutritionistDialogSelectWDiet>
     </Dialog>
   );
 }

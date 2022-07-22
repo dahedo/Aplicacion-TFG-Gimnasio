@@ -297,6 +297,7 @@ function NutritionistMenu(props) {
                   newClients={clients.new}
                   reviewedClients={clients.reviewed}
                   nonReviewedClients={clients.nonReviewed}
+                  weeklyDietList={weeklyDietList}
                 />
               ) : null}
             </Grid>

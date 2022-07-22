@@ -26,35 +26,10 @@ function NutritionistAssignedClients(props) {
     useState(false);
   const [enableReviewedClients, setEnableReviewedClients] = useState(false);
 
-  const [nutritionistNewClients, setNutritionistNewClients] = React.useState(
-    props.nutritionistProfile.clientes
-  );
-  const [nutritionistNonReviewedClients, setNutritionistNonReviewedClients] =
-    React.useState(props.nutritionistProfile.clientes);
-  const [nutritionistReviewedClients, setNutritionistReviewedClients] =
-    React.useState(props.nutritionistProfile.clientes);
-
   const [enableReviewDialog, setEnableReviewDialoge] = React.useState({
     open: false,
     clientToReview: null,
   });
-
-  const tableHeaderData = [
-    "Fecha",
-    "Peso",
-    "Cuello",
-    "Hombros",
-    "Pecho",
-    "Cintura",
-    "Cadera",
-    "Antebrazo izq",
-    "Antebrazo der",
-    "Muslo izq",
-    "Muslo der",
-    "Bicep izq",
-    "Bicep der",
-    "Comentario",
-  ];
 
   const changeView = async (e) => {
     e.preventDefault();
@@ -95,15 +70,6 @@ function NutritionistAssignedClients(props) {
       open: false,
       clientToReview: null,
     });
-  };
-
-  const filtrar = (e) => {
-    const filteredData = props.nutritionistProfile.clientes.filter((data) =>
-      data.nombre.toUpperCase().includes(e.target.value.toUpperCase())
-    );
-
-    // setNutritionistClients(filteredData);
-    setPage(0);
   };
 
   const selectedClientsByType = () => {
@@ -257,8 +223,10 @@ function NutritionistAssignedClients(props) {
       </Paper>
 
       <NutritionistReviewClientDialog
+        weeklyDietList={props.weeklyDietList}
         handleCloseReviewDialog={handleCloseReviewDialog}
         enableReviewDialog={enableReviewDialog}
+        setEnableReviewDialoge={setEnableReviewDialoge}
       />
     </div>
   );
