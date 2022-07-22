@@ -11,15 +11,24 @@ import ClientProfile from "./ClientProfile";
 import ClientDiets from "./ClientDiets";
 import ClientExercisesPanel from "./ClientExercisesPanel";
 import ClientReviews from "./ClientReviews";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 function ClientMenu(props) {
   const navigate = useNavigate();
 
-  const [showProfilePanel, setShowProfilePanel] = useState(false);
+  //loaging flags
+  const [isExerciseLoading, setExercieseLoading] = React.useState(true);
+  const [isClientLoading, setClientLoading] = React.useState(true);
+
+  //Bool flags to enable diferent screens
+  const [showProfilePanel, setShowProfilePanel] = useState(true);
   const [showDietsPanel, setShowDietsPanel] = useState(false);
   const [showTrainningsPanel, setShowTrainningsPanel] = useState(false);
   const [showExercisesPanel, setShowExercisesPanel] = useState(false);
   const [showReviewsPanel, setShowReviewsPanel] = useState(false);
+
+  //data
   const [exerciseData, setExerciseData] = useState([]);
 
   const [clientProfile, setClientProfile] = useState({
@@ -68,6 +77,7 @@ function ClientMenu(props) {
       .then(
         (response) => {
           setExerciseData(response.data);
+          setExercieseLoading(false);
         },
         (error) => {
           console.log(error);
@@ -105,6 +115,7 @@ function ClientMenu(props) {
             altura: response.data.altura,
             revisiones: response.data.revisiones,
           });
+          setClientLoading(false);
         },
         (error) => {
           console.log(error);
@@ -188,6 +199,15 @@ function ClientMenu(props) {
                 />
                 <p>Hola {clientProfile.nombre} !</p>
                 <Button
+                  sx={
+                    showProfilePanel
+                      ? {
+                          color: "black !important",
+                          backgroundColor: "#B7B7B7 !important",
+                        }
+                      : null
+                  }
+                  disabled={showProfilePanel}
                   id="show-profile"
                   variant="contained"
                   onClick={selectFromMenu}
@@ -196,6 +216,15 @@ function ClientMenu(props) {
                   Perfil
                 </Button>
                 <Button
+                  sx={
+                    showDietsPanel
+                      ? {
+                          color: "black !important",
+                          backgroundColor: "#B7B7B7 !important",
+                        }
+                      : null
+                  }
+                  disabled={showDietsPanel}
                   id="show-diets"
                   variant="contained"
                   onClick={selectFromMenu}
@@ -204,6 +233,15 @@ function ClientMenu(props) {
                   Dietas
                 </Button>
                 <Button
+                  sx={
+                    showTrainningsPanel
+                      ? {
+                          color: "black !important",
+                          backgroundColor: "#B7B7B7 !important",
+                        }
+                      : null
+                  }
+                  disabled={showTrainningsPanel}
                   id="show-trainnings"
                   variant="contained"
                   onClick={selectFromMenu}
@@ -212,6 +250,15 @@ function ClientMenu(props) {
                   Entrenamientos
                 </Button>
                 <Button
+                  sx={
+                    showExercisesPanel
+                      ? {
+                          color: "black !important",
+                          backgroundColor: "#B7B7B7 !important",
+                        }
+                      : null
+                  }
+                  disabled={showExercisesPanel}
                   id="show-exercises"
                   variant="contained"
                   onClick={selectFromMenu}
@@ -220,6 +267,15 @@ function ClientMenu(props) {
                   Ejercicios
                 </Button>
                 <Button
+                  sx={
+                    showReviewsPanel
+                      ? {
+                          color: "black !important",
+                          backgroundColor: "#B7B7B7 !important",
+                        }
+                      : null
+                  }
+                  disabled={showReviewsPanel}
                   id="show-reviews"
                   variant="contained"
                   onClick={selectFromMenu}
@@ -229,31 +285,47 @@ function ClientMenu(props) {
                 </Button>
               </Paper>
             </Grid>
-
-            <Grid item xs={12} md={10}>
-              {showProfilePanel ? (
-                <ClientProfile
-                  clientProfile={clientProfile}
-                  getClientData={getClientData}
-                />
-              ) : null}
-              {showDietsPanel ? (
-                <ClientDiets clientDiet={clientProfile.dieta} />
-              ) : null}
-              {showTrainningsPanel ? "Entrenamientos" : null}
-              {showExercisesPanel ? (
-                <ClientExercisesPanel
-                  exerciseData={exerciseData}
-                ></ClientExercisesPanel>
-              ) : null}
-              {showReviewsPanel ? (
-                <ClientReviews
-                  reviews={clientProfile.revisiones}
-                  clientId={clientProfile.user_id}
-                  getClientData={getClientData}
-                />
-              ) : null}
-            </Grid>
+            {!isExerciseLoading && !isClientLoading ? (
+              <Grid item xs={12} md={10}>
+                {showProfilePanel ? (
+                  <ClientProfile
+                    clientProfile={clientProfile}
+                    getClientData={getClientData}
+                  />
+                ) : null}
+                {showDietsPanel ? (
+                  <ClientDiets clientDiet={clientProfile.dieta} />
+                ) : null}
+                {showTrainningsPanel ? "Entrenamientos" : null}
+                {showExercisesPanel ? (
+                  <ClientExercisesPanel
+                    exerciseData={exerciseData}
+                  ></ClientExercisesPanel>
+                ) : null}
+                {showReviewsPanel ? (
+                  <ClientReviews
+                    reviews={clientProfile.revisiones}
+                    clientId={clientProfile.user_id}
+                    getClientData={getClientData}
+                  />
+                ) : null}
+              </Grid>
+            ) : (
+              <Grid
+                item
+                xs={12}
+                md={10}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Box>
+                  <CircularProgress />
+                </Box>
+              </Grid>
+            )}
           </Grid>
         </div>
       </div>
