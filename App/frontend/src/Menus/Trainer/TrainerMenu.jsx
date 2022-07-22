@@ -1,4 +1,12 @@
-import { Alert, Avatar, Button, Grid, Paper, Snackbar } from "@mui/material";
+import {
+  Alert,
+  Avatar,
+  Button,
+  CircularProgress,
+  Grid,
+  Paper,
+  Snackbar,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ResponsiveAppBar from "../../navbar";
@@ -11,10 +19,16 @@ import TrainerAsignedClients from "./AsignedClients/TrainerAsignedClients";
 function MuenuEntrenador(props) {
   const navigate = useNavigate();
 
+  //loaging flags
+  const [isTrainerLoading, setTrainerLoading] = React.useState(true);
+  const [isExerciseLoading, setExercieseLoading] = React.useState(true);
+  const [isDailyTrainingLoading, setDailyTrainingLoading] =
+    React.useState(true);
+
   //Botones del menu
-  const [showClientsPanel, setShowClientsPanel] = useState(false);
+  const [showClientsPanel, setShowClientsPanel] = useState(true);
   const [showTrainningsPanel, setShowTrainningsPanel] = useState(false);
-  const [createTrainningsPanel, setCreateTrainningsPanel] = useState(true);
+  const [createTrainningsPanel, setCreateTrainningsPanel] = useState(false);
 
   //Datos de ejercicios
   const [exerciseData, setExerciseData] = useState([]);
@@ -75,6 +89,7 @@ function MuenuEntrenador(props) {
             apellidos: response.data.apellidos,
             clientes: response.data.clientes,
           });
+          setTrainerLoading(false);
         },
         (error) => {
           console.log(error);
@@ -95,6 +110,7 @@ function MuenuEntrenador(props) {
       .then(
         (response) => {
           setExerciseData(response.data);
+          setExercieseLoading(false);
         },
         (error) => {
           console.log(error);
@@ -115,6 +131,7 @@ function MuenuEntrenador(props) {
       .then(
         (response) => {
           setDailyTrainingtList(response.data);
+          setDailyTrainingLoading(false);
         },
         (error) => {
           console.log(error);
@@ -223,23 +240,40 @@ function MuenuEntrenador(props) {
               </Paper>
             </Grid>
 
-            <Grid item xs={12} md={10} style={{ height: "100%" }}>
-              {showTrainningsPanel ? (
-                <TrainerViewTrainnings
-                  setOpenSnackBarOK={setOpenSnackBarOK}
-                  setOpenSnackBarKO={setOpenSnackBarKO}
-                />
-              ) : null}
-              {createTrainningsPanel ? (
-                <TrainerCreateTrainnings
-                  exerciseData={exerciseData}
-                  dailyTrainingtList={dailyTrainingtList}
-                  setOpenSnackBarOK={setOpenSnackBarOK}
-                  setOpenSnackBarKO={setOpenSnackBarKO}
-                />
-              ) : null}
-              {showClientsPanel ? <TrainerAsignedClients /> : null}
-            </Grid>
+            {!isExerciseLoading &&
+            !isTrainerLoading &&
+            !isDailyTrainingLoading ? (
+              <Grid item xs={12} md={10} style={{ height: "100%" }}>
+                {showTrainningsPanel ? (
+                  <TrainerViewTrainnings
+                    setOpenSnackBarOK={setOpenSnackBarOK}
+                    setOpenSnackBarKO={setOpenSnackBarKO}
+                  />
+                ) : null}
+                {createTrainningsPanel ? (
+                  <TrainerCreateTrainnings
+                    exerciseData={exerciseData}
+                    dailyTrainingtList={dailyTrainingtList}
+                    setOpenSnackBarOK={setOpenSnackBarOK}
+                    setOpenSnackBarKO={setOpenSnackBarKO}
+                  />
+                ) : null}
+                {showClientsPanel ? <TrainerAsignedClients /> : null}
+              </Grid>
+            ) : (
+              <Grid
+                item
+                xs={12}
+                md={10}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <CircularProgress />
+              </Grid>
+            )}
           </Grid>
 
           <Snackbar
