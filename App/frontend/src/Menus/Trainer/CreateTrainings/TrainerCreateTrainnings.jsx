@@ -10,7 +10,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 function TrainerCreateTrainnings(props) {
   const { setOpenSnackBarOK, setOpenSnackBarKO } = props;
-  const [enableDailyTrainning, setEnableDailyTrainning] = useState(false);
+  const [enableDailyTrainning, setEnableDailyTrainning] = useState(true);
   const [enableWeeklyTrainning, setEnableWeeklyTrainning] = useState(false);
 
   const createTrainning = async (e) => {
@@ -47,6 +47,15 @@ function TrainerCreateTrainnings(props) {
         }}
       >
         <Button
+          sx={
+            enableDailyTrainning
+              ? {
+                  color: "black !important",
+                  backgroundColor: "#B7B7B7 !important",
+                }
+              : null
+          }
+          disabled={enableDailyTrainning}
           onClick={createTrainning}
           id="create-daily-trainning"
           variant="contained"
@@ -55,6 +64,15 @@ function TrainerCreateTrainnings(props) {
         </Button>
 
         <Button
+          sx={
+            enableWeeklyTrainning
+              ? {
+                  color: "black !important",
+                  backgroundColor: "#B7B7B7 !important",
+                }
+              : null
+          }
+          disabled={enableWeeklyTrainning}
           onClick={createTrainning}
           id="create-weekly-trainning"
           variant="contained"
@@ -72,32 +90,6 @@ function TrainerCreateTrainnings(props) {
 
       {enableWeeklyTrainning && !enableDailyTrainning ? (
         <TrainerCreateWeeklyTrainning />
-      ) : null}
-
-      {!enableWeeklyTrainning && !enableDailyTrainning ? (
-        <>
-          <Paper
-            elevation={3}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              height: "50px",
-              padding: "10px 20px 10px 20px",
-              marginTop: "3px",
-            }}
-          ></Paper>
-          <Paper
-            elevation={3}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              padding: "5px 20px 5px 20px",
-              marginTop: "3px",
-              height: "486px",
-            }}
-          ></Paper>
-        </>
       ) : null}
     </div>
   );

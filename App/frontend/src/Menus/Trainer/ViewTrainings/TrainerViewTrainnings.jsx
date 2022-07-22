@@ -10,19 +10,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 function TrainerViewTrainnings(props) {
-  const [viewDailyTrainning, setViewDailyTrainning] = useState(false);
+  //
+  const [viewDailyTrainning, setViewDailyTrainning] = useState(true);
   const [vieWeeklyTrainning, setVieWeeklyTrainning] = useState(false);
-
-  const [openSnackBarOK, setOpenSnackBarOK] = React.useState(false);
-  const [openSnackBarKO, setOpenSnackBarKO] = React.useState(false);
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenSnackBarOK(false);
-    setOpenSnackBarKO(false);
-  };
 
   const showTrainnings = (e) => {
     switch (e.target.id) {
@@ -60,6 +50,15 @@ function TrainerViewTrainnings(props) {
         }}
       >
         <Button
+          sx={
+            viewDailyTrainning
+              ? {
+                  color: "black !important",
+                  backgroundColor: "#B7B7B7 !important",
+                }
+              : null
+          }
+          disabled={viewDailyTrainning}
           onClick={showTrainnings}
           id="show-daily-trainnings"
           variant="contained"
@@ -67,6 +66,15 @@ function TrainerViewTrainnings(props) {
           Ver entrenamientos diarios
         </Button>
         <Button
+          sx={
+            vieWeeklyTrainning
+              ? {
+                  color: "black !important",
+                  backgroundColor: "#B7B7B7 !important",
+                }
+              : null
+          }
+          disabled={vieWeeklyTrainning}
           onClick={showTrainnings}
           id="show-weekly-trainnings"
           variant="contained"
@@ -82,37 +90,6 @@ function TrainerViewTrainnings(props) {
       {!viewDailyTrainning && vieWeeklyTrainning ? (
         <TrainerViewWeeklyTrainnings />
       ) : null}
-
-      {!viewDailyTrainning && !vieWeeklyTrainning ? (
-        <Paper
-          elevation={3}
-          style={{
-            height: "calc(100% - 73px)",
-            padding: "10px 20px 10px 20px",
-            marginTop: "3px",
-          }}
-        />
-      ) : null}
-
-      <Snackbar
-        open={openSnackBarOK}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Guardado correctamente
-        </Alert>
-      </Snackbar>
-
-      <Snackbar
-        open={openSnackBarKO}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Error al guardar
-        </Alert>
-      </Snackbar>
     </div>
   );
 }

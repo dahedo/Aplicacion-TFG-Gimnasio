@@ -10,12 +10,18 @@ import TrainerViewTrainnings from "./ViewTrainings/TrainerViewTrainnings";
 function MuenuEntrenador(props) {
   const navigate = useNavigate();
 
+  //Botones del menu
   const [showClientsPanel, setShowClientsPanel] = useState(false);
   const [showTrainningsPanel, setShowTrainningsPanel] = useState(false);
-  const [createTrainningsPanel, setCreateTrainningsPanel] = useState(false);
+  const [createTrainningsPanel, setCreateTrainningsPanel] = useState(true);
+
+  //Datos
   const [exerciseData, setExerciseData] = useState([]);
+
+  //PopUps OK - KO en las peticiones
   const [openSnackBarOK, setOpenSnackBarOK] = React.useState(false);
   const [openSnackBarKO, setOpenSnackBarKO] = React.useState(false);
+
   const [trainerProfile, setTrainerProfile] = useState({
     nombre: "",
     apellidos: "",
@@ -105,12 +111,6 @@ function MuenuEntrenador(props) {
     setCreateTrainningsPanel(true);
   };
 
-  const showProfile = (e) => {
-    setShowClientsPanel(false);
-    setShowTrainningsPanel(false);
-    setCreateTrainningsPanel(false);
-  };
-
   const showClients = (e) => {
     setShowClientsPanel(true);
     setShowTrainningsPanel(false);
@@ -149,13 +149,32 @@ function MuenuEntrenador(props) {
                 />
                 <p>Hola {trainerProfile.nombre} !</p>
                 <Button
+                  sx={
+                    showTrainningsPanel
+                      ? {
+                          color: "black !important",
+                          backgroundColor: "#B7B7B7 !important",
+                        }
+                      : null
+                  }
+                  disabled={showTrainningsPanel}
                   variant="contained"
                   onClick={showTrainnings}
                   style={{ width: "90%", marginTop: "100px" }}
                 >
                   Ver entrenamientos
                 </Button>
+
                 <Button
+                  sx={
+                    createTrainningsPanel
+                      ? {
+                          color: "black !important",
+                          backgroundColor: "#B7B7B7 !important",
+                        }
+                      : null
+                  }
+                  disabled={createTrainningsPanel}
                   variant="contained"
                   onClick={createTrainning}
                   style={{ width: "90%", marginTop: "30px" }}
@@ -163,6 +182,15 @@ function MuenuEntrenador(props) {
                   Crear entrenamientos
                 </Button>
                 <Button
+                  sx={
+                    showClientsPanel
+                      ? {
+                          color: "black !important",
+                          backgroundColor: "#B7B7B7 !important",
+                        }
+                      : null
+                  }
+                  disabled={showClientsPanel}
                   variant="contained"
                   onClick={showClients}
                   style={{ width: "90%", marginTop: "30px" }}
@@ -173,7 +201,12 @@ function MuenuEntrenador(props) {
             </Grid>
 
             <Grid item xs={12} md={10} style={{ height: "100%" }}>
-              {showTrainningsPanel ? <TrainerViewTrainnings /> : null}
+              {showTrainningsPanel ? (
+                <TrainerViewTrainnings
+                  setOpenSnackBarOK={setOpenSnackBarOK}
+                  setOpenSnackBarKO={setOpenSnackBarKO}
+                />
+              ) : null}
               {createTrainningsPanel ? (
                 <TrainerCreateTrainnings
                   exerciseData={exerciseData}
