@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import ResponsiveAppBar from "../../navbar";
 import jwt from "jwt-decode";
 import axios from "axios";
-import TrainerCreateTrainnings from "./TrainerCreateTrainnings";
-import TrainerViewTrainnings from "./TrainerViewTrainnings";
+import TrainerCreateTrainnings from "./CreateTrainings/TrainerCreateTrainnings";
+import TrainerViewTrainnings from "./ViewTrainings/TrainerViewTrainnings";
 
 function MuenuEntrenador(props) {
   const navigate = useNavigate();
