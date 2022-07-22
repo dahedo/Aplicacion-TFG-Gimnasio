@@ -216,7 +216,6 @@ function ClientProfile(props) {
                           : null
                       }
                     >
-                      {console.log(clientProfile.parametrosCliente?.parq1)}
                       Si
                     </Button>
                   </TableCell>
@@ -471,7 +470,7 @@ function ClientProfile(props) {
             label="Alergias e intolerancias"
             variant="outlined"
             onChange={changeData}
-            value={clientProfile.parametrosCliente.alergias}
+            value={clientProfile.parametrosCliente?.alergias}
           ></TextField>
         </Paper>
         <Paper
@@ -499,7 +498,7 @@ function ClientProfile(props) {
             label="Lesiones o dolores"
             variant="outlined"
             onChange={changeData}
-            value={clientProfile.parametrosCliente.lesiones}
+            value={clientProfile.parametrosCliente?.lesiones}
           ></TextField>
         </Paper>
 
