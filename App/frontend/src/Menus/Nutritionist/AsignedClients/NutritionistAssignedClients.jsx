@@ -84,7 +84,6 @@ function NutritionistAssignedClients(props) {
   };
 
   const openReviewDialog = (row) => {
-    console.log(row);
     setEnableReviewDialoge({
       open: true,
       clientToReview: row,

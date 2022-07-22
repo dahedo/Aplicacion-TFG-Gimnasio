@@ -76,8 +76,6 @@ function ClientMenu(props) {
   }, []);
 
   const getClientData = () => {
-    console.log("reloading client...");
-
     var loggedUser = window.localStorage.getItem("loggedUser");
     loggedUser = jwt(loggedUser);
     const url = `http://localhost:8080/clientes/${loggedUser.userId}`;

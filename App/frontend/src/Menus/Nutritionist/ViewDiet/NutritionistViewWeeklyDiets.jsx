@@ -36,7 +36,6 @@ function NutritionistViewWeeklyDiets(props) {
       alimentacionDiariaDietas: [],
     },
   });
-  console.log(props.weeklyDietList);
 
   const [enableBusqueda, setEnableBusqueda] = useState({
     enable: false,

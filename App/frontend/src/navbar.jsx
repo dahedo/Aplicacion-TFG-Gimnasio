@@ -13,7 +13,6 @@ const ResponsiveAppBar = (props) => {
   };
 
   const goMain = () => {
-    console.log("main");
     navigate("/");
   };
 

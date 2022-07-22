@@ -32,7 +32,6 @@ const Login = (props) => {
       loggedUser = jwt(loggedUser);
 
       if (loggedUser.rol === "CLIENTE") {
-        console.log("menuCliente");
         navigate("/menuCliente");
       }
       if (loggedUser.rol === "ENTRENADOR") {
@@ -80,7 +79,6 @@ const Login = (props) => {
   };
 
   const handleChange = (prop) => (event) => {
-    console.log();
     setValues({ ...values, [prop]: event.target.value });
   };
 
