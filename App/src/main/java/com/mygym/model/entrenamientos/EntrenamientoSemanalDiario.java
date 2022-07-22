@@ -1,5 +1,6 @@
 package com.mygym.model.entrenamientos;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,9 @@ public class EntrenamientoSemanalDiario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+	@Column
+	private int diaSemana;
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -66,6 +70,20 @@ public class EntrenamientoSemanalDiario {
 	 */
 	public void setEntrenamientoDiario(EntrenamientoDiario entrenamientoDiario) {
 		this.entrenamientoDiario = entrenamientoDiario;
+	}
+
+	/**
+	 * @return the diaSemana
+	 */
+	public int getDiaSemana() {
+		return diaSemana;
+	}
+
+	/**
+	 * @param diaSemana the diaSemana to set
+	 */
+	public void setDiaSemana(int diaSemana) {
+		this.diaSemana = diaSemana;
 	}
 
 }

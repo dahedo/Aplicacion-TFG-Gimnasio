@@ -2,7 +2,7 @@ import { Button, Paper } from "@mui/material";
 import React, { useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import TrainerCreateDailyTrainning from "./TrainerCreateDailyTrainning";
+import TrainerCreateDailyTrainning from "./TrainerCreateDailyTraining";
 import TrainerCreateWeeklyTrainning from "./TrainerCreateWeeklyTrainning";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -89,7 +89,11 @@ function TrainerCreateTrainnings(props) {
       ) : null}
 
       {enableWeeklyTrainning && !enableDailyTrainning ? (
-        <TrainerCreateWeeklyTrainning />
+        <TrainerCreateWeeklyTrainning
+          dailyTrainingtList={props.dailyTrainingtList}
+          setOpenSnackBarOK={setOpenSnackBarOK}
+          setOpenSnackBarKO={setOpenSnackBarKO}
+        />
       ) : null}
     </div>
   );

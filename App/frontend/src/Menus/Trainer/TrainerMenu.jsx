@@ -16,8 +16,11 @@ function MuenuEntrenador(props) {
   const [showTrainningsPanel, setShowTrainningsPanel] = useState(false);
   const [createTrainningsPanel, setCreateTrainningsPanel] = useState(true);
 
-  //Datos
+  //Datos de ejercicios
   const [exerciseData, setExerciseData] = useState([]);
+
+  //Datos de entrenamientos diarios
+  const [dailyTrainingtList, setDailyTrainingtList] = useState([]);
 
   //PopUps OK - KO en las peticiones
   const [openSnackBarOK, setOpenSnackBarOK] = React.useState(false);
@@ -81,8 +84,27 @@ function MuenuEntrenador(props) {
     //
     //get all exercises
     //
+    const url3 = `http://localhost:8080/ejercicios/get-all`;
+    axios
+      .get(url3, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(
+        (response) => {
+          setExerciseData(response.data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
 
-    const url2 = `http://localhost:8080/ejercicios/get-all`;
+    //
+    //get all daily trainings
+    //
+    const url2 = `http://localhost:8080/entremaniento-diario/get-all`;
     axios
       .get(url2, {
         headers: {
@@ -92,7 +114,7 @@ function MuenuEntrenador(props) {
       })
       .then(
         (response) => {
-          setExerciseData(response.data);
+          setDailyTrainingtList(response.data);
         },
         (error) => {
           console.log(error);
@@ -211,6 +233,7 @@ function MuenuEntrenador(props) {
               {createTrainningsPanel ? (
                 <TrainerCreateTrainnings
                   exerciseData={exerciseData}
+                  dailyTrainingtList={dailyTrainingtList}
                   setOpenSnackBarOK={setOpenSnackBarOK}
                   setOpenSnackBarKO={setOpenSnackBarKO}
                 />
