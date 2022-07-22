@@ -15,6 +15,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  CircularProgress,
 } from "@mui/material";
 import axios from "axios";
 import jwt from "jwt-decode";
@@ -22,9 +23,17 @@ import jwt from "jwt-decode";
 function NutritionistMenu(props) {
   const navigate = useNavigate();
 
+  //loaging flags
+  const [isNutritionistLoading, setNutritionistLoading] = React.useState(true);
+  const [isDailyDietsLoading, setDailyDietsLoading] = React.useState(true);
+  const [isWeklyDietsLoading, setWeklyDietsLoading] = React.useState(true);
+
+  //flags show diferent panels
   const [showDietsPanel, setShowDietsPanel] = useState(true);
   const [showClientsPanel, setShowClientsPanel] = useState(false);
   const [createDietsPanel, setCreateDietsPanel] = useState(false);
+
+  //data
   const [dailyDietList, setDailyDietList] = useState([]);
   const [weeklyDietList, setWeeklyDietList] = useState([]);
   const [nutritionistProfile, setNutritionistProfile] = useState({
@@ -73,6 +82,7 @@ function NutritionistMenu(props) {
 
           filterClients(response.data.clientes);
           reloadDiets();
+          setNutritionistLoading(false);
         },
         (error) => {
           console.log(error);
@@ -145,6 +155,7 @@ function NutritionistMenu(props) {
       .then(
         (response) => {
           setDailyDietList(response.data);
+          setDailyDietsLoading(false);
         },
         (error) => {
           console.log(error);
@@ -169,6 +180,7 @@ function NutritionistMenu(props) {
       .then(
         (response) => {
           setWeeklyDietList(response.data);
+          setWeklyDietsLoading(false);
         },
         (error) => {
           console.log(error);
@@ -277,30 +289,47 @@ function NutritionistMenu(props) {
               </Paper>
             </Grid>
 
-            <Grid item xs={12} md={10} style={{ height: "100%" }}>
-              {showDietsPanel ? (
-                <NutritionistViewDiets
-                  reloadDiets={reloadDiets}
-                  dailyDietList={dailyDietList}
-                  weeklyDietList={weeklyDietList}
-                />
-              ) : null}
-              {createDietsPanel ? (
-                <NutritionistCreateDiet
-                  dailyDietList={dailyDietList}
-                  reloadDiets={reloadDiets}
-                />
-              ) : null}
-              {showClientsPanel ? (
-                <NutritionistAssignedClients
-                  nutritionistProfile={nutritionistProfile}
-                  newClients={clients.new}
-                  reviewedClients={clients.reviewed}
-                  nonReviewedClients={clients.nonReviewed}
-                  weeklyDietList={weeklyDietList}
-                />
-              ) : null}
-            </Grid>
+            {!isNutritionistLoading &&
+            !isDailyDietsLoading &&
+            !isWeklyDietsLoading ? (
+              <Grid item xs={12} md={10} style={{ height: "100%" }}>
+                {showDietsPanel ? (
+                  <NutritionistViewDiets
+                    reloadDiets={reloadDiets}
+                    dailyDietList={dailyDietList}
+                    weeklyDietList={weeklyDietList}
+                  />
+                ) : null}
+                {createDietsPanel ? (
+                  <NutritionistCreateDiet
+                    dailyDietList={dailyDietList}
+                    reloadDiets={reloadDiets}
+                  />
+                ) : null}
+                {showClientsPanel ? (
+                  <NutritionistAssignedClients
+                    nutritionistProfile={nutritionistProfile}
+                    newClients={clients.new}
+                    reviewedClients={clients.reviewed}
+                    nonReviewedClients={clients.nonReviewed}
+                    weeklyDietList={weeklyDietList}
+                  />
+                ) : null}
+              </Grid>
+            ) : (
+              <Grid
+                item
+                xs={12}
+                md={10}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <CircularProgress />
+              </Grid>
+            )}
           </Grid>
         </div>
       </div>
